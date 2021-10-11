@@ -63,52 +63,81 @@ class _HomeScreenState extends State<HomeScreen>
         backgroundColor: Colors.white,
         controller: _controller,
         drawerItems: <Widget>[
-          Text(
-            "Go to home",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.purple.shade700,
-              fontWeight: FontWeight.bold,
-            ),
+          ListTile(
+              leading: Icon(
+                Icons.fastfood,
+                color: Colors.orange,
+              ),
+              title: Text(
+                "Cuisine",
+                style: TextStyle(color: Colors.orange, fontSize: 20),
+              )),
+          Divider(
+            height: 1,
           ),
-          Text(
-            "About us",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.purple.shade700,
-              fontWeight: FontWeight.bold,
-            ),
+          ListTile(
+              leading: Icon(
+                Icons.chair,
+                color: Colors.orange,
+              ),
+              title: Text(
+                "Ménage",
+                style: TextStyle(color: Colors.orange, fontSize: 20),
+              )),
+          Divider(
+            height: 1,
           ),
-          Text(
-            "Our products",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.purple.shade700,
-              fontWeight: FontWeight.bold,
-            ),
+          ListTile(
+              leading: Icon(
+                Icons.tungsten,
+                color: Colors.orange,
+              ),
+              title: Text(
+                "JIRAMA",
+                style: TextStyle(color: Colors.orange, fontSize: 20),
+              )),
+          Divider(
+            height: 1,
           ),
-          Text(
-            "Support us",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.purple.shade700,
-              fontWeight: FontWeight.bold,
-            ),
+          ListTile(
+              leading: Icon(
+                Icons.paid,
+                color: Colors.orange,
+              ),
+              title: Text(
+                "Budget",
+                style: TextStyle(color: Colors.orange, fontSize: 20),
+              )),
+          Divider(
+            height: 1,
           ),
-          Text(
-            "Log out",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.purple.shade700,
-              fontWeight: FontWeight.bold,
-            ),
+          ListTile(
+              leading: Icon(
+                Icons.engineering,
+                color: Colors.orange,
+              ),
+              title: Text(
+                "Tours",
+                style: TextStyle(color: Colors.orange, fontSize: 20),
+              )),
+          ListTile(
+              leading: Icon(
+                Icons.groups,
+                color: Colors.orange,
+              ),
+              title: Text(
+                "Membres",
+                style: TextStyle(color: Colors.orange, fontSize: 20),
+              )),
+          Divider(
+            height: 1,
           ),
         ],
         child: Scaffold(
           appBar: AppBar(
             elevation: 4.0,
             title: Text(
-              "Some appbar",
+              "GFS",
               style: TextStyle(color: Colors.black),
             ),
             backgroundColor: Colors.white,
