@@ -60,54 +60,62 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Material(
       child: FancyDrawerWrapper(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xfff25272a),
         controller: _controller,
         drawerItems: <Widget>[
           ListTile(
-              leading: Icon(
-                Icons.fastfood,
-                color: Colors.orange,
-              ),
-              title: Text(
-                "Cuisine",
-                style: TextStyle(color: Colors.orange, fontSize: 20),
-              )),
+            leading: Icon(
+              Icons.fastfood,
+              color: Colors.orange,
+            ),
+            title: Text(
+              "Cuisine",
+              style: TextStyle(color: Colors.orange, fontSize: 20),
+            ),
+            onTap: () {},
+          ),
           Divider(
             height: 1,
           ),
           ListTile(
-              leading: Icon(
-                Icons.chair,
-                color: Colors.orange,
-              ),
-              title: Text(
-                "Ménage",
-                style: TextStyle(color: Colors.orange, fontSize: 20),
-              )),
+            leading: Icon(
+              Icons.chair,
+              color: Colors.orange,
+            ),
+            title: Text(
+              "Ménage",
+              style: TextStyle(color: Colors.orange, fontSize: 20),
+            ),
+            onTap: () {},
+          ),
           Divider(
             height: 1,
           ),
           ListTile(
-              leading: Icon(
-                Icons.tungsten,
-                color: Colors.orange,
-              ),
-              title: Text(
-                "JIRAMA",
-                style: TextStyle(color: Colors.orange, fontSize: 20),
-              )),
+            leading: Icon(
+              Icons.tungsten,
+              color: Colors.orange,
+            ),
+            title: Text(
+              "JIRAMA",
+              style: TextStyle(color: Colors.orange, fontSize: 20),
+            ),
+            onTap: () {},
+          ),
           Divider(
             height: 1,
           ),
           ListTile(
-              leading: Icon(
-                Icons.paid,
-                color: Colors.orange,
-              ),
-              title: Text(
-                "Budget",
-                style: TextStyle(color: Colors.orange, fontSize: 20),
-              )),
+            leading: Icon(
+              Icons.paid,
+              color: Colors.orange,
+            ),
+            title: Text(
+              "Budget",
+              style: TextStyle(color: Colors.orange, fontSize: 20),
+            ),
+            onTap: () {},
+          ),
           Divider(
             height: 1,
           ),
@@ -121,14 +129,16 @@ class _HomeScreenState extends State<HomeScreen>
                 style: TextStyle(color: Colors.orange, fontSize: 20),
               )),
           ListTile(
-              leading: Icon(
-                Icons.groups,
-                color: Colors.orange,
-              ),
-              title: Text(
-                "Membres",
-                style: TextStyle(color: Colors.orange, fontSize: 20),
-              )),
+            leading: Icon(
+              Icons.groups,
+              color: Colors.orange,
+            ),
+            title: Text(
+              "Membres",
+              style: TextStyle(color: Colors.orange, fontSize: 20),
+            ),
+            onTap: () {},
+          ),
           Divider(
             height: 1,
           ),
@@ -140,10 +150,10 @@ class _HomeScreenState extends State<HomeScreen>
               "GFS",
               style: TextStyle(color: Colors.black),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.orange,
             leading: IconButton(
               icon: Icon(
-                Icons.menu,
+                Icons.sort,
                 color: Colors.black,
               ),
               onPressed: () {
