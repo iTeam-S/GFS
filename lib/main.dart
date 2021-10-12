@@ -7,22 +7,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'GFS',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
       home: HomeScreen(),
     );
@@ -121,11 +112,11 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           ListTile(
               leading: Icon(
-                Icons.engineering,
+                Icons.date_range,
                 color: Colors.orange,
               ),
               title: Text(
-                "Tours",
+                "Agenda",
                 style: TextStyle(color: Colors.orange, fontSize: 20),
               )),
           ListTile(
@@ -161,9 +152,45 @@ class _HomeScreenState extends State<HomeScreen>
               },
             ),
           ),
-          body: Center(
-            child: Text("Body"),
-          ),
+          body: PageAcceuil(),
+        ),
+      ),
+    );
+  }
+}
+
+class PageAcceuil extends StatelessWidget {
+  const PageAcceuil({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+                height: 250.00,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: ExactAssetImage("assets/images/food2.png"),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 15.0, // soften the shadow
+                      spreadRadius: 3.0, //extend the shadow
+                      offset: Offset(
+                        8.0, // Move to right 10  horizontally
+                        10.0, // Move to bottom 10 Vertically
+                      ),
+                    )
+                  ],
+                ))
+          ],
         ),
       ),
     );
