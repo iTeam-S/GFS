@@ -139,18 +139,36 @@ class _HomeScreenState extends State<HomeScreen>
             elevation: 4.0,
             title: Text(
               "GFS",
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             ),
             backgroundColor: Colors.orange,
             leading: IconButton(
               icon: Icon(
                 Icons.sort,
-                color: Colors.black,
+                color: Colors.white,
               ),
               onPressed: () {
                 _controller.toggle();
               },
             ),
+            actions: [
+              Stack(children: [
+                Container(
+                  margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.03,
+                      right: MediaQuery.of(context).size.height * 0.02),
+                  child: Icon(
+                    Icons.notifications_sharp,
+                    color: Colors.white,
+                  ),
+                ),
+                Positioned(
+                  top: MediaQuery.of(context).size.height * 0.035,
+                  right: MediaQuery.of(context).size.height * 0.02,
+                  child: Icon(Icons.brightness_1, size: 10, color: Colors.red),
+                )
+              ]),
+            ],
           ),
           body: PageAcceuil(),
         ),
