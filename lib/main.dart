@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gfs/components/searchbox.dart';
-import 'package:gfs/lib/components/searchbox.dart';
 
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:gfs/agenda.dart';
@@ -10,6 +9,7 @@ import 'membres.dart';
 void main() {
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
