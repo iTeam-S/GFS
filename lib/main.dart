@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gfs/components/searchbox.dart';
+import 'package:gfs/lib/components/searchbox.dart';
 
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:gfs/agenda.dart';
@@ -152,82 +154,59 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ],
         child: Scaffold(
-          appBar: AppBar(
-            elevation: 4.0,
-            title: Text(
-              "GFS",
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: Colors.orange,
-            leading: IconButton(
-              icon: Icon(
-                Icons.sort,
-                color: Colors.white,
+            appBar: AppBar(
+              elevation: 4.0,
+              title: Text(
+                "GFS",
+                style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {
-                _controller.toggle();
-              },
-            ),
-            actions: [
-              Stack(children: [
-                Container(
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.03,
-                      right: MediaQuery.of(context).size.height * 0.02),
-                  child: Icon(
-                    Icons.notifications_sharp,
-                    color: Colors.white,
-                  ),
+              backgroundColor: Colors.orange,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.sort,
+                  color: Colors.white,
                 ),
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.035,
-                  right: MediaQuery.of(context).size.height * 0.02,
-                  child: Icon(Icons.brightness_1, size: 10, color: Colors.red),
-                )
-              ]),
-            ],
-          ),
-          body: PageAcceuil(),
-        ),
+                onPressed: () {
+                  _controller.toggle();
+                },
+              ),
+              actions: [
+                Stack(children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.03,
+                        right: MediaQuery.of(context).size.height * 0.02),
+                    child: Icon(
+                      Icons.notifications_sharp,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Positioned(
+                    top: MediaQuery.of(context).size.height * 0.035,
+                    right: MediaQuery.of(context).size.height * 0.02,
+                    child:
+                        Icon(Icons.brightness_1, size: 10, color: Colors.red),
+                  )
+                ]),
+              ],
+            ),
+            body: Screen()),
       ),
     );
   }
 }
 
-class PageAcceuil extends StatelessWidget {
-  const PageAcceuil({Key? key}) : super(key: key);
+class Screen extends StatelessWidget {
+  const Screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-                height: 250.00,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: ExactAssetImage("assets/images/food2.png"),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 15.0, // soften the shadow
-                      spreadRadius: 3.0, //extend the shadow
-                      offset: Offset(
-                        8.0, // Move to right 10  horizontally
-                        10.0, // Move to bottom 10 Vertically
-                      ),
-                    )
-                  ],
-                ))
-          ],
-        ),
+        child: SingleChildScrollView(
+            child: Column(children: <Widget>[
+      SearchBox(
+        onChanged: (value) {},
       ),
-    );
+    ])));
   }
 }
