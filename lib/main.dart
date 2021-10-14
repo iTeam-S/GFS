@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:fancy_drawer/fancy_drawer.dart';
+import 'package:gfs/agenda.dart';
+
+import 'membres.dart';
 
 void main() {
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -118,7 +120,15 @@ class _HomeScreenState extends State<HomeScreen>
               title: Text(
                 "Agenda",
                 style: TextStyle(color: Colors.orange, fontSize: 20),
-              )),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CalendarPage(),
+                  ),
+                );
+              }),
           ListTile(
             leading: Icon(
               Icons.groups,
@@ -128,7 +138,14 @@ class _HomeScreenState extends State<HomeScreen>
               "Membres",
               style: TextStyle(color: Colors.orange, fontSize: 20),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MembreList(),
+                ),
+              );
+            },
           ),
           Divider(
             height: 1,
