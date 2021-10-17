@@ -30,7 +30,7 @@ La gestion d'un foyer est une tâche importante, mais peu passionnante. Indispen
         <tr>
             <td><img width="360" alt="Agenda" src="screenshoots/agenda.png"></td>
             <td><img width="360" alt="Agenda" src="screenshoots/popUpDate1.png"></td>
-            <td><img width="360" alt="Agenda" src="screenshoots/popUpDate1.png"></td>
+            <td><img width="360" alt="Agenda" src="screenshoots/popUpDate2.png"></td>
         </tr>
     </tbody>
 </table>
