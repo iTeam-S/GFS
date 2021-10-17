@@ -44,7 +44,6 @@ La gestion d'un foyer est une tâche importante, mais peu passionnante. Indispen
         <tr>
             <td><img width="360" alt="jirama" src="screenshoots/jirama.png"></td>
             <td><img width="360" alt="jirama" src="screenshoots/jiramaPopUp.png"></td>
-            <td></td>
         </tr>
     </tbody>
 </table>
@@ -57,8 +56,6 @@ La gestion d'un foyer est une tâche importante, mais peu passionnante. Indispen
     <tbody>
         <tr>
             <td><img width="360" alt="drawer" src="screenshoots/drawer.png"></td>
-            <td></td>
-            <td></td>
         </tr>
     </tbody>
 </table>
