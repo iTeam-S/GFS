@@ -3,7 +3,6 @@ import 'package:gfs/dates_list.dart';
 import 'package:gfs/theme/colors/light_colors.dart';
 import 'package:gfs/widgets/calendar_dates.dart';
 import 'package:gfs/widgets/task_container.dart';
-import 'package:gfs/widgets/back_button.dart';
 
 class CalendarPage extends StatelessWidget {
   Widget _dashedText() {
@@ -21,6 +20,10 @@ class CalendarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff25272a),
+      appBar: AppBar(
+        leading: IconButton(onPressed: () {}, icon: Icon(Icons.sort)),
+        title: Text("AGENDA"),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(
@@ -31,8 +34,6 @@ class CalendarPage extends StatelessWidget {
           ),
           child: Column(
             children: <Widget>[
-              MyBackButton(),
-              SizedBox(height: 30.0),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -50,12 +51,24 @@ class CalendarPage extends StatelessWidget {
                         color: Colors.orange,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      // ignore: deprecated_member_use
-                      child: FlatButton(
-                        onPressed: () {},
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.orange,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2019),
+                            lastDate: DateTime(2022),
+                          );
+                        },
                         child: Center(
                           child: Text(
-                            'Terminer',
+                            'Ajouter',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,

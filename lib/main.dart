@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:gfs/components/searchbox.dart';
-
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:gfs/agenda.dart';
-
+import 'package:gfs/jirama.dart';
 import 'membres.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+/*
+IL Y A ENCORE BEAUCOUP D'ORGANISATION À FAIRE , VEILLEZ PREVENIR AVANT LA CONTRIBUTION
+ */
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -95,14 +97,21 @@ class _HomeScreenState extends State<HomeScreen>
               "JIRAMA",
               style: TextStyle(color: Colors.orange, fontSize: 20),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Jirama(),
+                ),
+              );
+            },
           ),
           Divider(
             height: 1,
           ),
           ListTile(
             leading: Icon(
-              Icons.paid,
+              Icons.savings,
               color: Colors.orange,
             ),
             title: Text(
