@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "331129566869",
+    "project_id": "gestion-foyer-58c87",
+    "storage_bucket": "gestion-foyer-58c87.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331129566869:android:89e367a9a9f8d9e1844d9c",
+        "android_client_info": {
+          "package_name": "com.example.gfs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331129566869-3ed3u9t6uajmc9583skeujdmu5ap8uts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCPRqUktlfPRuSidl3r2aw1DYgKZlA1uo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331129566869-3ed3u9t6uajmc9583skeujdmu5ap8uts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
