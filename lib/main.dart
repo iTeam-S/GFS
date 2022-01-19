@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:gfs/views/calendar_page.dart';
-
+import 'package:gfs/views/agenda.dart';
 import 'package:gfs/views/home.dart';
 import 'package:gfs/views/jirama.dart';
 import 'package:gfs/views/membres.dart';
