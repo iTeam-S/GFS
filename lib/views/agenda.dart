@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gfs/dates_list.dart';
+import 'package:gfs/views/widgets/dates_list.dart';
 import 'package:gfs/theme/colors/light_colors.dart';
-import 'package:gfs/widgets/calendar_dates.dart';
-import 'package:gfs/widgets/task_container.dart';
+import 'package:gfs/views/widgets/calendar_dates.dart';
+import 'package:gfs/views/widgets/task_container.dart';
 
 class CalendarPage extends StatelessWidget {
   Widget _dashedText() {

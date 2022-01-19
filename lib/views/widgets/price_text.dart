@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gfs/app_colors.dart';
+import 'package:gfs/views/widgets/app_colors.dart';
 
 class PriceText extends StatelessWidget {
   const PriceText({

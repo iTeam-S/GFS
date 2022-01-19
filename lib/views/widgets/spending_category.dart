@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gfs/app_colors.dart';
-import 'package:gfs/spending_category_model.dart';
-import 'package:gfs/widgets/custom_icon_button.dart';
-import 'package:gfs/widgets/price_text.dart';
+import 'package:gfs/views/widgets/app_colors.dart';
+import 'package:gfs/views/widgets/spending_category_model.dart';
+import 'package:gfs/views/widgets/custom_icon_button.dart';
+import 'package:gfs/views/widgets/price_text.dart';
 
 class SpendingCategory extends StatelessWidget {
   final SpendingCategoryModel data;

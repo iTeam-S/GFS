@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gfs/widgets/popUp.dart';
+import 'package:gfs/views/widgets/popUp.dart';
 
 class CustomIconButton extends StatelessWidget {
   final IconData? icon;

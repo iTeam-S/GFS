@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gfs/app_colors.dart';
-import 'package:gfs/spending_category_model.dart';
-import 'package:gfs/widgets/price_text.dart';
-import 'package:gfs/widgets/spending_category.dart';
+import 'package:gfs/views/widgets/app_colors.dart';
+import 'package:gfs/views/widgets/spending_category_model.dart';
+import 'package:gfs/views/widgets/price_text.dart';
+import 'package:gfs/views/widgets/spending_category.dart';
 
 class Jirama extends StatefulWidget {
   static const categoryModels = [
