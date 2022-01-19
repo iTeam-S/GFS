@@ -1,8 +1,6 @@
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:gfs/views/calendar_page.dart';
-import 'package:gfs/views/jirama.dart';
-import 'package:gfs/views/membres.dart';
+import 'package:get/route_manager.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -76,12 +74,7 @@ class _HomeScreenState extends State<HomeScreen>
               style: TextStyle(color: Colors.orange, fontSize: 20),
             ),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Jirama(),
-                ),
-              );
+              Get.toNamed('/jirama');
             },
           ),
           Divider(
@@ -111,12 +104,7 @@ class _HomeScreenState extends State<HomeScreen>
                 style: TextStyle(color: Colors.orange, fontSize: 20),
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CalendarPage(),
-                  ),
-                );
+                Get.toNamed('/agenda');
               }),
           ListTile(
             leading: Icon(
@@ -128,12 +116,7 @@ class _HomeScreenState extends State<HomeScreen>
               style: TextStyle(color: Colors.orange, fontSize: 20),
             ),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MembreList(),
-                ),
-              );
+              Get.toNamed('/membre');
             },
           ),
           Divider(
