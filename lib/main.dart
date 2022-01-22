@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => HomeScreen(),
+        '/': (context) => Screen(),
         '/jirama': (context) => Jirama(),
         '/agenda': (context) => CalendarPage(),
-        '/membre': (context) => MembreList()
+        '/membre': (context) => MembreList(),
       },
     );
   }
