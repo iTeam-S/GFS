@@ -34,7 +34,7 @@ dependencies:
   percent_indicator: ^3.4.0
   flutter_svg: ^0.23.0+1
   get: ^4.6.1
-  ionicons: ^0.1.2
+  line_icons: ^2.0.1
 
 dev_dependencies:
   flutter_test:

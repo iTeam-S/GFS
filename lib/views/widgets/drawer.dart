@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:line_icons/line_icons.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -43,7 +43,7 @@ class AppDrawer extends StatelessWidget {
                       leading: CircleAvatar(
                         backgroundColor: Colors.orange,
                         child: Icon(
-                          Ionicons.water_outline,
+                          LineIcons.plug,
                           color: Colors.black,
                         ),
                       ),
@@ -54,7 +54,7 @@ class AppDrawer extends StatelessWidget {
                       leading: CircleAvatar(
                         backgroundColor: Colors.purple,
                         child: Icon(
-                          Ionicons.fast_food_outline,
+                          LineIcons.utensils,
                           color: Colors.black,
                         ),
                       ),
@@ -65,7 +65,7 @@ class AppDrawer extends StatelessWidget {
                       leading: CircleAvatar(
                         backgroundColor: Colors.red,
                         child: Icon(
-                          Ionicons.home_outline,
+                          LineIcons.couch,
                           color: Colors.black,
                         ),
                       ),
@@ -76,7 +76,7 @@ class AppDrawer extends StatelessWidget {
                       leading: CircleAvatar(
                         backgroundColor: Colors.pink,
                         child: Icon(
-                          Ionicons.card_outline,
+                          LineIcons.coins,
                           color: Colors.black,
                         ),
                       ),
@@ -87,7 +87,7 @@ class AppDrawer extends StatelessWidget {
                       leading: CircleAvatar(
                         backgroundColor: Colors.amber,
                         child: Icon(
-                          Ionicons.today_outline,
+                          LineIcons.calendar,
                           color: Colors.black,
                         ),
                       ),
@@ -98,7 +98,7 @@ class AppDrawer extends StatelessWidget {
                       leading: CircleAvatar(
                         backgroundColor: Colors.blue,
                         child: Icon(
-                          Ionicons.people_outline,
+                          LineIcons.users,
                           color: Colors.black,
                         ),
                       ),
