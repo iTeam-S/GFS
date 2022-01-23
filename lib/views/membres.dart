@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 class MembreList extends StatelessWidget {
   const MembreList({Key? key}) : super(key: key);
@@ -15,55 +16,43 @@ class MembreList extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-            Text(
-              "Groupe:",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: Colors.white),
-            ),
-            Container(
-                width: MediaQuery.of(context).size.width * 0.85,
-                height: MediaQuery.of(context).size.height * 0.17,
-                margin: EdgeInsets.only(left: 20, top: 5),
-                decoration: BoxDecoration(
-                    color: Colors.orange,
-                    borderRadius: BorderRadius.circular(50)),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/food2.png"),
-                      radius: 50,
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 20.0, left: 5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            Card(
+                elevation: 8.0,
+                margin:
+                    new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                child: Container(
+                  decoration: BoxDecoration(color: Color(0xFF3E4650)),
+                  child: ListTile(
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10.0),
+                      leading: Container(
+                        padding: EdgeInsets.only(right: 12.0),
+                        decoration: new BoxDecoration(
+                            border: new Border(
+                                right: new BorderSide(
+                                    width: 1.0, color: Colors.white24))),
+                        child: Icon(
+                          LineIcons.userCircle,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ),
+                      title: Text(
+                        "Dominick Randria",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
+
+                      subtitle: Row(
                         children: <Widget>[
-                          Text(
-                            "Lahatra",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: Text(
-                              "Tâche d'aujourd'hui: Cuisine",
-                              overflow: TextOverflow.fade,
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          )
+                          Icon(LineIcons.graduationCap, color: Colors.orange),
+                          Text(" P20", style: TextStyle(color: Colors.white))
                         ],
                       ),
-                    )
-                  ],
-                )),
+                      trailing: Icon(Icons.keyboard_arrow_right,
+                          color: Colors.white, size: 30.0)),
+                ))
           ])),
     );
   }

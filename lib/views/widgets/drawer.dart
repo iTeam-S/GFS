@@ -93,7 +93,9 @@ class AppDrawer extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed('/membre');
+                      },
                       title: Text("Membres"),
                       leading: CircleAvatar(
                         backgroundColor: Colors.blue,
