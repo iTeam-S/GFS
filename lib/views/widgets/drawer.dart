@@ -6,112 +6,114 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(25),
-                color: Colors.red,
-                height: Get.height * .45,
-                width: Get.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.black,
-                      radius: 45,
+      child: Material(
+        color: Color(0xff25272a),
+        child: ListView(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(25),
+              color: Colors.red,
+              height: Get.height * .45,
+              width: Get.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    alignment: Alignment.topRight,
+                    child: InkWell(
+                      onTap: () => Get.toNamed('/'),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          LineIcons.home,
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
-                    Text(
-                      "Dominick Randriamanantena",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Text(
-                      "Chef de foyer",
-                      style: TextStyle(fontSize: 15),
-                    )
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: Get.height * .1,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.black,
+                    radius: 45,
+                  ),
+                  Text(
+                    "Dominick Randriamanantena",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  Text(
+                    "Chef de foyer",
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  )
+                ],
               ),
-              Container(
-                child: Column(
-                  children: [
-                    ListTile(
-                      onTap: () {},
-                      title: Text("Jirama"),
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.orange,
-                        child: Icon(
-                          LineIcons.plug,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      onTap: () {},
-                      title: Text("Cuisine"),
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.purple,
-                        child: Icon(
-                          LineIcons.utensils,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      onTap: () {},
-                      title: Text("Ménage"),
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.red,
-                        child: Icon(
-                          LineIcons.couch,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      onTap: () {},
-                      title: Text("Budget"),
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.pink,
-                        child: Icon(
-                          LineIcons.coins,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      onTap: () {},
-                      title: Text("Agenda"),
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(
-                          LineIcons.calendar,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      onTap: () {
-                        Get.toNamed('/membre');
-                      },
-                      title: Text("Membres"),
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        child: Icon(
-                          LineIcons.users,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  menuItems(
+                      itemName: 'Jirama',
+                      itemIcon: LineIcons.plug,
+                      itemRoute: '/jirama',
+                      itemColor: Colors.blue),
+                  menuItems(
+                      itemName: 'Cuisine',
+                      itemIcon: LineIcons.utensils,
+                      itemRoute: '/membre',
+                      itemColor: Colors.purple),
+                  menuItems(
+                      itemName: 'Ménage',
+                      itemIcon: LineIcons.couch,
+                      itemRoute: '/membre',
+                      itemColor: Colors.orange),
+                  menuItems(
+                      itemName: 'Budget',
+                      itemIcon: LineIcons.coins,
+                      itemRoute: '/membre',
+                      itemColor: Colors.pink),
+                  menuItems(
+                      itemName: 'Agenda',
+                      itemIcon: LineIcons.calendar,
+                      itemRoute: '/agenda',
+                      itemColor: Colors.amber),
+                  menuItems(
+                      itemName: 'Membres',
+                      itemIcon: LineIcons.users,
+                      itemRoute: '/membre',
+                      itemColor: Colors.blue),
+                ],
+              ),
+            )
+          ],
         ),
       ),
+    );
+  }
+
+  Widget menuItems({
+    required String itemName,
+    required IconData itemIcon,
+    required String itemRoute,
+    required Color itemColor,
+  }) {
+    return ListTile(
+      onTap: () {
+        Get.toNamed(itemRoute);
+      },
+      title: Text(
+        itemName,
+        style: TextStyle(color: Colors.white),
+      ),
+      leading: CircleAvatar(
+        backgroundColor: itemColor,
+        child: Icon(
+          itemIcon,
+          color: Colors.black,
+        ),
+      ),
+      hoverColor: Colors.red,
     );
   }
 }

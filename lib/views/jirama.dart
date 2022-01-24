@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gfs/views/widgets/app_colors.dart';
+import 'package:gfs/views/widgets/drawer.dart';
 import 'package:gfs/views/widgets/spending_category_model.dart';
 import 'package:gfs/views/widgets/price_text.dart';
 import 'package:gfs/views/widgets/spending_category.dart';
@@ -38,12 +39,14 @@ class Jirama extends StatefulWidget {
   _JiramaState createState() => _JiramaState();
 }
 
+AppDrawer drawer = AppDrawer();
+
 class _JiramaState extends State<Jirama> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: drawer,
       appBar: AppBar(
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.sort)),
         title: Text("JIRAMA"),
       ),
       body: Container(

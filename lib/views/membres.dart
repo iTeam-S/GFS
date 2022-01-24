@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
+
+AppDrawer drawer = AppDrawer();
 
 class MembreList extends StatelessWidget {
   const MembreList({Key? key}) : super(key: key);
@@ -7,10 +10,9 @@ class MembreList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff25272a),
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios),
-      ),
+      backgroundColor: Color(0xff25272a),
+      drawer: drawer,
+      appBar: AppBar(),
       body: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
