@@ -12,7 +12,7 @@ class AppDrawer extends StatelessWidget {
           children: <Widget>[
             Container(
               padding: EdgeInsets.all(25),
-              color: Colors.red,
+              color: Color(0xFF3F4041),
               height: Get.height * .45,
               width: Get.width,
               child: Column(
@@ -41,7 +41,10 @@ class AppDrawer extends StatelessWidget {
                   ),
                   Text(
                     "Dominick Randriamanantena",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        overflow: TextOverflow.ellipsis),
                   ),
                   Text(
                     "Chef de foyer",

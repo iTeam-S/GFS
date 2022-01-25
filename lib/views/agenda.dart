@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gfs/views/widgets/dates_list.dart';
 import 'package:gfs/theme/colors/light_colors.dart';
 import 'package:gfs/views/widgets/calendar_dates.dart';
+import 'package:gfs/views/widgets/drawer.dart';
 import 'package:gfs/views/widgets/task_container.dart';
+
+AppDrawer drawer = AppDrawer();
 
 class CalendarPage extends StatelessWidget {
   Widget _dashedText() {
@@ -19,9 +22,9 @@ class CalendarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff25272a),
+      backgroundColor: Color(0xff25272a),
+      drawer: drawer,
       appBar: AppBar(
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.sort)),
         title: Text("AGENDA"),
       ),
       body: SafeArea(
