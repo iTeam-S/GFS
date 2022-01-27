@@ -125,7 +125,9 @@ class _LoginPageState extends State<LoginPage> {
               width: Get.width * .5,
               height: 50,
               child: MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed('/');
+                },
                 color: Colors.red,
                 child: Text(
                   'Login',
