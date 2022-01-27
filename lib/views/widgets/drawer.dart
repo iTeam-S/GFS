@@ -16,8 +16,9 @@ class AppDrawer extends StatelessWidget {
               height: Get.height * .45,
               width: Get.width,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   Container(
                     alignment: Alignment.topRight,
@@ -32,24 +33,29 @@ class AppDrawer extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: Get.height * .1,
-                  ),
+                  SizedBox(),
                   CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 45,
                   ),
-                  Text(
-                    "Dominick Randriamanantena",
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        overflow: TextOverflow.ellipsis),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Dominick Randriamanantena",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                        Text(
+                          "Chef de foyer",
+                          style: TextStyle(fontSize: 15, color: Colors.white),
+                        )
+                      ],
+                    ),
                   ),
-                  Text(
-                    "Chef de foyer",
-                    style: TextStyle(fontSize: 15, color: Colors.white),
-                  )
                 ],
               ),
             ),
@@ -86,6 +92,11 @@ class AppDrawer extends StatelessWidget {
                       itemIcon: LineIcons.users,
                       itemRoute: '/membre',
                       itemColor: Colors.blue),
+                  menuItems(
+                      itemName: 'Deconexion',
+                      itemIcon: LineIcons.alternateSignOut,
+                      itemRoute: '/login',
+                      itemColor: Colors.grey),
                 ],
               ),
             )

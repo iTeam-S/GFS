@@ -35,6 +35,9 @@ dependencies:
   flutter_svg: ^0.23.0+1
   get: ^4.6.1
   line_icons: ^2.0.1
+  flutter_custom_clippers: ^2.0.0
+  
+  
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +73,11 @@ flutter:
     - family: ProductSans
       fonts:
         - asset: assets/fonts/PS.ttf
+          style: normal
+          weight: 700
+    - family: Sifonn
+      fonts:
+        - asset: assets/fonts/SIFONN_BASIC_OUTLINE.otf
           style: normal
           weight: 700
   #
