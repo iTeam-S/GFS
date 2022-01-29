@@ -221,16 +221,16 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 10,
               ),
               SizedBox(
-                width: Get.width * .5,
+                width: Get.width * .4,
                 height: 50,
                 child: MaterialButton(
                   onPressed: () {
-                    Get.toNamed('/');
+                    Get.toNamed('/login');
                   },
                   color: Colors.red,
                   child: Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+                    'Register',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),

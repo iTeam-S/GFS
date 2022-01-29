@@ -10,7 +10,11 @@ class Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: drawer,
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text('GFS'),
+          centerTitle: true,
+          backgroundColor: Colors.red,
+        ),
         body: SingleChildScrollView(child: Column(children: <Widget>[])));
   }
 }

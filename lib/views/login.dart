@@ -136,7 +136,36 @@ class _LoginPageState extends State<LoginPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
               ),
-            )
+            ),
+            SizedBox(
+              width: Get.width * .5,
+              child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'No account ?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black87, fontSize: 15),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.toNamed("/register");
+                        },
+                        child: Text(
+                          'Sign Up',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 15,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+            ),
           ],
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:gfs/views/home.dart';
 import 'package:gfs/views/jirama.dart';
 import 'package:gfs/views/login.dart';
 import 'package:gfs/views/membres.dart';
+import 'package:gfs/views/register.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/agenda': (context) => CalendarPage(),
         '/membre': (context) => MembreList(),
         '/login': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
       },
     );
   }
