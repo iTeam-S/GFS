@@ -6,6 +6,7 @@ import 'package:gfs/views/jirama.dart';
 import 'package:gfs/views/login.dart';
 import 'package:gfs/views/membres.dart';
 import 'package:gfs/views/register.dart';
+import 'package:gfs/views/splash.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,13 +15,17 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(milliseconds: 3000), () {
+      Get.offNamed('/login');
+    });
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'GFS',
       theme: ThemeData(primarySwatch: Colors.orange, fontFamily: "ProductSans"),
-      initialRoute: '/login',
+      initialRoute: '/',
       routes: {
-        '/': (context) => Screen(),
+        '/': (context) => Splash(),
+        'home': (context) => Screen(),
         '/jirama': (context) => Jirama(),
         '/agenda': (context) => CalendarPage(),
         '/membre': (context) => MembreList(),
