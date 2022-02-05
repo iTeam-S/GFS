@@ -1,4 +1,6 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -39,6 +41,76 @@ class _ScreenState extends State<Screen> {
                 ))
           ],
         ),
-        body: SingleChildScrollView(child: Column(children: <Widget>[])));
+        body: SingleChildScrollView(
+            child: Column(children: <Widget>[
+          Container(
+            width: Get.width,
+            height: 150,
+            child: Row(
+              children: [
+                Expanded(
+                    child: ListView.builder(
+                        itemCount: 4,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int id) {
+                          return Container(
+                            width: 150,
+                            height: Get.height,
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Center(
+                              child: Text(
+                                "cuisine",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 25),
+                              ),
+                            ),
+                          );
+                        }))
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(15),
+            width: Get.width,
+            height: Get.height * .3,
+            decoration: BoxDecoration(
+                color: Colors.black, borderRadius: BorderRadius.circular(15)),
+            child: Center(
+              child: Text(
+                "Courbe des taches",
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+            ),
+          ),
+          Container(
+            width: Get.width,
+            height: Get.height * .35,
+            child: Swiper(
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int id) {
+                return Container(
+                  height: Get.height * .8,
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Center(
+                    child: Text(
+                      "Tache+equipe",
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
+                  ),
+                );
+              },
+              indicatorLayout: PageIndicatorLayout.COLOR,
+              autoplay: true,
+              pagination: const SwiperPagination(),
+              control: const SwiperControl(),
+            ),
+          ),
+        ])));
   }
 }

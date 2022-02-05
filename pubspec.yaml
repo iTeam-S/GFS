@@ -36,6 +36,7 @@ dependencies:
   get: ^4.6.1
   line_icons: ^2.0.1
   flutter_custom_clippers: ^2.0.0
+  card_swiper: ^2.0.1
   
   
 
