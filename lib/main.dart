@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 3000), () {
-      Get.offNamed('/login');
+      Get.offNamed('/home');
     });
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Splash(),
-        'home': (context) => Screen(),
+        '/home': (context) => Screen(),
         '/jirama': (context) => Jirama(),
         '/agenda': (context) => CalendarPage(),
         '/membre': (context) => MembreList(),

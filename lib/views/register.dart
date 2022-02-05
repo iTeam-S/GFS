@@ -51,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ClipPath(
                         clipper: WaveClipperOne(flip: false),
                         child: Container(
-                          height: Get.height * .15,
+                          height: Get.height * .27,
                           width: Get.width,
                           decoration: BoxDecoration(
                               boxShadow: [
