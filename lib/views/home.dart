@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gfs/views/widgets/chart.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -16,6 +17,7 @@ class Screen extends StatefulWidget {
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class _ScreenState extends State<Screen> {
+  var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,10 +81,7 @@ class _ScreenState extends State<Screen> {
             decoration: BoxDecoration(
                 color: Colors.black, borderRadius: BorderRadius.circular(15)),
             child: Center(
-              child: Text(
-                "Courbe des taches",
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              ),
+              child: LineChartSample2(),
             ),
           ),
           Container(
