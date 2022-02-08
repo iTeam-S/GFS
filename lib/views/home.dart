@@ -14,10 +14,8 @@ class Screen extends StatefulWidget {
   State<Screen> createState() => _ScreenState();
 }
 
-final GlobalKey<ScaffoldState> _key = GlobalKey();
-
 class _ScreenState extends State<Screen> {
-  var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
+  GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
