@@ -84,12 +84,11 @@ class _ScreenState extends State<Screen> {
           ),
           Container(
             width: Get.width,
-            height: Get.height * .35,
+            height: Get.height * .25,
             child: Swiper(
               itemCount: 5,
               itemBuilder: (BuildContext context, int id) {
                 return Container(
-                  height: Get.height * .8,
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       color: Colors.black,
@@ -102,10 +101,10 @@ class _ScreenState extends State<Screen> {
                   ),
                 );
               },
-              indicatorLayout: PageIndicatorLayout.COLOR,
+              // indicatorLayout: PageIndicatorLayout.COLOR,
               autoplay: true,
-              pagination: const SwiperPagination(),
-              control: const SwiperControl(),
+              //pagination: const SwiperPagination(),
+              //control: const SwiperControl(),
             ),
           ),
         ])));

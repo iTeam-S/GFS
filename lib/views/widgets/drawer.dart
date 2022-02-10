@@ -13,7 +13,7 @@ class AppDrawer extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(25),
               color: Color(0xFF3F4041),
-              height: Get.height * .45,
+              height: Get.height * .3,
               width: Get.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
