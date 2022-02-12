@@ -1,6 +1,8 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gfs/views/exemple.dart';
+// ignore: unused_import
 import 'package:gfs/views/widgets/chart.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
@@ -19,6 +21,7 @@ class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         key: _key,
         drawer: drawer,
         appBar: AppBar(
@@ -68,7 +71,7 @@ class _ScreenState extends State<Screen> {
                                     padding: EdgeInsets.all(7),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
-                                      color: Color(0xFFF0B76D),
+                                      color: Color(0xFFFF8800),
                                     ),
                                     height: 100,
                                     width: Get.width,
@@ -91,14 +94,10 @@ class _ScreenState extends State<Screen> {
             ),
           ),
           Container(
-            margin: EdgeInsets.all(15),
+            margin: EdgeInsets.all(7),
             width: Get.width,
-            height: Get.height * .3,
-            decoration: BoxDecoration(
-                color: Colors.black, borderRadius: BorderRadius.circular(15)),
-            child: Center(
-              child: LineChartSample2(),
-            ),
+            height: Get.height * .35,
+            child: BarChartSample1(),
           ),
           Container(
             width: Get.width,
@@ -111,16 +110,39 @@ class _ScreenState extends State<Screen> {
                   decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(15)),
-                  child: Center(
-                    child: Text(
-                      "Tache+equipe",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(15),
+                            height: 40,
+                            width: Get.width * .5,
+                            decoration: BoxDecoration(
+                                color: Colors.orangeAccent,
+                                borderRadius: BorderRadius.circular(50)),
+                            child: Center(
+                              child: Text(
+                                "LUNDI",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "Tache+equipe",
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                    ],
                   ),
                 );
               },
               // indicatorLayout: PageIndicatorLayout.COLOR,
-              autoplay: true,
+              autoplay: false,
               //pagination: const SwiperPagination(),
               //control: const SwiperControl(),
             ),
