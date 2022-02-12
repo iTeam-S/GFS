@@ -45,7 +45,7 @@ class _ScreenState extends State<Screen> {
             child: Column(children: <Widget>[
           Container(
             width: Get.width,
-            height: 150,
+            height: 200,
             child: Row(
               children: [
                 Expanded(
@@ -58,14 +58,32 @@ class _ScreenState extends State<Screen> {
                             height: Get.height,
                             margin: EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                                color: Colors.black,
+                                // color: Colors.black,
                                 borderRadius: BorderRadius.circular(15)),
-                            child: Center(
-                              child: Text(
-                                "cuisine",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 25),
-                              ),
+                            child: Stack(
+                              children: <Widget>[
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                    padding: EdgeInsets.all(7),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Color(0xFFF0B76D),
+                                    ),
+                                    height: 100,
+                                    width: Get.width,
+                                    child: Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Text(
+                                        "SEMAINE B",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 20),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Image.asset('assets/images/Food_PNG.png'),
+                              ],
                             ),
                           );
                         }))
