@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:gfs/views/agenda.dart';
-import 'package:gfs/views/exemple.dart';
+import 'package:gfs/views/widgets/chart.dart';
 import 'package:gfs/views/home.dart';
 import 'package:gfs/views/jirama.dart';
 import 'package:gfs/views/login.dart';

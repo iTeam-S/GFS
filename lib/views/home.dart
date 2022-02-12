@@ -1,8 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gfs/views/exemple.dart';
-// ignore: unused_import
 import 'package:gfs/views/widgets/chart.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
@@ -71,7 +69,7 @@ class _ScreenState extends State<Screen> {
                                     padding: EdgeInsets.all(7),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
-                                      color: Color(0xFFFF8800),
+                                      color: Color(0xFFFF8C2D),
                                     ),
                                     height: 70,
                                     width: Get.width,
@@ -110,6 +108,7 @@ class _ScreenState extends State<Screen> {
               itemBuilder: (BuildContext context, int id) {
                 return Container(
                   margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(7),
                   decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(15)),
@@ -122,7 +121,7 @@ class _ScreenState extends State<Screen> {
                             height: 40,
                             width: Get.width * .5,
                             decoration: BoxDecoration(
-                                color: Colors.orangeAccent,
+                                color: Color(0xFFFF8C2D),
                                 borderRadius: BorderRadius.circular(50)),
                             child: Center(
                               child: Text(
@@ -133,11 +132,16 @@ class _ScreenState extends State<Screen> {
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
-                          )
+                          ),
+                          Text(
+                            "GROUPE 3",
+                            style: TextStyle(color: Colors.white, fontSize: 25),
+                          ),
                         ],
                       ),
                       Text(
-                        "Tache+equipe",
+                        "Nettoyage cours exterieur et débarassage",
+                        textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white, fontSize: 25),
                       ),
                     ],
@@ -145,7 +149,7 @@ class _ScreenState extends State<Screen> {
                 );
               },
               // indicatorLayout: PageIndicatorLayout.COLOR,
-              autoplay: false,
+              autoplay: true,
               //pagination: const SwiperPagination(),
               //control: const SwiperControl(),
             ),
