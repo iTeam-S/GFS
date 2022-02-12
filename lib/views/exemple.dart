@@ -20,7 +20,7 @@ class BarChartSample1 extends StatefulWidget {
 }
 
 class BarChartSample1State extends State<BarChartSample1> {
-  final Color barBackgroundColor = const Color(0xff72d8bf);
+  final Color barBackgroundColor = const Color(0xFFFFB87D);
   final Duration animDuration = const Duration(milliseconds: 250);
 
   int touchedIndex = -1;
@@ -33,7 +33,7 @@ class BarChartSample1State extends State<BarChartSample1> {
       aspectRatio: 1,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        color: const Color(0xff81e5cd),
+        color: const Color(0xFFFF8C2D),
         child: Stack(
           children: <Widget>[
             Padding(
@@ -44,9 +44,9 @@ class BarChartSample1State extends State<BarChartSample1> {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   const Text(
-                    'Mingguan',
+                    'PARTICIPATION',
                     style: TextStyle(
-                        color: Color(0xff0f4a3c),
+                        color: Color(0xFFFFFFFF),
                         fontSize: 24,
                         fontWeight: FontWeight.bold),
                   ),
@@ -54,9 +54,9 @@ class BarChartSample1State extends State<BarChartSample1> {
                     height: 4,
                   ),
                   const Text(
-                    'Grafik konsumsi kalori',
+                    'Selon les tache accomplie par jour',
                     style: TextStyle(
-                        color: Color(0xff379982),
+                        color: Color(0xFFFFFFFF),
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
                   ),
@@ -85,7 +85,7 @@ class BarChartSample1State extends State<BarChartSample1> {
                 child: IconButton(
                   icon: Icon(
                     isPlaying ? Icons.pause : Icons.play_arrow,
-                    color: const Color(0xff0f4a3c),
+                    color: const Color(0xFFFFFFFF),
                   ),
                   onPressed: () {
                     setState(() {
@@ -108,7 +108,7 @@ class BarChartSample1State extends State<BarChartSample1> {
     int x,
     double y, {
     bool isTouched = false,
-    Color barColor = Colors.white,
+    Color barColor = Colors.black,
     double width = 22,
     List<int> showTooltips = const [],
   }) {
@@ -163,25 +163,25 @@ class BarChartSample1State extends State<BarChartSample1> {
               String weekDay;
               switch (group.x.toInt()) {
                 case 0:
-                  weekDay = 'Monday';
+                  weekDay = 'Lundi';
                   break;
                 case 1:
-                  weekDay = 'Tuesday';
+                  weekDay = 'Mardi';
                   break;
                 case 2:
-                  weekDay = 'Wednesday';
+                  weekDay = 'Mercredi';
                   break;
                 case 3:
-                  weekDay = 'Thursday';
+                  weekDay = 'Jeudi';
                   break;
                 case 4:
-                  weekDay = 'Friday';
+                  weekDay = 'Vendredi';
                   break;
                 case 5:
-                  weekDay = 'Saturday';
+                  weekDay = 'Samedi';
                   break;
                 case 6:
-                  weekDay = 'Sunday';
+                  weekDay = 'Dimanche';
                   break;
                 default:
                   throw Error();
@@ -229,19 +229,19 @@ class BarChartSample1State extends State<BarChartSample1> {
           getTitles: (double value) {
             switch (value.toInt()) {
               case 0:
-                return 'M';
+                return 'L';
               case 1:
-                return 'T';
+                return 'M';
               case 2:
-                return 'W';
+                return 'M';
               case 3:
-                return 'T';
+                return 'J';
               case 4:
-                return 'F';
+                return 'V';
               case 5:
                 return 'S';
               case 6:
-                return 'S';
+                return 'D';
               default:
                 return '';
             }
@@ -274,19 +274,19 @@ class BarChartSample1State extends State<BarChartSample1> {
             getTitles: (double value) {
               switch (value.toInt()) {
                 case 0:
-                  return 'M';
+                  return 'L';
                 case 1:
-                  return 'T';
+                  return 'M';
                 case 2:
-                  return 'W';
+                  return 'M';
                 case 3:
-                  return 'T';
+                  return 'J';
                 case 4:
-                  return 'F';
+                  return 'V';
                 case 5:
                   return 'S';
                 case 6:
-                  return 'S';
+                  return 'D';
                 default:
                   return '';
               }

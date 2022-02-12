@@ -48,7 +48,7 @@ class _ScreenState extends State<Screen> {
             child: Column(children: <Widget>[
           Container(
             width: Get.width,
-            height: 200,
+            height: 170,
             child: Row(
               children: [
                 Expanded(
@@ -73,7 +73,7 @@ class _ScreenState extends State<Screen> {
                                       borderRadius: BorderRadius.circular(15),
                                       color: Color(0xFFFF8800),
                                     ),
-                                    height: 100,
+                                    height: 70,
                                     width: Get.width,
                                     child: Align(
                                       alignment: Alignment.bottomCenter,
@@ -85,7 +85,10 @@ class _ScreenState extends State<Screen> {
                                     ),
                                   ),
                                 ),
-                                Image.asset('assets/images/Food_PNG.png'),
+                                Image.asset(
+                                  'assets/images/Food_PNG.png',
+                                  width: Get.width * .3,
+                                ),
                               ],
                             ),
                           );
