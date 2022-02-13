@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:gfs/views/agenda.dart';
-import 'package:gfs/views/widgets/chart.dart';
+import 'package:gfs/views/exemple.dart';
 import 'package:gfs/views/home.dart';
 import 'package:gfs/views/jirama.dart';
 import 'package:gfs/views/login.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'GFS',
       theme: ThemeData(primarySwatch: Colors.orange, fontFamily: "ProductSans"),
-      initialRoute: '/home',
+      initialRoute: '/',
       routes: {
         '/': (context) => Splash(),
         '/home': (context) => Screen(),
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         '/membre': (context) => MembreList(),
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
-        '/test': (context) => BarChartSample1(),
+        '/test': (context) => MyHomePage(),
       },
     );
   }

@@ -39,6 +39,8 @@ dependencies:
   card_swiper: ^2.0.1
   fl_chart: ^0.41.0
   charts_flutter:
+  calendar_agenda: any
+  syncfusion_flutter_calendar: any
   
   
 
