@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -31,10 +30,6 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
             color: Colors.white,
           ),
-          title: Text(
-            "AGENDA",
-            style: TextStyle(color: Colors.white),
-          ),
         ),
         body: Scaffold(
             body: Container(
@@ -57,12 +52,11 @@ class _CalendarPageState extends State<CalendarPage> {
                       onPressed: () {},
                       color: Color(0xFFFF8C2D),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
                       child: Text(
                         "Ajouter",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     )
                   ],
@@ -77,7 +71,13 @@ class _CalendarPageState extends State<CalendarPage> {
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(25))),
                 child: ListView(
-                  children: [CardTask()],
+                  children: [
+                    CardTask(),
+                    CardTask(),
+                    CardTask(),
+                    CardTask(),
+                    CardTask()
+                  ],
                 ),
               ),
             ],
@@ -92,7 +92,7 @@ class CardTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(15),
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       width: Get.width,
       height: 100,
       decoration: BoxDecoration(
