@@ -7,12 +7,12 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Color(0xff25272a),
+        color: Color(0xFFFF8C2D),
         child: ListView(
           children: <Widget>[
             Container(
               padding: EdgeInsets.all(25),
-              color: Color(0xFF3F4041),
+              color: Color(0xFFFF8C2D),
               height: Get.height * .3,
               width: Get.width,
               child: Column(
@@ -35,7 +35,7 @@ class AppDrawer extends StatelessWidget {
                   ),
                   SizedBox(),
                   CircleAvatar(
-                    backgroundColor: Colors.black,
+                    backgroundColor: Colors.white,
                     radius: 45,
                   ),
                   Expanded(
@@ -59,44 +59,49 @@ class AppDrawer extends StatelessWidget {
                 ],
               ),
             ),
+            Divider(
+              color: Colors.white,
+              height: 1,
+              thickness: 1,
+            ),
             Container(
               child: Column(
                 children: [
                   menuItems(
-                      itemName: 'Jirama',
-                      itemIcon: LineIcons.plug,
-                      itemRoute: '/jirama',
-                      itemColor: Colors.blue),
+                    itemName: 'Jirama',
+                    itemIcon: LineIcons.plug,
+                    itemRoute: '/jirama',
+                  ),
                   menuItems(
-                      itemName: 'Cuisine',
-                      itemIcon: LineIcons.utensils,
-                      itemRoute: '/membre',
-                      itemColor: Colors.purple),
+                    itemName: 'Cuisine',
+                    itemIcon: LineIcons.utensils,
+                    itemRoute: '/membre',
+                  ),
                   menuItems(
-                      itemName: 'Ménage',
-                      itemIcon: LineIcons.couch,
-                      itemRoute: '/membre',
-                      itemColor: Colors.orange),
+                    itemName: 'Ménage',
+                    itemIcon: LineIcons.couch,
+                    itemRoute: '/membre',
+                  ),
                   menuItems(
-                      itemName: 'Budget',
-                      itemIcon: LineIcons.coins,
-                      itemRoute: '/membre',
-                      itemColor: Colors.pink),
+                    itemName: 'Budget',
+                    itemIcon: LineIcons.coins,
+                    itemRoute: '/membre',
+                  ),
                   menuItems(
-                      itemName: 'Agenda',
-                      itemIcon: LineIcons.calendar,
-                      itemRoute: '/agenda',
-                      itemColor: Colors.amber),
+                    itemName: 'Agenda',
+                    itemIcon: LineIcons.calendar,
+                    itemRoute: '/agenda',
+                  ),
                   menuItems(
-                      itemName: 'Membres',
-                      itemIcon: LineIcons.users,
-                      itemRoute: '/membre',
-                      itemColor: Colors.blue),
+                    itemName: 'Membres',
+                    itemIcon: LineIcons.users,
+                    itemRoute: '/membre',
+                  ),
                   menuItems(
-                      itemName: 'Deconexion',
-                      itemIcon: LineIcons.alternateSignOut,
-                      itemRoute: '/login',
-                      itemColor: Colors.grey),
+                    itemName: 'Deconexion',
+                    itemIcon: LineIcons.alternateSignOut,
+                    itemRoute: '/login',
+                  ),
                 ],
               ),
             )
@@ -110,7 +115,6 @@ class AppDrawer extends StatelessWidget {
     required String itemName,
     required IconData itemIcon,
     required String itemRoute,
-    required Color itemColor,
   }) {
     return ListTile(
       onTap: () {
@@ -118,14 +122,12 @@ class AppDrawer extends StatelessWidget {
       },
       title: Text(
         itemName,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(
+            color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
       ),
       leading: CircleAvatar(
-        backgroundColor: itemColor,
-        child: Icon(
-          itemIcon,
-          color: Colors.black,
-        ),
+        backgroundColor: Color(0xFF000000),
+        child: Icon(itemIcon, color: Colors.white),
       ),
       hoverColor: Colors.red,
     );
