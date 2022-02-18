@@ -4,6 +4,7 @@ import 'package:gfs/views/widgets/drawer.dart';
 import 'package:gfs/views/widgets/spending_category_model.dart';
 import 'package:gfs/views/widgets/price_text.dart';
 import 'package:gfs/views/widgets/spending_category.dart';
+import 'package:line_icons/line_icons.dart';
 
 class Jirama extends StatefulWidget {
   static const categoryModels = [
@@ -42,12 +43,24 @@ class Jirama extends StatefulWidget {
 AppDrawer drawer = AppDrawer();
 
 class _JiramaState extends State<Jirama> {
+  GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       drawer: drawer,
       appBar: AppBar(
-        title: Text("JIRAMA"),
+        elevation: 0,
+        backgroundColor: Color(0xff25272a),
+        leading: IconButton(
+          onPressed: () {
+            _key.currentState!.openDrawer();
+          },
+          icon: Icon(
+            LineIcons.verticalEllipsis,
+          ),
+          color: Colors.white,
+        ),
       ),
       body: Container(
         color: Color(0xfff25272a),

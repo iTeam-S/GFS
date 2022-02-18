@@ -20,18 +20,41 @@ class AppDrawer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Container(
-                    alignment: Alignment.topRight,
-                    child: InkWell(
-                      onTap: () => Get.toNamed('/'),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          LineIcons.home,
-                          color: Colors.black,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        alignment: Alignment.topRight,
+                        child: InkWell(
+                          onTap: () {
+                            Get.toNamed('/login');
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Colors.red.shade900,
+                            child: Icon(
+                              LineIcons.alternateSignOut,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        alignment: Alignment.topRight,
+                        child: InkWell(
+                          onTap: () => Get.toNamed('/home'),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Icon(
+                              LineIcons.home,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(),
                   CircleAvatar(
@@ -60,7 +83,7 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             Divider(
-              color: Colors.white,
+              color: Colors.white.withOpacity(.5),
               height: 1,
               thickness: 1,
             ),
@@ -97,11 +120,6 @@ class AppDrawer extends StatelessWidget {
                     itemIcon: LineIcons.users,
                     itemRoute: '/membre',
                   ),
-                  menuItems(
-                    itemName: 'Deconexion',
-                    itemIcon: LineIcons.alternateSignOut,
-                    itemRoute: '/login',
-                  ),
                 ],
               ),
             )
@@ -116,20 +134,28 @@ class AppDrawer extends StatelessWidget {
     required IconData itemIcon,
     required String itemRoute,
   }) {
-    return ListTile(
-      onTap: () {
-        Get.toNamed(itemRoute);
-      },
-      title: Text(
-        itemName,
-        style: TextStyle(
-            color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
+    return Container(
+      margin: EdgeInsets.all(7),
+      child: ListTile(
+        onTap: () {
+          Get.toNamed(itemRoute);
+        },
+        title: Text(
+          itemName,
+          style: TextStyle(
+              color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
+        ),
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundColor: Color(0xFF000000),
+          child: Icon(
+            itemIcon,
+            color: Colors.white,
+            size: 27,
+          ),
+        ),
+        hoverColor: Colors.red,
       ),
-      leading: CircleAvatar(
-        backgroundColor: Color(0xFF000000),
-        child: Icon(itemIcon, color: Colors.white),
-      ),
-      hoverColor: Colors.red,
     );
   }
 }

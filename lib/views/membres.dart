@@ -9,10 +9,24 @@ class MembreList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<ScaffoldState> _key = GlobalKey();
     return Scaffold(
       backgroundColor: Color(0xff25272a),
+      key: _key,
       drawer: drawer,
-      appBar: AppBar(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Color(0xff25272a),
+        leading: IconButton(
+          onPressed: () {
+            _key.currentState!.openDrawer();
+          },
+          icon: Icon(
+            LineIcons.verticalEllipsis,
+          ),
+          color: Colors.white,
+        ),
+      ),
       body: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
