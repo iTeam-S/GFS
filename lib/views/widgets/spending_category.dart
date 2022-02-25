@@ -12,7 +12,7 @@ class SpendingCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
+      height: 90,
       child: Stack(
         children: [
           Container(

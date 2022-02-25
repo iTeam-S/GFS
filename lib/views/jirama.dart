@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gfs/views/widgets/app_colors.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:gfs/views/widgets/spending_category_model.dart';
@@ -63,68 +64,61 @@ class _JiramaState extends State<Jirama> {
         ),
       ),
       body: Container(
-        color: Color(0xfff25272a),
+        color: Color(0xff25272a),
         child: Column(
           children: [
             Container(
-              height: 110,
-              child: Stack(children: [
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Estimation\ndu mois prochain',
-                                style: TextStyle(
-                                    color: AppColors.primaryWhiteColor),
-                              ),
-                              SizedBox(width: 20),
-                              PriceText(
-                                price: 2500,
-                                color: AppColors.primaryWhiteColor,
-                              ),
-                            ],
+              height: Get.height * .1,
+              child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Estimation\ndu mois prochain',
+                            style:
+                                TextStyle(color: AppColors.primaryWhiteColor),
                           ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 32, vertical: 16),
-                          decoration: BoxDecoration(
-                              color: AppColors.secondaryAccent,
-                              borderRadius: BorderRadius.circular(32)),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(32),
-                              color: AppColors.secondaryAccent),
-                          // Wrap the IconButton in a Material widget for the
-                          // IconButton's splash to render above the container.
-                          child: Material(
-                            borderRadius: BorderRadius.circular(32),
-                            type: MaterialType.transparency,
-                            // Hard Edge makes sure the splash is clipped at the border of this
-                            // Material widget, which is circular due to the radius above.
-                            clipBehavior: Clip.hardEdge,
-                            child: IconButton(
-                              padding: EdgeInsets.all(16),
-                              color: AppColors.primaryWhiteColor,
-                              iconSize: 32,
-                              icon: Icon(
-                                Icons.savings,
-                              ),
-                              onPressed: () {},
-                            ),
+                          SizedBox(width: 20),
+                          PriceText(
+                            price: 2500,
+                            color: AppColors.primaryWhiteColor,
                           ),
+                        ],
+                      ),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                      decoration: BoxDecoration(
+                          color: AppColors.secondaryAccent,
+                          borderRadius: BorderRadius.circular(32)),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(32),
+                          color: AppColors.secondaryAccent),
+                      // Wrap the IconButton in a Material widget for the
+                      // IconButton's splash to render above the container.
+                      child: Material(
+                        borderRadius: BorderRadius.circular(32),
+                        type: MaterialType.transparency,
+                        // Hard Edge makes sure the splash is clipped at the border of this
+                        // Material widget, which is circular due to the radius above.
+                        clipBehavior: Clip.hardEdge,
+                        child: IconButton(
+                          padding: EdgeInsets.all(16),
+                          color: AppColors.primaryWhiteColor,
+                          iconSize: 32,
+                          icon: Icon(
+                            Icons.savings,
+                          ),
+                          onPressed: () {},
                         ),
-                      ]),
-                )
-              ]),
+                      ),
+                    ),
+                  ]),
             ),
             Expanded(
               child: ListView(children: [
