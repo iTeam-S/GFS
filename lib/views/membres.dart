@@ -37,13 +37,14 @@ class MembreList extends StatelessWidget {
                 margin:
                     new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
                 child: Container(
-                  decoration: BoxDecoration(color: Color(0xFF3E4650)),
+                  decoration: BoxDecoration(color: Color(0xFFFF8C2D)),
                   child: ListTile(
                       contentPadding: EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10.0),
                       leading: Container(
                         padding: EdgeInsets.only(right: 12.0),
                         decoration: new BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
                             border: new Border(
                                 right: new BorderSide(
                                     width: 1.0, color: Colors.white24))),
