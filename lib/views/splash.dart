@@ -12,7 +12,7 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(milliseconds: 2000), () {
-      Get.offNamed('/membre');
+      Get.offNamed('/cuisine');
     });
     return Scaffold(
       body: Container(

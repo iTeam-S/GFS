@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:gfs/views/agenda.dart';
+import 'package:gfs/views/cuisto.dart';
 import 'package:gfs/views/exemple.dart';
 import 'package:gfs/views/home.dart';
 import 'package:gfs/views/jirama.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
         '/test': (context) => MyHomePage(),
+        '/cuisine': (context) => TacheCuisine()
       },
     );
   }
