@@ -32,44 +32,41 @@ class MembreList extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-            Card(
-                elevation: 8.0,
-                margin:
-                    new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                child: Container(
-                  decoration: BoxDecoration(color: Color(0xFFFF8C2D)),
-                  child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 10.0),
-                      leading: Container(
-                        padding: EdgeInsets.only(right: 12.0),
-                        decoration: new BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: new Border(
-                                right: new BorderSide(
-                                    width: 1.0, color: Colors.white24))),
-                        child: Icon(
-                          LineIcons.userCircle,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                      ),
-                      title: Text(
-                        "Dominick Randria",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Color(0xFFFF8C2D)),
+              child: ListTile(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                  leading: Container(
+                    padding: EdgeInsets.only(right: 12.0),
+                    decoration: new BoxDecoration(
+                        border: new Border(
+                            right: new BorderSide(
+                                width: 1.0, color: Colors.white24))),
+                    child: Icon(
+                      LineIcons.userCircle,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                  ),
+                  title: Text(
+                    "Dominick Randria",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
-                      subtitle: Row(
-                        children: <Widget>[
-                          Icon(LineIcons.graduationCap, color: Colors.orange),
-                          Text(" P20", style: TextStyle(color: Colors.white))
-                        ],
-                      ),
-                      trailing: Icon(Icons.keyboard_arrow_right,
-                          color: Colors.white, size: 30.0)),
-                ))
+                  subtitle: Row(
+                    children: <Widget>[
+                      Icon(LineIcons.graduationCap, color: Colors.orange),
+                      Text(" P20", style: TextStyle(color: Colors.white))
+                    ],
+                  ),
+                  trailing: Icon(Icons.keyboard_arrow_right,
+                      color: Colors.white, size: 30.0)),
+            )
           ])),
     );
   }
