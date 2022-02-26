@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 class RecipeCard extends StatelessWidget {
   final String title;
-  final String rating;
-  final String cookTime;
+  final String groupe;
+  final String heureCuisto;
   final String thumbnailUrl;
 
   const RecipeCard(
       {Key? key,
       required this.title,
-      required this.rating,
-      required this.cookTime,
+      required this.groupe,
+      required this.heureCuisto,
       required this.thumbnailUrl})
       : super(key: key);
 
@@ -75,12 +76,12 @@ class RecipeCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Icon(
-                        Icons.star,
-                        color: Colors.yellow,
+                        LineIcons.users,
+                        color: Colors.orange,
                         size: 18,
                       ),
                       SizedBox(width: 7),
-                      Text(rating, style: TextStyle(color: Colors.white)),
+                      Text(groupe, style: TextStyle(color: Colors.white)),
                     ],
                   ),
                 ),
@@ -95,12 +96,12 @@ class RecipeCard extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.schedule,
-                        color: Colors.yellow,
+                        color: Colors.orange,
                         size: 18,
                       ),
                       SizedBox(width: 7),
                       Text(
-                        cookTime,
+                        heureCuisto,
                         style: TextStyle(color: Colors.white),
                       ),
                     ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gfs/views/widgets/card_cuisto.dart';
+// ignore: unused_import
+import 'package:line_icons/line_icons.dart';
 
 class TacheCuisine extends StatefulWidget {
   const TacheCuisine({Key? key}) : super(key: key);
@@ -20,9 +22,9 @@ class _TacheCuisineState extends State<TacheCuisine> {
           child: ListView(
         children: [
           RecipeCard(
-              title: 'Ravokazaha',
-              rating: '0',
-              cookTime: '1h30',
+              title: 'Ravinkazaha',
+              groupe: 'Groupe1',
+              heureCuisto: '07h30',
               thumbnailUrl:
                   'https://stileex.xyz/wp-content/uploads/2018/10/image-principale-2.jpg')
         ],
