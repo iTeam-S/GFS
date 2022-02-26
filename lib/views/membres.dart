@@ -11,12 +11,12 @@ class MembreList extends StatelessWidget {
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _key = GlobalKey();
     return Scaffold(
-      backgroundColor: Color(0xff25272a),
+      backgroundColor: Colors.white,
       key: _key,
       drawer: drawer,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xff25272a),
+        backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
             _key.currentState!.openDrawer();
@@ -24,7 +24,7 @@ class MembreList extends StatelessWidget {
           icon: Icon(
             LineIcons.verticalEllipsis,
           ),
-          color: Colors.white,
+          color: Colors.black,
         ),
       ),
       body: SingleChildScrollView(
@@ -33,6 +33,7 @@ class MembreList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
             Container(
+              margin: EdgeInsets.all(15),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: Color(0xFFFF8C2D)),
@@ -60,7 +61,7 @@ class MembreList extends StatelessWidget {
 
                   subtitle: Row(
                     children: <Widget>[
-                      Icon(LineIcons.graduationCap, color: Colors.orange),
+                      Icon(LineIcons.graduationCap, color: Colors.black),
                       Text(" P20", style: TextStyle(color: Colors.white))
                     ],
                   ),
