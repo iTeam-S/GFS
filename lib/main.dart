@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:gfs/views/agenda.dart';
+import 'package:gfs/views/budget.dart';
 import 'package:gfs/views/cuisto.dart';
 import 'package:gfs/views/exemple.dart';
 import 'package:gfs/views/home.dart';
@@ -17,11 +18,14 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /*Future.delayed(Duration(milliseconds: 2000), () {
+      Get.offNamed('/home');
+    });*/
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'GFS',
       theme: ThemeData(primarySwatch: Colors.orange, fontFamily: "ProductSans"),
-      initialRoute: '/',
+      initialRoute: '/budget',
       routes: {
         '/': (context) => Splash(),
         '/home': (context) => Screen(),
@@ -31,7 +35,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
         '/test': (context) => MyHomePage(),
-        '/cuisine': (context) => TacheCuisine()
+        '/cuisine': (context) => TacheCuisine(),
+        '/budget': (context) => Budget(),
       },
     );
   }

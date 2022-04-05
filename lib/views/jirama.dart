@@ -1,42 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gfs/views/widgets/app_colors.dart';
+import 'package:gfs/constants.dart';
+
 import 'package:gfs/views/widgets/drawer.dart';
-import 'package:gfs/views/widgets/spending_category_model.dart';
-import 'package:gfs/views/widgets/price_text.dart';
-import 'package:gfs/views/widgets/spending_category.dart';
+
 import 'package:line_icons/line_icons.dart';
 
 class Jirama extends StatefulWidget {
-  static const categoryModels = [
-    SpendingCategoryModel(
-        'Janvier', 'assets/images/jirama.png', 500, AppColors.secondaryAccent),
-    SpendingCategoryModel(
-      'Fevrier',
-      'assets/images/jirama.png',
-      1500,
-      AppColors.secondaryAccent,
-    ),
-    SpendingCategoryModel(
-      'Mars',
-      'assets/images/jirama.png',
-      3000,
-      AppColors.secondaryAccent,
-    ),
-    SpendingCategoryModel(
-      'Avril',
-      'assets/images/jirama.png',
-      400,
-      AppColors.secondaryAccent,
-    ),
-    SpendingCategoryModel(
-      'Mai',
-      'assets/images/jirama.png',
-      2000,
-      AppColors.secondaryAccent,
-    ),
-  ];
-
   @override
   _JiramaState createState() => _JiramaState();
 }
@@ -52,7 +22,7 @@ class _JiramaState extends State<Jirama> {
       drawer: drawer,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xff25272a),
+        backgroundColor: dark,
         leading: IconButton(
           onPressed: () {
             _key.currentState!.openDrawer();
@@ -63,73 +33,120 @@ class _JiramaState extends State<Jirama> {
           color: Colors.white,
         ),
       ),
-      body: Container(
-        color: Color(0xff25272a),
-        child: Column(
-          children: [
-            Container(
-              height: Get.height * .1,
-              child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: SingleChildScrollView(
+        child: Container(
+          width: Get.width,
+          height: Get.height,
+          color: dark,
+          child: Column(
+            children: [
+              Container(
+                height: Get.height * .3,
+                color: dark,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
+                      margin: EdgeInsets.symmetric(vertical: 25),
+                      child: Column(
+                        children: [
+                          Text(
+                            "150.482 Ariary",
+                            style: TextStyle(color: Colors.white, fontSize: 40),
+                          ),
+                          Text(
+                            "augementation de 20% cette année",
+                            style:
+                                TextStyle(color: Colors.white54, fontSize: 15),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 45, vertical: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Estimation\ndu mois prochain',
-                            style:
-                                TextStyle(color: AppColors.primaryWhiteColor),
-                          ),
-                          SizedBox(width: 20),
-                          PriceText(
-                            price: 2500,
-                            color: AppColors.primaryWhiteColor,
-                          ),
+                          SizedBox(
+                              width: 120,
+                              height: 40,
+                              child: MaterialButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                onPressed: () {},
+                                color: Colors.redAccent,
+                                child: Text(
+                                  "Reload",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                              )),
+                          SizedBox(
+                              width: 120,
+                              height: 40,
+                              child: MaterialButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                onPressed: () {},
+                                color: Colors.blueAccent,
+                                child: Text(
+                                  "Add",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                              )),
                         ],
                       ),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                      decoration: BoxDecoration(
-                          color: AppColors.secondaryAccent,
-                          borderRadius: BorderRadius.circular(32)),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(32),
-                          color: AppColors.secondaryAccent),
-                      // Wrap the IconButton in a Material widget for the
-                      // IconButton's splash to render above the container.
-                      child: Material(
-                        borderRadius: BorderRadius.circular(32),
-                        type: MaterialType.transparency,
-                        // Hard Edge makes sure the splash is clipped at the border of this
-                        // Material widget, which is circular due to the radius above.
-                        clipBehavior: Clip.hardEdge,
-                        child: IconButton(
-                          padding: EdgeInsets.all(16),
-                          color: AppColors.primaryWhiteColor,
-                          iconSize: 32,
-                          icon: Icon(
-                            Icons.savings,
-                          ),
-                          onPressed: () {},
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 20),
+                height: Get.height * .7,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25),
+                    )),
+                child: ListView.separated(
+                  itemCount: 4,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.blue,
+                        radius: 25,
+                        child: Icon(
+                          LineIcons.lightningBolt,
+                          size: 32,
+                          color: Colors.white,
                         ),
                       ),
-                    ),
-                  ]),
-            ),
-            Expanded(
-              child: ListView(children: [
-                for (var model in Jirama.categoryModels)
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 36.0, vertical: 7),
-                      child: SpendingCategory(model))
-              ]),
-            ),
-          ],
+                      title: Text(
+                        "Mars",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      subtitle: Text("28 feb- 24 mars"),
+                      trailing: Text(
+                        "150 000Ar",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 17),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Divider();
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 50,
               child: MaterialButton(
                 onPressed: () {
-                  Get.toNamed('/');
+                  Get.toNamed('/home');
                 },
                 color: Colors.red,
                 child: Text(
@@ -138,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(
-              width: Get.width * .5,
+              width: Get.width * .6,
               child: Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Row(
@@ -149,17 +149,19 @@ class _LoginPageState extends State<LoginPage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black87, fontSize: 15),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Get.toNamed("/register");
-                        },
-                        child: Text(
-                          'Sign Up',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 15,
-                            decoration: TextDecoration.underline,
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Get.toNamed("/register");
+                          },
+                          child: Text(
+                            'Sign Up',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 15,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                         ),
                       ),

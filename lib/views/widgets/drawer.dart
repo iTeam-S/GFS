@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gfs/constants.dart';
 import 'package:line_icons/line_icons.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -7,13 +8,13 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Color(0xFFFF8C2D),
+        color: orange,
         child: ListView(
           children: <Widget>[
             Container(
               padding: EdgeInsets.all(25),
-              color: Color(0xFFFF8C2D),
-              height: Get.height * .3,
+              color: orange,
+              height: 230,
               width: Get.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +99,7 @@ class AppDrawer extends StatelessWidget {
                   menuItems(
                     itemName: 'Cuisine',
                     itemIcon: LineIcons.utensils,
-                    itemRoute: '/membre',
+                    itemRoute: '/cuisine',
                   ),
                   menuItems(
                     itemName: 'Ménage',
@@ -108,7 +109,7 @@ class AppDrawer extends StatelessWidget {
                   menuItems(
                     itemName: 'Budget',
                     itemIcon: LineIcons.coins,
-                    itemRoute: '/membre',
+                    itemRoute: '/budget',
                   ),
                   menuItems(
                     itemName: 'Agenda',
@@ -137,6 +138,7 @@ class AppDrawer extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(7),
       child: ListTile(
+        style: ListTileStyle.drawer,
         onTap: () {
           Get.toNamed(itemRoute);
         },
@@ -147,7 +149,7 @@ class AppDrawer extends StatelessWidget {
         ),
         leading: CircleAvatar(
           radius: 25,
-          backgroundColor: Color(0xFF000000),
+          backgroundColor: dark,
           child: Icon(
             itemIcon,
             color: Colors.white,

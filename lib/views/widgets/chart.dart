@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:gfs/constants.dart';
 
 class BarChartSample1 extends StatefulWidget {
   final List<Color> availableColors = const [
@@ -108,7 +109,7 @@ class BarChartSample1State extends State<BarChartSample1> {
     int x,
     double y, {
     bool isTouched = false,
-    Color barColor = Colors.black,
+    Color barColor = dark,
     double width = 22,
     List<int> showTooltips = const [],
   }) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gfs/constants.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -20,7 +21,8 @@ class _CalendarPageState extends State<CalendarPage> {
         key: _key,
         drawer: drawer,
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: dark,
+          elevation: 0,
           leading: IconButton(
             onPressed: () {
               _key.currentState!.openDrawer();
@@ -33,12 +35,12 @@ class _CalendarPageState extends State<CalendarPage> {
         ),
         body: Scaffold(
             body: Container(
-          color: Colors.black,
+          color: dark,
           child: Column(
             children: [
               Container(
                 padding: EdgeInsets.all(15),
-                color: Colors.black,
+                color: dark,
                 width: Get.width,
                 height: 70,
                 child: Row(
@@ -50,7 +52,7 @@ class _CalendarPageState extends State<CalendarPage> {
                     ),
                     MaterialButton(
                       onPressed: () {},
-                      color: Color(0xFFFF8C2D),
+                      color: orange,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -96,7 +98,7 @@ class CardTask extends StatelessWidget {
       width: Get.width,
       height: 100,
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: dark,
         borderRadius: BorderRadius.circular(15),
       ),
       child: Stack(
@@ -106,7 +108,7 @@ class CardTask extends StatelessWidget {
               Container(
                 width: Get.width * .1,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFF8C2D),
+                  color: orange,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(15),
                       bottomLeft: Radius.circular(15)),

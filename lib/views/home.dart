@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gfs/constants.dart';
 import 'package:gfs/views/widgets/chart.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
@@ -38,7 +39,7 @@ class _ScreenState extends State<Screen> {
             Container(
                 margin: EdgeInsets.symmetric(horizontal: 15),
                 child: CircleAvatar(
-                  backgroundColor: Colors.black,
+                  backgroundColor: dark,
                 ))
           ],
         ),
@@ -81,7 +82,7 @@ class _ScreenState extends State<Screen> {
                                           topRight: Radius.circular(7),
                                           bottomLeft: Radius.circular(20),
                                           bottomRight: Radius.circular(20)),
-                                      color: Color(0xFFFF8C2D),
+                                      color: orange,
                                     ),
                                     height: 70,
                                     width: Get.width,
@@ -122,18 +123,17 @@ class _ScreenState extends State<Screen> {
                   margin: EdgeInsets.all(10),
                   padding: EdgeInsets.all(7),
                   decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(15)),
+                      color: dark, borderRadius: BorderRadius.circular(15)),
                   child: Column(
                     children: [
                       Row(
                         children: [
                           Container(
                             margin: EdgeInsets.all(15),
-                            height: 40,
-                            width: Get.width * .5,
+                            height: 35,
+                            width: 150,
                             decoration: BoxDecoration(
-                                color: Color(0xFFFF8C2D),
+                                color: orange,
                                 borderRadius: BorderRadius.circular(50)),
                             child: Center(
                               child: Text(
@@ -145,9 +145,12 @@ class _ScreenState extends State<Screen> {
                               ),
                             ),
                           ),
-                          Text(
-                            "GROUPE 3",
-                            style: TextStyle(color: Colors.white, fontSize: 25),
+                          Expanded(
+                            child: Text(
+                              "GROUPE 3",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
                           ),
                         ],
                       ),
