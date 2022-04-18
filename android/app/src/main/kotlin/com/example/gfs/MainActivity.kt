@@ -1,4 +1,4 @@
-package com.example.gfs
+package com.iteams.gfs
 
 import io.flutter.embedding.android.FlutterActivity
 
