@@ -44,5 +44,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#Cofig perso
 google-services.json
 /android/app/src/main/res/values/strings.xml
