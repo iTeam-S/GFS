@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:get/get.dart';
+import 'package:gfs/controllers/auth_logique.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/input_style.dart';
 
@@ -15,6 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
+
   @override
   void initState() {
     username.text = ""; //innitail value of text field
@@ -25,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isHide = true;
   @override
   Widget build(BuildContext context) {
+    var authLogique = Provider.of<AuthLogique>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -122,16 +126,26 @@ class _LoginPageState extends State<LoginPage> {
               height: 20,
             ),
             SizedBox(
-              width: Get.width * .5,
+              width: Get.width * .85,
               height: 50,
               child: MaterialButton(
                 onPressed: () {
-                  Get.toNamed('/home');
+                  authLogique.loginFacebook();
                 },
-                color: Colors.red,
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+                color: Colors.blueAccent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Icon(
+                      LineIcons.facebookSquare,
+                      color: Colors.white,
+                      size: 35,
+                    ),
+                    Text(
+                      'Login with facebook',
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
+                  ],
                 ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),

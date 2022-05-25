@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_core: ^1.10.6
+  flutter_login_facebook: ^1.4.1
 
 
 
@@ -41,6 +42,8 @@ dependencies:
   charts_flutter:
   calendar_agenda: any
   syncfusion_flutter_calendar: any
+  firebase_auth: ^3.3.17
+  provider: ^6.0.2
   
   
 
