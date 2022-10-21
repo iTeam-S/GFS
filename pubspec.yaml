@@ -23,8 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: ^1.10.6
-  flutter_login_facebook: ^1.4.1
+
 
 
 
@@ -42,14 +41,20 @@ dependencies:
   charts_flutter:
   calendar_agenda: any
   syncfusion_flutter_calendar: any
-  firebase_auth: ^3.3.17
-  provider: ^6.0.2
+  #Local database
+  path: ^1.8.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
   
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # hive database generators
+  build_runner: ^2.1.11
+  hive_generator: ^1.1.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

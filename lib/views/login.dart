@@ -1,14 +1,10 @@
 // ignore_for_file: cancel_subscriptions
 
-import 'dart:async';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:get/get.dart';
-import 'package:gfs/controllers/auth_logique.dart';
+
 import 'package:line_icons/line_icons.dart';
-import 'package:provider/provider.dart';
 
 import 'widgets/input_style.dart';
 
@@ -22,15 +18,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
-  late StreamSubscription<User?> loginStateSubscription;
+
   @override
   void initState() {
-    var authLogique = Provider.of<AuthLogique>(context, listen: false);
-    loginStateSubscription = authLogique.currentUser.listen((fbUser) {
-      if (fbUser != null) {
-        Get.toNamed('/home');
-      }
-    });
     username.text = ""; //innitail value of text field
     password.text = "";
     super.initState();
@@ -39,7 +29,6 @@ class _LoginPageState extends State<LoginPage> {
   bool _isHide = true;
   @override
   Widget build(BuildContext context) {
-    var authLogique = Provider.of<AuthLogique>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -140,9 +129,7 @@ class _LoginPageState extends State<LoginPage> {
               width: Get.width * .85,
               height: 50,
               child: MaterialButton(
-                onPressed: () {
-                  authLogique.loginFacebook();
-                },
+                onPressed: () {},
                 color: Colors.blueAccent,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

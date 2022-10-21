@@ -28,12 +28,10 @@ class PopUpConsomation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
+              MaterialButton(
+                color: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -43,12 +41,10 @@ class PopUpConsomation extends StatelessWidget {
               SizedBox(
                 width: 50,
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
+              MaterialButton(
+                color: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
