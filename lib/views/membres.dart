@@ -71,6 +71,7 @@ class _MembreListState extends State<MembreList> {
                       itemBuilder: ((context, index) {
                         final membre = membres[index];
                         return cardMembre(
+                          index: index,
                           name: membre.nom,
                           prom: membre.promotion.toString(),
                         );
@@ -85,13 +86,7 @@ class _MembreListState extends State<MembreList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //popEdit();
-          _action.addMembre(
-            nom: "DOMINICK",
-            promotion: 20,
-            es: "ESTI",
-            role: "simple",
-          );
+          popEdit();
         },
         backgroundColor: Colors.black,
         child: Icon(
@@ -104,6 +99,7 @@ class _MembreListState extends State<MembreList> {
   }
 
   Widget cardMembre({
+    required int index,
     required String name,
     required String prom,
   }) {
@@ -160,10 +156,18 @@ class _MembreListState extends State<MembreList> {
             )
           ],
         ),
-        trailing: Icon(
-          Icons.delete_forever,
-          color: Colors.white,
-          size: 30.0,
+        trailing: IconButton(
+          onPressed: () {
+            _action.deleteItemAt(
+              boxe: 'membre',
+              itemId: index,
+            );
+          },
+          icon: Icon(
+            Icons.delete_forever,
+            color: Colors.white,
+            size: 30.0,
+          ),
         ),
       ),
     );
