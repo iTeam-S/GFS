@@ -2,7 +2,6 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
-import 'package:gfs/views/widgets/chart.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -47,71 +46,37 @@ class _ScreenState extends State<Screen> {
             child: Column(children: <Widget>[
           Container(
             width: Get.width,
-            height: 180,
+            height: Get.height * .62,
             child: Row(
               children: [
                 Expanded(
-                    child: ListView.builder(
-                        itemCount: 4,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int id) {
-                          return Container(
-                            width: 150,
-                            height: Get.height,
-                            margin: EdgeInsets.all(10),
-                            padding: EdgeInsets.only(top: 7),
-                            decoration: BoxDecoration(
-                                color: Color(0xFFFFFFFF),
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black38,
-                                      blurRadius: 12,
-                                      spreadRadius: 0,
-                                      offset: Offset(10, 5))
-                                ]),
-                            child: Stack(
-                              children: <Widget>[
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                    padding: EdgeInsets.all(7),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(7),
-                                          topRight: Radius.circular(7),
-                                          bottomLeft: Radius.circular(20),
-                                          bottomRight: Radius.circular(20)),
-                                      color: orange,
-                                    ),
-                                    height: 70,
-                                    width: Get.width,
-                                    child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Text(
-                                        "SEMAINE B",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Image.asset(
-                                  'assets/images/Food_PNG.png',
-                                  width: Get.width * .3,
-                                ),
-                              ],
-                            ),
-                          );
-                        }))
+                  child: ListView.builder(
+                    itemCount: 4,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, int id) {
+                      return Container(
+                        width: 315,
+                        height: Get.height,
+                        margin: EdgeInsets.all(10),
+                        padding: EdgeInsets.only(top: 7),
+                        decoration: BoxDecoration(
+                          color: orange,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black38,
+                              blurRadius: 12,
+                              spreadRadius: 0,
+                              offset: Offset(10, 5),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(7),
-            width: Get.width,
-            height: Get.height * .35,
-            child: BarChartSample1(),
           ),
           Container(
             width: Get.width,

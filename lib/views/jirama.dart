@@ -6,14 +6,14 @@ import 'package:gfs/views/widgets/drawer.dart';
 
 import 'package:line_icons/line_icons.dart';
 
-class Jirama extends StatefulWidget {
+class JiramaPage extends StatefulWidget {
   @override
-  _JiramaState createState() => _JiramaState();
+  _JiramaPageState createState() => _JiramaPageState();
 }
 
 AppDrawer drawer = AppDrawer();
 
-class _JiramaState extends State<Jirama> {
+class _JiramaPageState extends State<JiramaPage> {
   GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {

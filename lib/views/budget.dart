@@ -6,16 +6,16 @@ import 'package:gfs/views/widgets/drawer.dart';
 import 'package:gfs/views/widgets/indicator.dart';
 import 'package:line_icons/line_icons.dart';
 
-class Budget extends StatefulWidget {
-  const Budget({Key? key}) : super(key: key);
+class BudgetPage extends StatefulWidget {
+  const BudgetPage({Key? key}) : super(key: key);
 
   @override
-  _BudgetState createState() => _BudgetState();
+  _BudgetPageState createState() => _BudgetPageState();
 }
 
 AppDrawer drawer = AppDrawer();
 
-class _BudgetState extends State<Budget> {
+class _BudgetPageState extends State<BudgetPage> {
   GlobalKey<ScaffoldState> _key = GlobalKey();
   int touchedIndex = -1;
   @override

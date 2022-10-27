@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
+import 'package:gfs/database/db.transaction.dart';
+import 'package:gfs/models/membre/membre.model.dart';
 import 'package:gfs/views/widgets/drawer.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:line_icons/line_icons.dart';
+
+import '../database/db.service.dart';
 
 AppDrawer drawer = AppDrawer();
 
-class MembreList extends StatelessWidget {
+class MembreList extends StatefulWidget {
   const MembreList({Key? key}) : super(key: key);
 
+  @override
+  State<MembreList> createState() => _MembreListState();
+}
+
+class _MembreListState extends State<MembreList> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _promController = TextEditingController();
+  final TextEditingController _roleController = TextEditingController();
+  final TextEditingController _esController = TextEditingController();
+
+  final TransAction _action = TransAction();
+  List<Membre> membresList = [];
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -35,19 +52,54 @@ class MembreList extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-          child: Container(
-        width: Get.width,
-        height: Get.height,
-        child: Column(
+        child: Container(
+          width: Get.width,
+          height: Get.height,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              cardMembre(name: 'Dominick', prom: 'P20'),
-              cardMembre(name: 'Grégoire', prom: 'P40'),
-              cardMembre(name: 'Cekah', prom: 'P50'),
-              cardMembre(name: 'Randria', prom: 'P60'),
-            ]),
-      )),
+              SizedBox(
+                height: Get.height * .7,
+                child: ValueListenableBuilder<Box<Membre>>(
+                  valueListenable: Boxes.getMembre().listenable(),
+                  builder: (context, box, _) {
+                    final membres = box.values.toList().cast<Membre>();
+                    return ListView.builder(
+                      itemCount: membres.length,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: ((context, index) {
+                        final membre = membres[index];
+                        return cardMembre(
+                          name: membre.nom,
+                          prom: membre.promotion.toString(),
+                        );
+                      }),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          //popEdit();
+          _action.addMembre(
+            nom: "DOMINICK",
+            promotion: 20,
+            es: "ESTI",
+            role: "simple",
+          );
+        },
+        backgroundColor: Colors.black,
+        child: Icon(
+          LineIcons.plus,
+          color: Colors.white,
+          size: 25,
+        ),
+      ),
     );
   }
 
@@ -56,37 +108,284 @@ class MembreList extends StatelessWidget {
     required String prom,
   }) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 7),
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(15), color: orange),
+      margin: EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 3,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: orange,
+      ),
       child: ListTile(
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          leading: Container(
-            padding: EdgeInsets.only(right: 12.0),
-            decoration: new BoxDecoration(
-                border: new Border(
-                    right: new BorderSide(width: 1.0, color: Colors.white24))),
-            child: Icon(
-              LineIcons.userCircle,
-              color: Colors.white,
-              size: 40,
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        leading: Container(
+          padding: EdgeInsets.only(right: 12.0),
+          decoration: new BoxDecoration(
+            border: new Border(
+              right: new BorderSide(
+                width: 1.0,
+                color: Colors.white24,
+              ),
             ),
           ),
-          title: Text(
-            name,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          child: Icon(
+            LineIcons.userCircle,
+            color: Colors.white,
+            size: 40,
           ),
-          // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
+        ),
+        title: Text(
+          name,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
-          subtitle: Row(
-            children: <Widget>[
-              Icon(LineIcons.graduationCap, color: Colors.black),
-              Text(prom, style: TextStyle(color: Colors.white))
-            ],
-          ),
-          trailing: Icon(Icons.keyboard_arrow_right,
-              color: Colors.white, size: 30.0)),
+        subtitle: Row(
+          children: <Widget>[
+            Icon(
+              LineIcons.graduationCap,
+              color: Colors.black,
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              "P$prom",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            )
+          ],
+        ),
+        trailing: Icon(
+          Icons.delete_forever,
+          color: Colors.white,
+          size: 30.0,
+        ),
+      ),
     );
+  }
+
+  Future popEdit() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            backgroundColor: Colors.transparent,
+            children: [
+              Container(
+                height: 350,
+                margin: EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(25)),
+                child: Column(
+                  children: [
+                    SingleChildScrollView(
+                      child: Container(
+                        height: 280,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 8,
+                              ),
+                              child: Text(
+                                "Ajour de nouvau membre",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
+                              padding: EdgeInsets.symmetric(horizontal: 25),
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.black12,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: TextField(
+                                controller: _nameController,
+                                maxLines: 4,
+                                keyboardType: TextInputType.text,
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                                decoration: InputDecoration(
+                                    hintStyle: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black38,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    hintText: "Nom",
+                                    border: InputBorder.none),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
+                              padding: EdgeInsets.symmetric(horizontal: 25),
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.black12,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: TextField(
+                                controller: _promController,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal),
+                                keyboardType: TextInputType.number,
+                                maxLines: 1,
+                                decoration: InputDecoration(
+                                    hintStyle: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black38,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    prefixText: 'P',
+                                    prefixStyle: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    suffixStyle: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    hintText:
+                                        "Promotion (ex: ecrire 20 si P20)",
+                                    border: InputBorder.none),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
+                              padding: EdgeInsets.symmetric(horizontal: 25),
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.black12,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: TextField(
+                                controller: _roleController,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal),
+                                keyboardType: TextInputType.text,
+                                maxLines: 1,
+                                decoration: InputDecoration(
+                                    hintStyle: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black38,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    hintText: "role",
+                                    border: InputBorder.none),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
+                              padding: EdgeInsets.symmetric(horizontal: 25),
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.black12,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: TextField(
+                                controller: _esController,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal),
+                                keyboardType: TextInputType.text,
+                                maxLines: 1,
+                                decoration: InputDecoration(
+                                    hintStyle: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black38,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    hintText: "ES",
+                                    border: InputBorder.none),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            height: 40,
+                            child: MaterialButton(
+                                color: orange,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: Text(
+                                  "enregister",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                                onPressed: () async {
+                                  _action.addMembre(
+                                    nom: _nameController.text,
+                                    promotion: int.parse(_promController.text),
+                                    es: _esController.text,
+                                    role: _roleController.text,
+                                  );
+                                  Navigator.pop(context);
+                                }),
+                          ),
+                          SizedBox(
+                            width: 100,
+                            height: 40,
+                            child: MaterialButton(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: Text(
+                                  "annuler",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          );
+        });
   }
 }

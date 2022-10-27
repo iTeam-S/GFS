@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gfs/database/db.service.dart';
 
 import 'package:gfs/views/agenda.dart';
 import 'package:gfs/views/budget.dart';
@@ -11,10 +12,15 @@ import 'package:gfs/views/login.dart';
 import 'package:gfs/views/membres.dart';
 import 'package:gfs/views/register.dart';
 import 'package:gfs/views/splash.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+final HiveDatabase _hiveDatabase = HiveDatabase();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Hive.initFlutter();
+  _hiveDatabase.openTableBox();
+  _hiveDatabase.registreAdapter();
   runApp(MyApp());
 }
 
@@ -33,14 +39,14 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => Splash(),
         '/home': (context) => Screen(),
-        '/jirama': (context) => Jirama(),
+        '/jirama': (context) => JiramaPage(),
         '/agenda': (context) => CalendarPage(),
         '/membre': (context) => MembreList(),
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
         '/test': (context) => MyHomePage(),
         '/cuisine': (context) => TacheCuisine(),
-        '/budget': (context) => Budget(),
+        '/budget': (context) => BudgetPage(),
       },
     );
   }
