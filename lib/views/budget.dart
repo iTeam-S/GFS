@@ -25,6 +25,13 @@ class _BudgetPageState extends State<BudgetPage> {
   final DataApp _data = DataApp();
   List<Budget> budgetList = [];
   List<double> listMontant = [];
+  double total = 0.0;
+  String percent(double one) {
+    String pourcent = "";
+    // pourcent =(100- (100 - one));
+    return pourcent;
+  }
+
   String toDateN(DateTime dateTime) {
     String date = "";
     date = "${dateTime.day} ${_data.mois[dateTime.month].toLowerCase()}";
@@ -80,32 +87,58 @@ class _BudgetPageState extends State<BudgetPage> {
                     Container(
                       height: 250,
                       width: 200,
-                      //color: Colors.amber,
-                      child: AspectRatio(
-                        aspectRatio: .7,
-                        child: PieChart(
-                          PieChartData(
-                            pieTouchData: PieTouchData(touchCallback:
-                                (FlTouchEvent event, pieTouchResponse) {
-                              setState(() {
-                                if (!event.isInterestedForInteractions ||
-                                    pieTouchResponse == null ||
-                                    pieTouchResponse.touchedSection == null) {
-                                  touchedIndex = -1;
-                                  return;
-                                }
-                                touchedIndex = pieTouchResponse
-                                    .touchedSection!.touchedSectionIndex;
-                              });
-                            }),
-                            borderData: FlBorderData(
-                              show: false,
+                      color: Colors.white,
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: [
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: MaterialButton(
+                              onPressed: () {
+                                setState(() {});
+                              },
+                              padding: EdgeInsets.zero,
+                              color: dark,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.refresh,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                            sectionsSpace: 0,
-                            centerSpaceRadius: 60,
-                            sections: showingSections(),
                           ),
-                        ),
+                          AspectRatio(
+                            aspectRatio: .7,
+                            child: PieChart(
+                              PieChartData(
+                                pieTouchData: PieTouchData(touchCallback:
+                                    (FlTouchEvent event, pieTouchResponse) {
+                                  setState(() {
+                                    if (!event.isInterestedForInteractions ||
+                                        pieTouchResponse == null ||
+                                        pieTouchResponse.touchedSection ==
+                                            null) {
+                                      touchedIndex = -1;
+                                      return;
+                                    }
+                                    touchedIndex = pieTouchResponse
+                                        .touchedSection!.touchedSectionIndex;
+                                  });
+                                }),
+                                borderData: FlBorderData(
+                                  show: false,
+                                ),
+                                sectionsSpace: 0,
+                                centerSpaceRadius: 60,
+                                sections: show(),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Container(
@@ -116,7 +149,7 @@ class _BudgetPageState extends State<BudgetPage> {
                       ),
                       child: Center(
                         child: Text(
-                          "total : 280 000 Ar",
+                          "total : $total Ar",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 30,
@@ -193,7 +226,6 @@ class _BudgetPageState extends State<BudgetPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.toNamed('/ajoutBudget');
-          // print(listMontant);
         },
         backgroundColor: dark,
         child: Icon(
@@ -202,6 +234,25 @@ class _BudgetPageState extends State<BudgetPage> {
         ),
       ),
     );
+  }
+
+  List<PieChartSectionData> show() {
+    return List.generate(Boxes.getBudget().length, (index) {
+      final budget = Boxes.getBudget().values.toList().cast<Budget>()[index];
+      final isTouched = index == touchedIndex;
+      final fontSize = isTouched ? 25.0 : 16.0;
+      final radius = isTouched ? 60.0 : 50.0;
+      return PieChartSectionData(
+        color: _data.listCategorie[index].couleur,
+        value: budget.montant,
+        title: budget.montant.toString(),
+        radius: radius,
+        titleStyle: TextStyle(
+            fontSize: fontSize,
+            fontWeight: FontWeight.bold,
+            color: const Color(0xffffffff)),
+      );
+    });
   }
 
   List<PieChartSectionData> showingSections() {
