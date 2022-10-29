@@ -26,6 +26,7 @@ class _MembreListState extends State<MembreList> {
 
   final TransAction _action = TransAction();
   List<Membre> membresList = [];
+  bool isEmpt = false;
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -52,35 +53,33 @@ class _MembreListState extends State<MembreList> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          width: Get.width,
-          height: Get.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: Get.height * .7,
-                child: ValueListenableBuilder<Box<Membre>>(
-                  valueListenable: Boxes.getMembre().listenable(),
-                  builder: (context, box, _) {
-                    final membres = box.values.toList().cast<Membre>();
-                    return ListView.builder(
-                      itemCount: membres.length,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: ((context, index) {
-                        final membre = membres[index];
-                        return cardMembre(
-                          index: index,
-                          name: membre.nom,
-                          prom: membre.promotion.toString(),
-                        );
-                      }),
+        child: SizedBox(
+          height: Get.height * .9,
+          child: ValueListenableBuilder<Box<Membre>>(
+            valueListenable: Boxes.getMembre().listenable(),
+            builder: (context, box, _) {
+              final membres = box.values.toList().cast<Membre>();
+              if (membres.isNotEmpty) {
+                return ListView.builder(
+                  itemCount: membres.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: ((context, index) {
+                    final membre = membres[index];
+                    return cardMembre(
+                      index: index,
+                      name: membre.nom,
+                      prom: membre.promotion.toString(),
                     );
-                  },
-                ),
-              ),
-            ],
+                  }),
+                );
+              } else {
+                return Container(
+                  color: orange,
+                  width: 50,
+                  height: 50,
+                );
+              }
+            },
           ),
         ),
       ),
@@ -345,24 +344,42 @@ class _MembreListState extends State<MembreList> {
                             width: 100,
                             height: 40,
                             child: MaterialButton(
-                                color: orange,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12)),
-                                child: Text(
-                                  "enregister",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
+                              color: isEmpt ? orange.withOpacity(0.4) : orange,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                "enregister",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
                                 ),
-                                onPressed: () async {
+                              ),
+                              onPressed: () async {
+                                if (_nameController.text.isNotEmpty ||
+                                    _esController.text.isNotEmpty ||
+                                    _promController.text.isNotEmpty ||
+                                    _roleController.text.isNotEmpty) {
                                   _action.addMembre(
                                     nom: _nameController.text,
                                     promotion: int.parse(_promController.text),
                                     es: _esController.text,
                                     role: _roleController.text,
                                   );
+                                  _nameController.clear();
+                                  _promController.clear();
+                                  _roleController.clear();
+                                  _esController.clear();
                                   Navigator.pop(context);
-                                }),
+                                } else {
+                                  setState(
+                                    () {
+                                      isEmpt = true;
+                                    },
+                                  );
+                                }
+                              },
+                            ),
                           ),
                           SizedBox(
                             width: 100,

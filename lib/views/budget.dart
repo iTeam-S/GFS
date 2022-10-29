@@ -255,8 +255,10 @@ class _BudgetPageState extends State<BudgetPage> {
                       ),
                       title: Text(
                         "Vetement",
-                        style:
-                            TextStyle(fontSize: 20, color: Color(0xff13d38e)),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Color(0xff13d38e),
+                        ),
                       ),
                       subtitle: Text(
                         "28 feb- 24 mars",

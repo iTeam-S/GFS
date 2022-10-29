@@ -10,6 +10,7 @@ import '../models/budget/budget.model.dart';
 import '../models/cuisine/plat.model.dart';
 
 class HiveDatabase {
+  //ouvre les tables dans la base de donnée pour que l'application puisse effectuer des transaction
   Future openTableBox() async {
     await Hive.openBox<Budget>('budget');
     await Hive.openBox<Plat>('plat');
@@ -22,6 +23,8 @@ class HiveDatabase {
     //await Hive.openBox<Compare>('comparaison');
   }
 
+//enregistre les adaptateur de chaque table pour que les données de l'application interagit avec celui de la BD
+//les "Adapter" permet d'utiliser directement des types de donnée que normalement la BD n'autorise pas ou prend beaucoup de temps à convertir manuellment
   registreAdapter() {
     Hive.registerAdapter(BudgetAdapter());
     Hive.registerAdapter(PlatAdapter());
@@ -35,6 +38,7 @@ class HiveDatabase {
 }
 
 class Boxes {
+  //associe la table NoSQL et les HiveObject ou model de donnée qu'on a crée
   static Box<Budget> getBudget() => Hive.box<Budget>('budget');
   static Box<Plat> getPlat() => Hive.box<Plat>('plat');
   static Box<TourCuisine> getTourCuisine() =>

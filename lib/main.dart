@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:gfs/database/db.service.dart';
 
 import 'package:gfs/views/agenda.dart';
+import 'package:gfs/views/ajout_budget.dart';
 import 'package:gfs/views/budget.dart';
 import 'package:gfs/views/cuisto.dart';
 import 'package:gfs/views/exemple.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'GFS',
       theme: ThemeData(primarySwatch: Colors.orange, fontFamily: "ProductSans"),
-      initialRoute: '/home',
+      initialRoute: '/ajoutBudget',
       routes: {
         '/': (context) => Splash(),
         '/home': (context) => Screen(),
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         '/test': (context) => MyHomePage(),
         '/cuisine': (context) => TacheCuisine(),
         '/budget': (context) => BudgetPage(),
+        '/ajoutBudget': (context) => AjoutBudgetPage(),
       },
     );
   }
