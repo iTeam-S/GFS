@@ -29,6 +29,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
   final TransAction _action = TransAction();
   final DataApp _data = DataApp();
   List<CategorieModel> categList = [];
+
   int selectedIndex = 100;
   bool isValide = true;
 
@@ -72,6 +73,18 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
     }
   }
 
+  cleanAll() {
+    selectedIndex = 100;
+    _titreController.clear();
+    _montantController.clear();
+    _dayDateDebutController.clear();
+    _monthDateDebutController.clear();
+    _yearDateDebutController.clear();
+    _dayDateFinController.clear();
+    _monthDateFinController.clear();
+    _yearDateFinController.clear();
+  }
+
 //--------------------------
   double montant = 0.0;
   String titre = "";
@@ -97,7 +110,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
           icon: Icon(
             LineIcons.arrowLeft,
@@ -385,13 +398,15 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                         isFirstDate: false,
                       );
                       if (isValide) {
-                        _action.addBudget(
+                        await _action.addBudget(
                           montant: double.parse(_montantController.text),
                           dateDebut: dateDebut,
                           dateFin: dateFin,
                           type: type,
                           titre: _titreController.text,
                         );
+                        Get.back();
+                        cleanAll();
                       }
                     } else {
                       scaffoldMessenger.showSnackBar(

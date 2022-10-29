@@ -24,7 +24,7 @@ class _BudgetPageState extends State<BudgetPage> {
   int touchedIndex = -1;
   final DataApp _data = DataApp();
   List<Budget> budgetList = [];
-
+  List<double> listMontant = [];
   String toDateN(DateTime dateTime) {
     String date = "";
     date = "${dateTime.day} ${_data.mois[dateTime.month].toLowerCase()}";
@@ -78,37 +78,37 @@ class _BudgetPageState extends State<BudgetPage> {
                 child: Column(
                   children: [
                     Container(
-                      height: 200,
+                      height: 250,
                       width: 200,
                       //color: Colors.amber,
                       child: AspectRatio(
                         aspectRatio: .7,
                         child: PieChart(
                           PieChartData(
-                              pieTouchData: PieTouchData(touchCallback:
-                                  (FlTouchEvent event, pieTouchResponse) {
-                                setState(() {
-                                  if (!event.isInterestedForInteractions ||
-                                      pieTouchResponse == null ||
-                                      pieTouchResponse.touchedSection == null) {
-                                    touchedIndex = -1;
-                                    return;
-                                  }
-                                  touchedIndex = pieTouchResponse
-                                      .touchedSection!.touchedSectionIndex;
-                                });
-                              }),
-                              borderData: FlBorderData(
-                                show: false,
-                              ),
-                              sectionsSpace: 0,
-                              centerSpaceRadius: 40,
-                              sections: showingSections()),
+                            pieTouchData: PieTouchData(touchCallback:
+                                (FlTouchEvent event, pieTouchResponse) {
+                              setState(() {
+                                if (!event.isInterestedForInteractions ||
+                                    pieTouchResponse == null ||
+                                    pieTouchResponse.touchedSection == null) {
+                                  touchedIndex = -1;
+                                  return;
+                                }
+                                touchedIndex = pieTouchResponse
+                                    .touchedSection!.touchedSectionIndex;
+                              });
+                            }),
+                            borderData: FlBorderData(
+                              show: false,
+                            ),
+                            sectionsSpace: 0,
+                            centerSpaceRadius: 60,
+                            sections: showingSections(),
+                          ),
                         ),
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.all(20),
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -143,12 +143,14 @@ class _BudgetPageState extends State<BudgetPage> {
                         scrollDirection: Axis.vertical,
                         itemBuilder: ((context, index) {
                           final budget = budgets[index];
+                          listMontant.add(budget.montant);
                           return ListTile(
                             leading: CircleAvatar(
-                              backgroundColor: Color(0xff0293ee),
+                              backgroundColor:
+                                  _data.listCategorie[budget.type].couleur,
                               radius: 25,
                               child: Icon(
-                                LineIcons.shower,
+                                _data.listCategorie[budget.type].icon,
                                 size: 32,
                                 color: Colors.white,
                               ),
@@ -185,6 +187,18 @@ class _BudgetPageState extends State<BudgetPage> {
               )
             ],
           ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed('/ajoutBudget');
+          // print(listMontant);
+        },
+        backgroundColor: dark,
+        child: Icon(
+          LineIcons.plus,
+          color: Colors.white,
         ),
       ),
     );

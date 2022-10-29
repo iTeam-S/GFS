@@ -40,7 +40,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         alignment: Alignment.topRight,
                         child: InkWell(
                           onTap: () {
-                            Get.toNamed('/login');
+                            Get.offAllNamed('/login');
                           },
                           child: CircleAvatar(
                             backgroundColor: Colors.red.shade900,
@@ -57,7 +57,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       Container(
                         alignment: Alignment.topRight,
                         child: InkWell(
-                          onTap: () => Get.toNamed('/home'),
+                          onTap: () => Get.offAllNamed('/home'),
                           child: CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Icon(
@@ -152,7 +152,7 @@ class _AppDrawerState extends State<AppDrawer> {
       child: ListTile(
         style: ListTileStyle.drawer,
         onTap: () {
-          Get.toNamed(itemRoute);
+          Get.offAllNamed(itemRoute);
         },
         title: Text(
           itemName,
