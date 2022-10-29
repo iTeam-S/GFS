@@ -32,4 +32,20 @@ class DataApp {
       icon: LineIcons.medicalBriefcase,
     ),
   ];
+
+  List<String> mois = [
+    'zero',
+    'Janvier',
+    'Fevrier',
+    'Mars',
+    'Avril',
+    'Mai',
+    'Juin',
+    'Juillet',
+    'Août',
+    'Septembre',
+    'Octobre',
+    'Novembre',
+    'Décembre',
+  ];
 }

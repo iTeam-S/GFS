@@ -5,6 +5,8 @@ import 'package:gfs/models/categorie/model.categorie.dart';
 import 'package:gfs/persistData/data.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../database/db.transaction.dart';
+
 class AjoutBudgetPage extends StatefulWidget {
   const AjoutBudgetPage({Key? key}) : super(key: key);
 
@@ -23,9 +25,53 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
   final TextEditingController _dayDateFinController = TextEditingController();
   final TextEditingController _monthDateFinController = TextEditingController();
   final TextEditingController _yearDateFinController = TextEditingController();
+  late ScaffoldMessengerState scaffoldMessenger;
+  final TransAction _action = TransAction();
   final DataApp _data = DataApp();
   List<CategorieModel> categList = [];
   int selectedIndex = 100;
+  bool isValide = true;
+
+  dateValidation({
+    required String jour,
+    required String mois,
+    required String annee,
+    required bool isFirstDate,
+  }) {
+    int j = int.parse(jour);
+    int m = int.parse(mois);
+    int a = int.parse(annee);
+    if (j <= 0 || j > 31 || m <= 0 || m > 12 || a <= 1999) {
+      scaffoldMessenger.showSnackBar(
+        SnackBar(
+          backgroundColor: orange,
+          dismissDirection: DismissDirection.down,
+          content: Text("Votre date n'est pas valide"),
+        ),
+      );
+      setState(() {
+        isValide = false;
+      });
+    } else {
+      setState(() {
+        isValide = true;
+      });
+      if (isFirstDate) {
+        setState(
+          () {
+            dateDebut = DateTime(a, m, j);
+          },
+        );
+      } else {
+        setState(
+          () {
+            dateFin = DateTime(a, m, j);
+          },
+        );
+      }
+    }
+  }
+
 //--------------------------
   double montant = 0.0;
   String titre = "";
@@ -42,6 +88,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
 
   @override
   Widget build(BuildContext context) {
+    scaffoldMessenger = ScaffoldMessenger.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -74,9 +121,23 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
           child: Column(
             children: [
               SizedBox(
-                height: Get.height * .75,
+                height: Get.height * .78,
                 child: Column(
                   children: [
+                    Container(
+                      width: Get.width,
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      margin: EdgeInsets.symmetric(vertical: 2),
+                      child: Text(
+                        "Categorie ",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: dark,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                     Container(
                       width: Get.width,
                       height: 82,
@@ -98,8 +159,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                                   callback: () {
                                     setState(
                                       () {
-                                        selectedIndex = index;
-                                        type = index;
+                                        type = selectedIndex = index;
                                       },
                                     );
                                   },
@@ -115,7 +175,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       margin: EdgeInsets.symmetric(vertical: 7),
                       child: Text(
-                        "Titre de votre budget (motif)",
+                        "Titre ou motif",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 17,
@@ -166,7 +226,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       margin: EdgeInsets.symmetric(vertical: 7),
                       child: Text(
-                        "Montant de votre budget (Ariary)",
+                        "Montant (Ariary)",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 17,
@@ -253,13 +313,13 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                       children: [
                         dataWidget(
                           controller: _dayDateDebutController,
-                          width: 80,
-                          hintText: "j",
+                          width: 95,
+                          hintText: "jours",
                         ),
                         dataWidget(
                           controller: _monthDateDebutController,
                           width: 80,
-                          hintText: "m",
+                          hintText: "mois",
                         ),
                         dataWidget(
                           controller: _yearDateDebutController,
@@ -286,13 +346,13 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                       children: [
                         dataWidget(
                           controller: _dayDateFinController,
-                          width: 80,
-                          hintText: "j",
+                          width: 95,
+                          hintText: "jours",
                         ),
                         dataWidget(
                           controller: _monthDateFinController,
                           width: 80,
-                          hintText: "m",
+                          hintText: "mois",
                         ),
                         dataWidget(
                           controller: _yearDateFinController,
@@ -308,14 +368,43 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                 height: 50,
                 width: 250,
                 child: MaterialButton(
-                  onPressed: () {
-                    print([
-                      _titreController.text,
-                      _montantController.text,
-                      dateDebut,
-                      dateFin,
-                      type,
-                    ]);
+                  onPressed: () async {
+                    if (selectedIndex != 100 &&
+                        _titreController.text.isNotEmpty &&
+                        _montantController.text.isNotEmpty) {
+                      await dateValidation(
+                        jour: _dayDateDebutController.text,
+                        mois: _monthDateDebutController.text,
+                        annee: _yearDateDebutController.text,
+                        isFirstDate: true,
+                      );
+                      await dateValidation(
+                        jour: _dayDateFinController.text,
+                        mois: _monthDateFinController.text,
+                        annee: _yearDateFinController.text,
+                        isFirstDate: false,
+                      );
+                      if (isValide) {
+                        _action.addBudget(
+                          montant: double.parse(_montantController.text),
+                          dateDebut: dateDebut,
+                          dateFin: dateFin,
+                          type: type,
+                          titre: _titreController.text,
+                        );
+                      }
+                    } else {
+                      scaffoldMessenger.showSnackBar(
+                        SnackBar(
+                          backgroundColor: orange,
+                          content: Text(
+                            selectedIndex != 100
+                                ? "Veillez bien verifié les formulaires "
+                                : "Veillez verifier qu'une cotegorie a bien été selectioner",
+                          ),
+                        ),
+                      );
+                    }
                   },
                   color: dark,
                   shape: RoundedRectangleBorder(
@@ -350,7 +439,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
       margin: EdgeInsets.only(
         left: 15,
       ),
-      padding: EdgeInsets.symmetric(horizontal: 25),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       height: 50,
       width: width,
       decoration: BoxDecoration(

@@ -40,7 +40,10 @@ class _MembreListState extends State<MembreList> {
         centerTitle: true,
         title: Text(
           "MEMBRES",
-          style: TextStyle(color: Colors.black, fontSize: 35),
+          style: TextStyle(
+            color: dark,
+            fontSize: 35,
+          ),
         ),
         leading: IconButton(
           onPressed: () {

@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'GFS',
       theme: ThemeData(primarySwatch: Colors.orange, fontFamily: "ProductSans"),
-      initialRoute: '/ajoutBudget',
+      initialRoute: '/home',
       routes: {
         '/': (context) => Splash(),
         '/home': (context) => Screen(),

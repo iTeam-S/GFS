@@ -2,9 +2,13 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
+import 'package:gfs/models/budget/budget.model.dart';
 import 'package:gfs/views/widgets/drawer.dart';
-import 'package:gfs/views/widgets/indicator.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:line_icons/line_icons.dart';
+
+import '../database/db.service.dart';
+import '../persistData/data.dart';
 
 class BudgetPage extends StatefulWidget {
   const BudgetPage({Key? key}) : super(key: key);
@@ -18,6 +22,15 @@ AppDrawer drawer = AppDrawer();
 class _BudgetPageState extends State<BudgetPage> {
   GlobalKey<ScaffoldState> _key = GlobalKey();
   int touchedIndex = -1;
+  final DataApp _data = DataApp();
+  List<Budget> budgetList = [];
+
+  String toDateN(DateTime dateTime) {
+    String date = "";
+    date = "${dateTime.day} ${_data.mois[dateTime.month].toLowerCase()}";
+    return date;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +39,7 @@ class _BudgetPageState extends State<BudgetPage> {
       backgroundColor: dark,
       appBar: AppBar(
         elevation: 0,
+        centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
@@ -36,6 +50,13 @@ class _BudgetPageState extends State<BudgetPage> {
           ),
           color: Colors.black,
         ),
+        title: Text(
+          "BUDGET",
+          style: TextStyle(
+            color: dark,
+            fontSize: 35,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -45,31 +66,6 @@ class _BudgetPageState extends State<BudgetPage> {
           child: Column(
             children: [
               Container(
-                color: Colors.white,
-                width: Get.width,
-                child: Container(
-                  margin: EdgeInsets.all(20),
-                  width: 300,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black45,
-                            blurRadius: 8,
-                            spreadRadius: 1,
-                            offset: Offset(2, 5))
-                      ]),
-                  child: Center(
-                    child: Text(
-                      "280 000 Ar",
-                      style: TextStyle(color: Colors.black, fontSize: 30),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -78,78 +74,56 @@ class _BudgetPageState extends State<BudgetPage> {
                   ),
                 ),
                 width: Get.width,
-                height: Get.height * .3,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                height: Get.height * .45,
+                child: Column(
                   children: [
                     Container(
-                        height: 300,
-                        child: AspectRatio(
-                          aspectRatio: .7,
-                          child: PieChart(
-                            PieChartData(
-                                pieTouchData: PieTouchData(touchCallback:
-                                    (FlTouchEvent event, pieTouchResponse) {
-                                  setState(() {
-                                    if (!event.isInterestedForInteractions ||
-                                        pieTouchResponse == null ||
-                                        pieTouchResponse.touchedSection ==
-                                            null) {
-                                      touchedIndex = -1;
-                                      return;
-                                    }
-                                    touchedIndex = pieTouchResponse
-                                        .touchedSection!.touchedSectionIndex;
-                                  });
-                                }),
-                                borderData: FlBorderData(
-                                  show: false,
-                                ),
-                                sectionsSpace: 0,
-                                centerSpaceRadius: 40,
-                                sections: showingSections()),
-                          ),
-                        )),
-                    SizedBox(
-                      width: 30,
+                      height: 200,
+                      width: 200,
+                      //color: Colors.amber,
+                      child: AspectRatio(
+                        aspectRatio: .7,
+                        child: PieChart(
+                          PieChartData(
+                              pieTouchData: PieTouchData(touchCallback:
+                                  (FlTouchEvent event, pieTouchResponse) {
+                                setState(() {
+                                  if (!event.isInterestedForInteractions ||
+                                      pieTouchResponse == null ||
+                                      pieTouchResponse.touchedSection == null) {
+                                    touchedIndex = -1;
+                                    return;
+                                  }
+                                  touchedIndex = pieTouchResponse
+                                      .touchedSection!.touchedSectionIndex;
+                                });
+                              }),
+                              borderData: FlBorderData(
+                                show: false,
+                              ),
+                              sectionsSpace: 0,
+                              centerSpaceRadius: 40,
+                              sections: showingSections()),
+                        ),
+                      ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const <Widget>[
-                        Indicator(
-                          color: Color(0xff0293ee),
-                          text: 'Eau',
-                          isSquare: false,
+                    Container(
+                      margin: EdgeInsets.all(20),
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "total : 280 000 Ar",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Indicator(
-                          color: Color(0xfff8b250),
-                          text: 'Electricité',
-                          isSquare: false,
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Indicator(
-                          color: Color(0xff845bef),
-                          text: 'Nouriture',
-                          isSquare: false,
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Indicator(
-                          color: Color(0xff13d38e),
-                          text: 'Vetement',
-                          isSquare: false,
-                        ),
-                        SizedBox(
-                          height: 18,
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
@@ -159,120 +133,54 @@ class _BudgetPageState extends State<BudgetPage> {
                 width: Get.width,
                 height: Get.height * .5,
                 padding: EdgeInsets.symmetric(vertical: 15),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Color(0xff0293ee),
-                        radius: 25,
-                        child: Icon(
-                          LineIcons.shower,
-                          size: 32,
-                          color: Colors.white,
-                        ),
-                      ),
-                      title: Text(
-                        "Eau",
-                        style:
-                            TextStyle(fontSize: 20, color: Color(0xff0293ee)),
-                      ),
-                      subtitle: Text(
-                        "28 feb- 24 mars",
-                        style: TextStyle(color: Colors.white54),
-                      ),
-                      trailing: Text(
-                        "100 000Ar",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            color: Colors.white),
-                      ),
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Color(0xfff8b250),
-                        radius: 25,
-                        child: Icon(
-                          LineIcons.carBattery,
-                          size: 32,
-                          color: Colors.white,
-                        ),
-                      ),
-                      title: Text(
-                        "Electricité",
-                        style:
-                            TextStyle(fontSize: 20, color: Color(0xfff8b250)),
-                      ),
-                      subtitle: Text(
-                        "28 feb- 24 mars",
-                        style: TextStyle(color: Colors.white54),
-                      ),
-                      trailing: Text(
-                        "80 000Ar",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            color: Colors.white),
-                      ),
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Color(0xff845bef),
-                        radius: 25,
-                        child: Icon(
-                          LineIcons.hamburger,
-                          size: 32,
-                          color: Colors.white,
-                        ),
-                      ),
-                      title: Text(
-                        "Nouriture",
-                        style:
-                            TextStyle(fontSize: 20, color: Color(0xff845bef)),
-                      ),
-                      subtitle: Text(
-                        "28 feb- 24 mars",
-                        style: TextStyle(color: Colors.white54),
-                      ),
-                      trailing: Text(
-                        "50 000Ar",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            color: Colors.white),
-                      ),
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Color(0xff13d38e),
-                        radius: 25,
-                        child: Icon(
-                          LineIcons.tShirt,
-                          size: 32,
-                          color: Colors.white,
-                        ),
-                      ),
-                      title: Text(
-                        "Vetement",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Color(0xff13d38e),
-                        ),
-                      ),
-                      subtitle: Text(
-                        "28 feb- 24 mars",
-                        style: TextStyle(color: Colors.white54),
-                      ),
-                      trailing: Text(
-                        "50 000Ar",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ],
+                child: ValueListenableBuilder<Box<Budget>>(
+                  valueListenable: Boxes.getBudget().listenable(),
+                  builder: (context, box, _) {
+                    final budgets = box.values.toList().cast<Budget>();
+                    if (budgets.isNotEmpty) {
+                      return ListView.builder(
+                        itemCount: budgets.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: ((context, index) {
+                          final budget = budgets[index];
+                          return ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Color(0xff0293ee),
+                              radius: 25,
+                              child: Icon(
+                                LineIcons.shower,
+                                size: 32,
+                                color: Colors.white,
+                              ),
+                            ),
+                            title: Text(
+                              budget.titre,
+                              style: TextStyle(
+                                  fontSize: 20, color: Color(0xff0293ee)),
+                            ),
+                            subtitle: Text(
+                              "${toDateN(budget.dateDebut)} - ${toDateN(budget.dateFin)}",
+                              style: TextStyle(color: Colors.white54),
+                            ),
+                            trailing: Text(
+                              "${budget.montant} Ar",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                                color: Colors.white,
+                              ),
+                            ),
+                          );
+                        }),
+                      );
+                    } else {
+                      return Container(
+                        color: orange,
+                        width: 50,
+                        height: 50,
+                      );
+                    }
+                  },
                 ),
               )
             ],
