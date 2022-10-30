@@ -4,6 +4,7 @@ import 'package:gfs/constants.dart';
 import 'package:gfs/database/db.transaction.dart';
 import 'package:gfs/models/membre/membre.model.dart';
 import 'package:gfs/views/widgets/drawer.dart';
+import 'package:gfs/views/widgets/empty.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -77,9 +78,11 @@ class _MembreListState extends State<MembreList> {
                 );
               } else {
                 return Container(
-                  color: orange,
-                  width: 50,
-                  height: 50,
+                  margin: EdgeInsets.only(top: 120),
+                  child: emptyWidget(
+                    bgColor: Colors.white,
+                    textColor: dark.withOpacity(.4),
+                  ),
                 );
               }
             },

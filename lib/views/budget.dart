@@ -5,6 +5,7 @@ import 'package:gfs/constants.dart';
 import 'package:gfs/database/db.transaction.dart';
 import 'package:gfs/models/budget/budget.model.dart';
 import 'package:gfs/views/widgets/drawer.dart';
+import 'package:gfs/views/widgets/empty.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -145,7 +146,20 @@ class _BudgetPageState extends State<BudgetPage> {
                               ),
                               sectionsSpace: 1,
                               centerSpaceRadius: 50,
-                              sections: show(),
+                              sections: Boxes.getBudget().isNotEmpty
+                                  ? show()
+                                  : [
+                                      PieChartSectionData(
+                                        color: orange,
+                                        value: 100,
+                                        showTitle: false,
+                                        radius: 50,
+                                        borderSide: BorderSide(
+                                          color: dark,
+                                          width: 0.5,
+                                        ),
+                                      )
+                                    ],
                             ),
                           ),
                         ),
@@ -214,11 +228,7 @@ class _BudgetPageState extends State<BudgetPage> {
                           }),
                         );
                       } else {
-                        return Container(
-                          color: orange,
-                          width: 50,
-                          height: 50,
-                        );
+                        return emptyWidget();
                       }
                     },
                   ),
@@ -344,6 +354,7 @@ class _BudgetPageState extends State<BudgetPage> {
       final budget = Boxes.getBudget().values.toList().cast<Budget>()[index];
       final isTouched = index == touchedIndex;
       final radius = isTouched ? 60.0 : 50.0;
+
       return PieChartSectionData(
         color: _data.listCategorie[budget.type].couleur,
         value: budget.montant,
