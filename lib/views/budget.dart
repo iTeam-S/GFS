@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
+import 'package:gfs/database/db.transaction.dart';
 import 'package:gfs/models/budget/budget.model.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -21,21 +22,46 @@ AppDrawer drawer = AppDrawer();
 
 class _BudgetPageState extends State<BudgetPage> {
   GlobalKey<ScaffoldState> _key = GlobalKey();
+  final TransAction _action = TransAction();
   int touchedIndex = -1;
   final DataApp _data = DataApp();
+  List<Budget> listOfBudget = Boxes.getBudget().values.toList().cast<Budget>();
+
+  somme() {
+    listOfBudget.forEach((element) => total += element.montant);
+  }
+
   List<Budget> budgetList = [];
   List<double> listMontant = [];
+  bool isMultiselected = false;
+  List<int> selectedList = [];
   double total = 0.0;
   String percent(double one) {
     String pourcent = "";
-    // pourcent =(100- (100 - one));
-    return pourcent;
+    pourcent = ((one * 100) / total).toStringAsFixed(2);
+    return pourcent + "%";
   }
 
   String toDateN(DateTime dateTime) {
     String date = "";
     date = "${dateTime.day} ${_data.mois[dateTime.month].toLowerCase()}";
     return date;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setState(() {
+      listOfBudget = Boxes.getBudget().values.toList().cast<Budget>();
+      total = 0.0;
+      somme();
+    });
+  }
+
+  @override
+  void initState() {
+    somme();
+    super.initState();
   }
 
   @override
@@ -65,173 +91,250 @@ class _BudgetPageState extends State<BudgetPage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: dark,
-          width: Get.width,
-          height: Get.height,
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(35),
-                    bottomRight: Radius.circular(35),
-                  ),
-                ),
-                width: Get.width,
-                height: Get.height * .45,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 250,
-                      width: 200,
-                      color: Colors.white,
-                      child: Stack(
-                        alignment: AlignmentDirectional.center,
-                        children: [
-                          SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: MaterialButton(
-                              onPressed: () {
-                                setState(() {});
-                              },
-                              padding: EdgeInsets.zero,
-                              color: dark,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              child: Center(
-                                child: Icon(
-                                  Icons.refresh,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          AspectRatio(
-                            aspectRatio: .7,
-                            child: PieChart(
-                              PieChartData(
-                                pieTouchData: PieTouchData(touchCallback:
-                                    (FlTouchEvent event, pieTouchResponse) {
-                                  setState(() {
-                                    if (!event.isInterestedForInteractions ||
-                                        pieTouchResponse == null ||
-                                        pieTouchResponse.touchedSection ==
-                                            null) {
-                                      touchedIndex = -1;
-                                      return;
-                                    }
-                                    touchedIndex = pieTouchResponse
-                                        .touchedSection!.touchedSectionIndex;
-                                  });
-                                }),
-                                borderData: FlBorderData(
-                                  show: false,
-                                ),
-                                sectionsSpace: 0,
-                                centerSpaceRadius: 60,
-                                sections: show(),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+      body: Container(
+        color: dark,
+        width: Get.width,
+        height: Get.height,
+        child: RefreshIndicator(
+          backgroundColor: dark,
+          color: Colors.white,
+          onRefresh: () async {
+            didChangeDependencies();
+            setState(() {});
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(35),
+                      bottomRight: Radius.circular(35),
                     ),
-                    Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                      ),
-                      child: Center(
-                        child: Text(
-                          "total : $total Ar",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontWeight: FontWeight.normal,
+                  ),
+                  width: Get.width,
+                  height: 270,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 260,
+                        width: 200,
+                        color: Colors.transparent,
+                        child: AspectRatio(
+                          aspectRatio: .7,
+                          child: PieChart(
+                            PieChartData(
+                              pieTouchData: PieTouchData(touchCallback:
+                                  (FlTouchEvent event, pieTouchResponse) {
+                                setState(() {
+                                  if (!event.isInterestedForInteractions ||
+                                      pieTouchResponse == null ||
+                                      pieTouchResponse.touchedSection == null) {
+                                    touchedIndex = -1;
+                                    return;
+                                  }
+                                  touchedIndex = pieTouchResponse
+                                      .touchedSection!.touchedSectionIndex;
+                                });
+                              }),
+                              borderData: FlBorderData(
+                                show: false,
+                              ),
+                              sectionsSpace: 1,
+                              centerSpaceRadius: 50,
+                              sections: show(),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        height: 25,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: dark,
+                        ),
+                        padding: EdgeInsets.all(5),
+                        child: Center(
+                          child: Text(
+                            "$total Ar",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                color: dark,
-                width: Get.width,
-                height: Get.height * .5,
-                padding: EdgeInsets.symmetric(vertical: 15),
-                child: ValueListenableBuilder<Box<Budget>>(
-                  valueListenable: Boxes.getBudget().listenable(),
-                  builder: (context, box, _) {
-                    final budgets = box.values.toList().cast<Budget>();
-                    if (budgets.isNotEmpty) {
-                      return ListView.builder(
-                        itemCount: budgets.length,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: ((context, index) {
-                          final budget = budgets[index];
-                          listMontant.add(budget.montant);
-                          return ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor:
-                                  _data.listCategorie[budget.type].couleur,
-                              radius: 25,
-                              child: Icon(
-                                _data.listCategorie[budget.type].icon,
-                                size: 32,
-                                color: Colors.white,
-                              ),
-                            ),
-                            title: Text(
-                              budget.titre,
-                              style: TextStyle(
-                                  fontSize: 20, color: Color(0xff0293ee)),
-                            ),
-                            subtitle: Text(
-                              "${toDateN(budget.dateDebut)} - ${toDateN(budget.dateFin)}",
-                              style: TextStyle(color: Colors.white54),
-                            ),
-                            trailing: Text(
-                              "${budget.montant} Ar",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                                color: Colors.white,
-                              ),
-                            ),
-                          );
-                        }),
-                      );
-                    } else {
-                      return Container(
-                        color: orange,
-                        width: 50,
-                        height: 50,
-                      );
-                    }
-                  },
-                ),
-              )
-            ],
+                Container(
+                  color: dark,
+                  width: Get.width,
+                  height: Get.height * .6,
+                  padding: EdgeInsets.only(bottom: 30),
+                  child: ValueListenableBuilder<Box<Budget>>(
+                    valueListenable: Boxes.getBudget().listenable(),
+                    builder: (context, box, _) {
+                      final budgets = box.values.toList().cast<Budget>();
+                      if (budgets.isNotEmpty) {
+                        return ListView.builder(
+                          itemCount: budgets.length,
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: ((context, index) {
+                            final budget = budgets[index];
+                            listMontant.add(budget.montant);
+                            return cardWidget(
+                              id: index,
+                              type: budget.type,
+                              montant: budget.montant,
+                              titre: budget.titre,
+                              dateDebut: budget.dateDebut,
+                              dateFin: budget.dateFin,
+                              isSelected: selectedList.contains(index),
+                              onTap: () {
+                                if (isMultiselected) {
+                                  if (!selectedList.contains(index)) {
+                                    selectedList.add(index);
+                                    print("add $index");
+                                    print(selectedList);
+                                    setState(() {});
+                                  } else {
+                                    selectedList.remove(index);
+                                    print("remove $index");
+                                    print(selectedList);
+                                    setState(() {});
+                                  }
+                                }
+                              },
+                            );
+                          }),
+                        );
+                      } else {
+                        return Container(
+                          color: orange,
+                          width: 50,
+                          height: 50,
+                        );
+                      }
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed('/ajoutBudget');
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: isMultiselected
+          ? FloatingActionButton(
+              onPressed: () {
+                if (selectedList.isEmpty) {
+                  setState(() {
+                    isMultiselected = false;
+                    selectedList.clear();
+                  });
+                } else {
+                  selectedList.forEach((element) {
+                    _action.deleteItemAt(boxe: 'budget', itemId: element);
+                  });
+                  selectedList.clear();
+                }
+              },
+              backgroundColor: Colors.red,
+              child: selectedList.isEmpty
+                  ? Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: 30,
+                    )
+                  : Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+            )
+          : FloatingActionButton(
+              onPressed: () {
+                Get.toNamed('/ajoutBudget');
+              },
+              backgroundColor: Colors.white,
+              child: Icon(
+                LineIcons.plus,
+                color: Colors.black,
+              ),
+            ),
+    );
+  }
+
+  Widget cardWidget({
+    required int type,
+    required int id,
+    required double montant,
+    required String titre,
+    required DateTime dateDebut,
+    required DateTime dateFin,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 2.5),
+      decoration: BoxDecoration(
+        color: !(isMultiselected && isSelected)
+            ? Colors.transparent
+            : Colors.white12,
+      ),
+      child: ListTile(
+        onLongPress: () {
+          setState(() {
+            isMultiselected = !isMultiselected;
+          });
         },
-        backgroundColor: dark,
-        child: Icon(
-          LineIcons.plus,
-          color: Colors.white,
+        leading: CircleAvatar(
+          backgroundColor: _data.listCategorie[type].couleur,
+          radius: 25,
+          child: Icon(
+            _data.listCategorie[type].icon,
+            size: 32,
+            color: Colors.white,
+          ),
         ),
+        title: Text(
+          titre,
+          style: TextStyle(fontSize: 20, color: Color(0xff0293ee)),
+        ),
+        subtitle: Text(
+          "${toDateN(dateDebut)} - ${toDateN(dateFin)}",
+          style: TextStyle(
+            color: Colors.white54,
+          ),
+        ),
+        trailing: isMultiselected
+            ? IconButton(
+                onPressed: onTap,
+                icon: selectedList.contains(id)
+                    ? Icon(
+                        LineIcons.checkCircle,
+                        size: 32,
+                        color: Colors.red,
+                      )
+                    : Icon(
+                        LineIcons.circle,
+                        size: 33,
+                        color: Colors.red,
+                      ),
+              )
+            : Text(
+                "$montant Ar",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                  color: Colors.white,
+                ),
+              ),
       ),
     );
   }
@@ -240,74 +343,23 @@ class _BudgetPageState extends State<BudgetPage> {
     return List.generate(Boxes.getBudget().length, (index) {
       final budget = Boxes.getBudget().values.toList().cast<Budget>()[index];
       final isTouched = index == touchedIndex;
-      final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
       return PieChartSectionData(
-        color: _data.listCategorie[index].couleur,
+        color: _data.listCategorie[budget.type].couleur,
         value: budget.montant,
-        title: budget.montant.toString(),
+        title: percent(budget.montant),
+        titlePositionPercentageOffset: 1.5,
         radius: radius,
+        borderSide: BorderSide(
+          color: dark,
+          width: 0.5,
+        ),
         titleStyle: TextStyle(
-            fontSize: fontSize,
-            fontWeight: FontWeight.bold,
-            color: const Color(0xffffffff)),
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+          color: _data.listCategorie[budget.type].couleur,
+        ),
       );
-    });
-  }
-
-  List<PieChartSectionData> showingSections() {
-    return List.generate(4, (i) {
-      final isTouched = i == touchedIndex;
-      final fontSize = isTouched ? 25.0 : 16.0;
-      final radius = isTouched ? 60.0 : 50.0;
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            color: const Color(0xff0293ee),
-            value: 40,
-            title: '40%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        case 1:
-          return PieChartSectionData(
-            color: const Color(0xfff8b250),
-            value: 30,
-            title: '30%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        case 2:
-          return PieChartSectionData(
-            color: const Color(0xff845bef),
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        case 3:
-          return PieChartSectionData(
-            color: const Color(0xff13d38e),
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        default:
-          throw Error();
-      }
     });
   }
 }

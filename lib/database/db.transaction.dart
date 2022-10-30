@@ -18,6 +18,9 @@ class TransAction {
       case 'jirama':
         await Boxes.getJirama().deleteAt(itemId);
         break;
+      case 'jirama-all':
+        await Boxes.getJirama().deleteAt(itemId);
+        break;
       case 'plat':
         await Boxes.getPlat().deleteAt(itemId);
         break;

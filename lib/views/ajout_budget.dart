@@ -172,9 +172,12 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                                   callback: () {
                                     setState(
                                       () {
-                                        type = selectedIndex = index;
+                                        selectedIndex = index;
+                                        type = index;
                                       },
                                     );
+                                    print("type : $type et index : $index");
+                                    print(categList[index].name);
                                   },
                                 );
                               },
@@ -261,14 +264,6 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                       ),
                       child: TextField(
                         controller: _montantController,
-                        onChanged: (montantValue) {
-                          setState(
-                            () {
-                              montant = double.parse(montantValue);
-                              print(montant);
-                            },
-                          );
-                        },
                         style: TextStyle(
                           fontSize: 17,
                           color: Colors.black,

@@ -31,21 +31,26 @@ class DataApp {
       couleur: Colors.green,
       icon: LineIcons.medicalBriefcase,
     ),
+    CategorieModel(
+      name: "Transport",
+      couleur: Colors.grey,
+      icon: LineIcons.car,
+    )
   ];
 
   List<String> mois = [
     'zero',
-    'Janvier',
-    'Fevrier',
+    'Janv',
+    'Fevr',
     'Mars',
     'Avril',
     'Mai',
     'Juin',
     'Juillet',
     'Août',
-    'Septembre',
-    'Octobre',
-    'Novembre',
-    'Décembre',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Déc',
   ];
 }
