@@ -18,7 +18,7 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 22, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       width: MediaQuery.of(context).size.width,
       height: 180,
       decoration: BoxDecoration(
@@ -40,7 +40,7 @@ class RecipeCard extends StatelessWidget {
             Colors.black.withOpacity(0.35),
             BlendMode.multiply,
           ),
-          image: NetworkImage(thumbnailUrl),
+          image: ExactAssetImage(thumbnailUrl),
           fit: BoxFit.cover,
         ),
       ),
@@ -52,7 +52,7 @@ class RecipeCard extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 19,
+                  fontSize: 25,
                   color: Colors.white,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -81,7 +81,12 @@ class RecipeCard extends StatelessWidget {
                         size: 18,
                       ),
                       SizedBox(width: 7),
-                      Text(groupe, style: TextStyle(color: Colors.white)),
+                      Text(
+                        groupe,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -102,7 +107,9 @@ class RecipeCard extends StatelessWidget {
                       SizedBox(width: 7),
                       Text(
                         heureCuisto,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),

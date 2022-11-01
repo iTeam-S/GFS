@@ -140,23 +140,23 @@ class _TacheCuisineState extends State<TacheCuisine> {
                   scrollDirection: Axis.vertical,
                   children: [
                     RecipeCard(
-                        title: 'Ravitoto',
-                        groupe: 'Groupe2',
-                        heureCuisto: '07h30',
-                        thumbnailUrl:
-                            'https://stileex.xyz/wp-content/uploads/2018/10/image-principale-2.jpg'),
+                      title: 'Ravitoto',
+                      groupe: 'Groupe2',
+                      heureCuisto: '07h30',
+                      thumbnailUrl: 'assets/images/food2.png',
+                    ),
                     RecipeCard(
-                        title: 'Tsaramaso',
-                        groupe: 'Groupe1',
-                        heureCuisto: '06h30',
-                        thumbnailUrl:
-                            'https://static01.nyt.com/images/2021/01/06/dining/04cookbooksrex-white-beans/merlin_181830831_89593d64-43f8-487a-bac1-6c064744c014-articleLarge.jpg'),
+                      title: 'Tsaramaso',
+                      groupe: 'Groupe1',
+                      heureCuisto: '06h30',
+                      thumbnailUrl: 'assets/images/food2.png',
+                    ),
                     RecipeCard(
-                        title: 'Petsay',
-                        groupe: 'Groupe3',
-                        heureCuisto: '07h30',
-                        thumbnailUrl:
-                            'https://upload.wikimedia.org/wikipedia/commons/4/4d/Ravimbomanga_Madagascar_Food.jpg'),
+                      title: 'Petsay',
+                      groupe: 'Groupe3',
+                      heureCuisto: '07h30',
+                      thumbnailUrl: 'assets/images/food2.png',
+                    ),
                   ],
                 ),
               ),

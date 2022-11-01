@@ -11,11 +11,9 @@ class AppDrawer extends StatefulWidget {
   State<AppDrawer> createState() => _AppDrawerState();
 }
 
-late String userPic;
-late String userName;
+int selectedIndex = 0;
 
 class _AppDrawerState extends State<AppDrawer> {
-  @override
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -106,32 +104,80 @@ class _AppDrawerState extends State<AppDrawer> {
                   menuItems(
                     itemName: 'Jirama',
                     itemIcon: LineIcons.plug,
-                    itemRoute: '/jirama',
+                    isSelected: selectedIndex == 1,
+                    voidCallback: () {
+                      Get.offAllNamed('/jirama');
+                      setState(
+                        () {
+                          selectedIndex = 1;
+                        },
+                      );
+                    },
                   ),
                   menuItems(
                     itemName: 'Cuisine',
                     itemIcon: LineIcons.utensils,
-                    itemRoute: '/cuisine',
+                    isSelected: selectedIndex == 2,
+                    voidCallback: () {
+                      Get.offAllNamed('/cuisine');
+                      setState(
+                        () {
+                          selectedIndex = 2;
+                        },
+                      );
+                    },
                   ),
                   menuItems(
                     itemName: 'Ménage',
                     itemIcon: LineIcons.couch,
-                    itemRoute: '/membre',
+                    isSelected: selectedIndex == 3,
+                    voidCallback: () {
+                      // Get.offAllNamed( '/membre');
+                      setState(
+                        () {
+                          selectedIndex = 3;
+                        },
+                      );
+                    },
                   ),
                   menuItems(
                     itemName: 'Budget',
                     itemIcon: LineIcons.coins,
-                    itemRoute: '/budget',
+                    isSelected: selectedIndex == 4,
+                    voidCallback: () {
+                      Get.offAllNamed('/budget');
+                      setState(
+                        () {
+                          selectedIndex = 4;
+                        },
+                      );
+                    },
                   ),
                   menuItems(
                     itemName: 'Agenda',
                     itemIcon: LineIcons.calendar,
-                    itemRoute: '/agenda',
+                    isSelected: selectedIndex == 5,
+                    voidCallback: () {
+                      Get.offAllNamed('/agenda');
+                      setState(
+                        () {
+                          selectedIndex = 5;
+                        },
+                      );
+                    },
                   ),
                   menuItems(
                     itemName: 'Membres',
                     itemIcon: LineIcons.users,
-                    itemRoute: '/membre',
+                    isSelected: selectedIndex == 6,
+                    voidCallback: () {
+                      Get.offAllNamed('/membre');
+                      setState(
+                        () {
+                          selectedIndex = 6;
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -145,26 +191,32 @@ class _AppDrawerState extends State<AppDrawer> {
   Widget menuItems({
     required String itemName,
     required IconData itemIcon,
-    required String itemRoute,
+    required bool isSelected,
+    required VoidCallback voidCallback,
   }) {
     return Container(
-      margin: EdgeInsets.all(7),
+      color: isSelected ? Colors.black.withOpacity(.2) : Colors.transparent,
       child: ListTile(
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 7,
+          horizontal: 17,
+        ),
         style: ListTileStyle.drawer,
-        onTap: () {
-          Get.offAllNamed(itemRoute);
-        },
+        onTap: voidCallback,
         title: Text(
           itemName,
           style: TextStyle(
-              color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
+            color: isSelected ? Colors.white : Colors.black,
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         leading: CircleAvatar(
           radius: 25,
-          backgroundColor: dark,
+          backgroundColor: isSelected ? Colors.white : dark,
           child: Icon(
             itemIcon,
-            color: Colors.white,
+            color: !isSelected ? Colors.white : Colors.black,
             size: 27,
           ),
         ),

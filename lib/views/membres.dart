@@ -27,7 +27,9 @@ class _MembreListState extends State<MembreList> {
 
   final TransAction _action = TransAction();
   List<Membre> membresList = [];
+  List<Membre> membreGoupe = [];
   bool isEmpt = false;
+  bool isMultiselected = false;
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -111,14 +113,14 @@ class _MembreListState extends State<MembreList> {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
-        vertical: 3,
+        vertical: 5,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
         color: orange,
       ),
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0),
         leading: Container(
           padding: EdgeInsets.only(right: 12.0),
           decoration: new BoxDecoration(
@@ -142,8 +144,6 @@ class _MembreListState extends State<MembreList> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
         subtitle: Row(
           children: <Widget>[
             Icon(
@@ -294,19 +294,23 @@ class _MembreListState extends State<MembreList> {
                               child: TextField(
                                 controller: _roleController,
                                 style: TextStyle(
-                                    fontSize: 17,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal),
-                                keyboardType: TextInputType.text,
+                                  fontSize: 17,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                                keyboardType: TextInputType.numberWithOptions(
+                                  decimal: false,
+                                ),
                                 maxLines: 1,
                                 decoration: InputDecoration(
-                                    hintStyle: TextStyle(
-                                      fontSize: 17,
-                                      color: Colors.black38,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                    hintText: "role",
-                                    border: InputBorder.none),
+                                  hintStyle: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black38,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                  hintText: "groupe",
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
                             Container(
@@ -321,9 +325,10 @@ class _MembreListState extends State<MembreList> {
                               child: TextField(
                                 controller: _esController,
                                 style: TextStyle(
-                                    fontSize: 17,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal),
+                                  fontSize: 17,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                ),
                                 keyboardType: TextInputType.text,
                                 maxLines: 1,
                                 decoration: InputDecoration(
