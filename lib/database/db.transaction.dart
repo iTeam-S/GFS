@@ -55,11 +55,13 @@ class TransAction {
     required double montant,
     required DateTime dateDebut,
     required DateTime dateFin,
+    required String moisDePayment,
   }) async {
     Jirama jirama = Jirama();
     jirama.montant = montant;
     jirama.dateDebut = dateDebut;
     jirama.dateFin = dateFin;
+    jirama.moisDePayment = moisDePayment;
 
     final box = Boxes.getJirama();
 
@@ -68,7 +70,8 @@ class TransAction {
       Jirama()
         ..montant = jirama.montant
         ..dateDebut = jirama.dateDebut
-        ..dateFin = jirama.dateFin,
+        ..dateFin = jirama.dateFin
+        ..moisDePayment = jirama.moisDePayment,
     );
     print("modifiation JIRAMA ok");
   }
@@ -255,11 +258,13 @@ class TransAction {
     required double montant,
     required DateTime dateDebut,
     required DateTime dateFin,
+    required String moisDePayment,
   }) async {
     final jirama = Jirama()
       ..montant = montant
       ..dateDebut = dateDebut
-      ..dateFin = dateFin;
+      ..dateFin = dateFin
+      ..moisDePayment = moisDePayment;
     final box = Boxes.getJirama();
     await box.add(jirama);
     print("ajout jirama :  $montant");

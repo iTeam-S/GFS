@@ -15,6 +15,8 @@ import 'package:gfs/views/register.dart';
 import 'package:gfs/views/splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'views/ajout_jirama.dart';
+
 final HiveDatabase _hiveDatabase = HiveDatabase();
 
 void main() async {
@@ -49,7 +51,10 @@ class MyApp extends StatelessWidget {
         '/cuisine': (context) => TacheCuisine(),
         '/budget': (context) => BudgetPage(),
         '/ajoutBudget': (context) => AjoutBudgetPage(),
+        '/ajoutJirama': (context) => AjoutJirmaPage(),
       },
     );
   }
 }
+//si tu veux builder la base de donnée Hive :
+//flutter packages pub run build_runner build --delete-conflicting-outputs

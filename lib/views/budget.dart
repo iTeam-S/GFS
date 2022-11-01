@@ -11,6 +11,7 @@ import 'package:line_icons/line_icons.dart';
 
 import '../database/db.service.dart';
 import '../persistData/data.dart';
+import '../utils/dateToString.dart';
 
 class BudgetPage extends StatefulWidget {
   const BudgetPage({Key? key}) : super(key: key);
@@ -37,16 +38,17 @@ class _BudgetPageState extends State<BudgetPage> {
   bool isMultiselected = false;
   List<int> selectedList = [];
   double total = 0.0;
+
   String percent(double one) {
     String pourcent = "";
     pourcent = ((one * 100) / total).toStringAsFixed(2);
     return pourcent + "%";
   }
 
-  String toDateN(DateTime dateTime) {
-    String date = "";
-    date = "${dateTime.day} ${_data.mois[dateTime.month].toLowerCase()}";
-    return date;
+  delete() {
+    selectedList.forEach((element) {
+      _action.deleteItemAt(boxe: 'budget', itemId: element);
+    });
   }
 
   @override
@@ -115,11 +117,32 @@ class _BudgetPageState extends State<BudgetPage> {
                     ),
                   ),
                   width: Get.width,
-                  height: 270,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  height: 330,
+                  //padding: EdgeInsets.symmetric(horizontal: 25),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Container(
+                        height: 35,
+                        width: 100 + (3 * total.toString().length.toDouble()),
+                        margin: EdgeInsets.only(bottom: 15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: dark,
+                        ),
+                        padding: EdgeInsets.all(5),
+                        child: Center(
+                          child: Text(
+                            "$total Ar",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
                       Container(
                         height: 260,
                         width: 200,
@@ -145,7 +168,7 @@ class _BudgetPageState extends State<BudgetPage> {
                                 show: false,
                               ),
                               sectionsSpace: 1,
-                              centerSpaceRadius: 50,
+                              centerSpaceRadius: 40,
                               sections: Boxes.getBudget().isNotEmpty
                                   ? show()
                                   : [
@@ -160,24 +183,6 @@ class _BudgetPageState extends State<BudgetPage> {
                                         ),
                                       )
                                     ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 25,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: dark,
-                        ),
-                        padding: EdgeInsets.all(5),
-                        child: Center(
-                          child: Text(
-                            "$total Ar",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ),
@@ -241,17 +246,20 @@ class _BudgetPageState extends State<BudgetPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: isMultiselected
           ? FloatingActionButton(
-              onPressed: () {
+              onPressed: () async {
                 if (selectedList.isEmpty) {
                   setState(() {
                     isMultiselected = false;
                     selectedList.clear();
                   });
                 } else {
-                  selectedList.forEach((element) {
-                    _action.deleteItemAt(boxe: 'budget', itemId: element);
-                  });
+                  await delete();
                   selectedList.clear();
+                  setState(
+                    () {
+                      isMultiselected = false;
+                    },
+                  );
                 }
               },
               backgroundColor: Colors.red,
@@ -359,7 +367,7 @@ class _BudgetPageState extends State<BudgetPage> {
         color: _data.listCategorie[budget.type].couleur,
         value: budget.montant,
         title: percent(budget.montant),
-        titlePositionPercentageOffset: 1.5,
+        titlePositionPercentageOffset: 1.7,
         radius: radius,
         borderSide: BorderSide(
           color: dark,

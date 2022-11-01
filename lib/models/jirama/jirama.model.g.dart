@@ -19,19 +19,22 @@ class JiramaAdapter extends TypeAdapter<Jirama> {
     return Jirama()
       ..montant = fields[0] as double
       ..dateDebut = fields[1] as DateTime
-      ..dateFin = fields[2] as DateTime;
+      ..dateFin = fields[2] as DateTime
+      ..moisDePayment = fields[3] as String;
   }
 
   @override
   void write(BinaryWriter writer, Jirama obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.montant)
       ..writeByte(1)
       ..write(obj.dateDebut)
       ..writeByte(2)
-      ..write(obj.dateFin);
+      ..write(obj.dateFin)
+      ..writeByte(3)
+      ..write(obj.moisDePayment);
   }
 
   @override

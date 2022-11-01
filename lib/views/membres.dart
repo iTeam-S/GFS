@@ -83,7 +83,7 @@ class _MembreListState extends State<MembreList> {
                   margin: EdgeInsets.only(top: 120),
                   child: emptyWidget(
                     bgColor: Colors.white,
-                    textColor: dark.withOpacity(.4),
+                    textColor: dark,
                   ),
                 );
               }

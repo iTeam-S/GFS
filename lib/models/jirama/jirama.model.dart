@@ -10,4 +10,6 @@ class Jirama extends HiveObject {
   late DateTime dateDebut;
   @HiveField(2)
   late DateTime dateFin;
+  @HiveField(3)
+  late String moisDePayment;
 }

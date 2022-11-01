@@ -33,7 +33,7 @@ Widget emptyWidget({
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 30,
-              color: textColor ?? Colors.white.withOpacity(.4),
+              color: (textColor ?? Colors.white).withOpacity(.4),
               fontWeight: FontWeight.normal,
             ),
           ),

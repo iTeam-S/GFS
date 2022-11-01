@@ -16,21 +16,22 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: Container(
-          padding: EdgeInsets.all(15),
-          width: Get.width,
-          height: Get.height,
-          child: SfCalendar(
-            view: CalendarView.month,
-
-            // by default the month appointment display mode set as Indicator, we can
-            // change the display mode as appointment using the appointment display
-            // mode property
-            monthViewSettings: const MonthViewSettings(
-                appointmentDisplayMode:
-                    MonthAppointmentDisplayMode.appointment),
+      appBar: AppBar(),
+      body: Container(
+        padding: EdgeInsets.zero,
+        width: Get.width,
+        height: Get.height,
+        child: SfCalendar(
+          // dataSource: ,
+          view: CalendarView.timelineMonth,
+          // by default the month appointment display mode set as Indicator, we can
+          // change the display mode as appointment using the appointment display
+          // mode property
+          monthViewSettings: const MonthViewSettings(
+            appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

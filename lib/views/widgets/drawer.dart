@@ -216,11 +216,10 @@ class _AppDrawerState extends State<AppDrawer> {
           backgroundColor: isSelected ? Colors.white : dark,
           child: Icon(
             itemIcon,
-            color: !isSelected ? Colors.white : Colors.black,
+            color: isSelected ? Colors.black : Colors.white,
             size: 27,
           ),
         ),
-        hoverColor: Colors.red,
       ),
     );
   }

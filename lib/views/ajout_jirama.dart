@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
-import 'package:gfs/models/categorie/model.categorie.dart';
-import 'package:gfs/persistData/data.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../database/db.transaction.dart';
 import 'widgets/input_date.dart';
 
-class AjoutBudgetPage extends StatefulWidget {
-  const AjoutBudgetPage({Key? key}) : super(key: key);
+class AjoutJirmaPage extends StatefulWidget {
+  const AjoutJirmaPage({Key? key}) : super(key: key);
 
   @override
-  State<AjoutBudgetPage> createState() => _AjoutBudgetPageState();
+  State<AjoutJirmaPage> createState() => _AjoutJirmaPageState();
 }
 
-class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
+class _AjoutJirmaPageState extends State<AjoutJirmaPage> {
   final TextEditingController _titreController = TextEditingController();
   final TextEditingController _montantController = TextEditingController();
   final TextEditingController _dayDateDebutController = TextEditingController();
@@ -28,10 +26,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
   final TextEditingController _yearDateFinController = TextEditingController();
   late ScaffoldMessengerState scaffoldMessenger;
   final TransAction _action = TransAction();
-  final DataApp _data = DataApp();
-  List<CategorieModel> categList = [];
 
-  int selectedIndex = 100;
   bool isValide = true;
 
   dateValidation({
@@ -75,7 +70,6 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
   }
 
   cleanAll() {
-    selectedIndex = 100;
     _titreController.clear();
     _montantController.clear();
     _dayDateDebutController.clear();
@@ -96,7 +90,6 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
 //--------------------------
   @override
   void initState() {
-    categList = _data.listCategorie;
     super.initState();
   }
 
@@ -119,7 +112,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
           color: dark,
         ),
         title: Text(
-          "Ajout d'un nouveau budget",
+          "Ajout d'un payment de JIRAMA",
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: 20,
@@ -141,58 +134,9 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                     Container(
                       width: Get.width,
                       padding: EdgeInsets.symmetric(horizontal: 15),
-                      margin: EdgeInsets.symmetric(vertical: 2),
-                      child: Text(
-                        "Categorie ",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 17,
-                          color: dark,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: Get.width,
-                      height: 82,
-                      // color: Colors.amber,
-                      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: categList.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (BuildContext context, int index) {
-                                CategorieModel categorie = categList[index];
-                                return categWidget(
-                                  name: categorie.name,
-                                  icon: categorie.icon,
-                                  couleur: categorie.couleur,
-                                  isSelected: selectedIndex == index,
-                                  callback: () {
-                                    setState(
-                                      () {
-                                        selectedIndex = index;
-                                        type = index;
-                                      },
-                                    );
-                                    print("type : $type et index : $index");
-                                    print(categList[index].name);
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: Get.width,
-                      padding: EdgeInsets.symmetric(horizontal: 15),
                       margin: EdgeInsets.symmetric(vertical: 7),
                       child: Text(
-                        "Titre ou motif",
+                        "Mois de payement",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 17,
@@ -233,7 +177,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                             color: Colors.black26,
                             fontWeight: FontWeight.normal,
                           ),
-                          hintText: "exemple : sakafo fety, fanafody sery",
+                          hintText: "exemple : mars,  janvier, etc",
                           border: InputBorder.none,
                         ),
                       ),
@@ -243,7 +187,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       margin: EdgeInsets.symmetric(vertical: 7),
                       child: Text(
-                        "Montant (Ariary)",
+                        "Montant Eau et Electricité (Ariary) ",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 17,
@@ -295,7 +239,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       margin: EdgeInsets.symmetric(vertical: 7),
                       child: Text(
-                        "Periode de consomation du budget",
+                        "Periode de consomation du montant",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 17,
@@ -378,8 +322,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                 width: 250,
                 child: MaterialButton(
                   onPressed: () async {
-                    if (selectedIndex != 100 &&
-                        _titreController.text.isNotEmpty &&
+                    if (_titreController.text.isNotEmpty &&
                         _montantController.text.isNotEmpty) {
                       await dateValidation(
                         jour: _dayDateDebutController.text,
@@ -394,12 +337,11 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                         isFirstDate: false,
                       );
                       if (isValide) {
-                        await _action.addBudget(
+                        await _action.addJirama(
                           montant: double.parse(_montantController.text),
                           dateDebut: dateDebut,
                           dateFin: dateFin,
-                          type: type,
-                          titre: _titreController.text,
+                          moisDePayment: _titreController.text,
                         );
                         Get.back();
                         cleanAll();
@@ -409,9 +351,7 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                         SnackBar(
                           backgroundColor: orange,
                           content: Text(
-                            selectedIndex != 100
-                                ? "Veillez bien verifié les formulaires "
-                                : "Veillez verifier qu'une cotegorie a bien été selectioner",
+                            "Veillez bien verifié les formulaires ",
                           ),
                         ),
                       );
@@ -436,58 +376,6 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget categWidget({
-    required String name,
-    required IconData icon,
-    required Color couleur,
-    required bool isSelected,
-    required VoidCallback callback,
-  }) {
-    return InkWell(
-      onTap: callback,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        padding: EdgeInsets.only(
-          top: 7,
-          left: 7,
-          right: 7,
-          bottom: 0,
-        ),
-        decoration: isSelected
-            ? BoxDecoration(
-                color: couleur.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(8),
-              )
-            : BoxDecoration(),
-        child: Column(
-          children: [
-            CircleAvatar(
-              backgroundColor: couleur,
-              radius: 25,
-              child: Icon(
-                icon,
-                size: 32,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              name,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.black38,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
         ),
       ),
     );
