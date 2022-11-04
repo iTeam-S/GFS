@@ -9,6 +9,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../database/db.service.dart';
+import 'widgets/membre_card.dart';
 
 AppDrawer drawer = AppDrawer();
 
@@ -30,6 +31,7 @@ class _MembreListState extends State<MembreList> {
   List<Membre> membreGoupe = [];
   bool isEmpt = false;
   bool isMultiselected = false;
+
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -72,9 +74,15 @@ class _MembreListState extends State<MembreList> {
                   itemBuilder: ((context, index) {
                     final membre = membres[index];
                     return cardMembre(
-                      index: index,
+                      onPressed: () {
+                        _action.deleteItemAt(
+                          boxe: 'membre',
+                          itemId: index,
+                        );
+                      },
                       name: membre.nom,
                       prom: membre.promotion.toString(),
+                      es: membre.es.toUpperCase(),
                     );
                   }),
                 );
@@ -91,88 +99,38 @@ class _MembreListState extends State<MembreList> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          popEdit();
-        },
-        backgroundColor: Colors.black,
-        child: Icon(
-          LineIcons.plus,
-          color: Colors.white,
-          size: 25,
-        ),
-      ),
-    );
-  }
-
-  Widget cardMembre({
-    required int index,
-    required String name,
-    required String prom,
-  }) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: orange,
-      ),
-      child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0),
-        leading: Container(
-          padding: EdgeInsets.only(right: 12.0),
-          decoration: new BoxDecoration(
-            border: new Border(
-              right: new BorderSide(
-                width: 1.0,
-                color: Colors.white24,
+      floatingActionButton: Container(
+        // color: Colors.amber,
+        width: 150,
+        height: 70,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            FloatingActionButton(
+              heroTag: '/groupe',
+              onPressed: () {
+                Get.toNamed('/groupe');
+              },
+              backgroundColor: orange,
+              child: Icon(
+                LineIcons.users,
+                color: Colors.white,
+                size: 30,
               ),
             ),
-          ),
-          child: Icon(
-            LineIcons.userCircle,
-            color: Colors.white,
-            size: 40,
-          ),
-        ),
-        title: Text(
-          name,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        subtitle: Row(
-          children: <Widget>[
-            Icon(
-              LineIcons.graduationCap,
-              color: Colors.black,
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              "P$prom",
-              style: TextStyle(
+            FloatingActionButton(
+              heroTag: '/popPup',
+              onPressed: () {
+                popEdit();
+              },
+              backgroundColor: orange,
+              child: Icon(
+                LineIcons.userPlus,
                 color: Colors.white,
+                size: 25,
               ),
             )
           ],
-        ),
-        trailing: IconButton(
-          onPressed: () {
-            _action.deleteItemAt(
-              boxe: 'membre',
-              itemId: index,
-            );
-          },
-          icon: Icon(
-            Icons.delete_forever,
-            color: Colors.white,
-            size: 30.0,
-          ),
         ),
       ),
     );
@@ -207,7 +165,7 @@ class _MembreListState extends State<MembreList> {
                                 vertical: 8,
                               ),
                               child: Text(
-                                "Ajour de nouvau membre",
+                                "Ajout de nouvau membre",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,

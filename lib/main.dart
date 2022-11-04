@@ -7,6 +7,7 @@ import 'package:gfs/views/ajout_budget.dart';
 import 'package:gfs/views/budget.dart';
 import 'package:gfs/views/cuisto.dart';
 import 'package:gfs/views/exemple.dart';
+import 'package:gfs/views/groupe.dart';
 import 'package:gfs/views/home.dart';
 import 'package:gfs/views/jirama.dart';
 import 'package:gfs/views/login.dart';
@@ -52,9 +53,12 @@ class MyApp extends StatelessWidget {
         '/budget': (context) => BudgetPage(),
         '/ajoutBudget': (context) => AjoutBudgetPage(),
         '/ajoutJirama': (context) => AjoutJirmaPage(),
+        '/groupe': (context) => GroupePage(),
       },
     );
   }
 }
+
 //si tu veux builder la base de donnée Hive :
+//commande à executer une fois seulement ou en cas de modification du Model
 //flutter packages pub run build_runner build --delete-conflicting-outputs
