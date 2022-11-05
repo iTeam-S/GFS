@@ -369,10 +369,6 @@ class _BudgetPageState extends State<BudgetPage> {
         title: percent(budget.montant),
         titlePositionPercentageOffset: 1.7,
         radius: radius,
-        borderSide: BorderSide(
-          color: dark,
-          width: 0.5,
-        ),
         titleStyle: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.bold,

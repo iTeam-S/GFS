@@ -20,13 +20,14 @@ class PlatAdapter extends TypeAdapter<Plat> {
       ..categorie = fields[0] as String
       ..nom = fields[1] as String
       ..commentaire = fields[2] as String
-      ..prix = fields[3] as double;
+      ..prix = fields[3] as double
+      ..compositions = (fields[4] as List).cast<String>();
   }
 
   @override
   void write(BinaryWriter writer, Plat obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.categorie)
       ..writeByte(1)
@@ -34,7 +35,9 @@ class PlatAdapter extends TypeAdapter<Plat> {
       ..writeByte(2)
       ..write(obj.commentaire)
       ..writeByte(3)
-      ..write(obj.prix);
+      ..write(obj.prix)
+      ..writeByte(4)
+      ..write(obj.compositions);
   }
 
   @override

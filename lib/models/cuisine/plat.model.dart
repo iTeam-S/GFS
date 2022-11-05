@@ -12,4 +12,6 @@ class Plat extends HiveObject {
   late String commentaire;
   @HiveField(3)
   late double prix;
+  @HiveField(4)
+  late List<String> compositions;
 }
