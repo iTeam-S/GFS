@@ -4,6 +4,7 @@ import 'package:gfs/database/db.service.dart';
 
 import 'package:gfs/views/agenda.dart';
 import 'package:gfs/views/ajout_budget.dart';
+import 'package:gfs/views/ajout_plat.dart';
 import 'package:gfs/views/budget.dart';
 import 'package:gfs/views/cuisto.dart';
 import 'package:gfs/views/exemple.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         '/ajoutBudget': (context) => AjoutBudgetPage(),
         '/ajoutJirama': (context) => AjoutJirmaPage(),
         '/groupe': (context) => GroupePage(),
+        '/ajoutPlat': (context) => AjoutPlatPage(),
       },
     );
   }

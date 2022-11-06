@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
-import 'package:gfs/models/categorie/model.categorie.dart';
+import 'package:gfs/models/categorie/model.categorie.budget.dart';
 import 'package:gfs/persistData/data.dart';
 import 'package:line_icons/line_icons.dart';
 

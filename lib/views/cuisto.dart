@@ -57,7 +57,7 @@ class _TacheCuisineState extends State<TacheCuisine> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          // Get.toNamed('/listCtg');
+                          Get.toNamed('/ajoutPlat');
                         },
                         child: Container(
                           margin: const EdgeInsets.all(10),

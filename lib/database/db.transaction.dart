@@ -293,11 +293,13 @@ class TransAction {
     required String commentaire,
     required String nom,
     required String categorie,
+    required List<String> compositions,
   }) async {
     final plat = Plat()
       ..prix = prix
       ..commentaire = commentaire
       ..nom = nom
+      ..compositions = compositions
       ..categorie = categorie;
     final box = Boxes.getPlat();
     await box.add(plat);

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gfs/models/categorie/model.categorie.plat.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../models/categorie/model.categorie.dart';
+import '../models/categorie/model.categorie.budget.dart';
 
 class DataApp {
   List<CategorieModel> listCategorie = [
@@ -52,5 +53,23 @@ class DataApp {
     'Oct',
     'Nov',
     'Déc',
+  ];
+
+  List<PlatModel> categoriePlat = [
+    PlatModel(
+      name: "Petit dej",
+      couleur: Colors.blueAccent,
+      icon: LineIcons.cheese,
+    ),
+    PlatModel(
+      name: "Resistance",
+      couleur: Colors.amber,
+      icon: LineIcons.drumstickWithBiteTakenOut,
+    ),
+    PlatModel(
+      name: "Dessert",
+      couleur: Colors.pink,
+      icon: LineIcons.birthdayCake,
+    ),
   ];
 }
