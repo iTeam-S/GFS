@@ -65,6 +65,7 @@ class _AjoutBudgPlatState extends State<AjoutPlatPage> {
         leading: IconButton(
           onPressed: () {
             Get.back();
+            cleanAll();
           },
           icon: Icon(
             LineIcons.angleLeft,
@@ -466,7 +467,7 @@ class _AjoutBudgPlatState extends State<AjoutPlatPage> {
                         categorie: _data.categoriePlat[selectedIndex].name,
                       );
                       cleanAll();
-                      //  Get.back();
+                      Get.back();
                     } else {
                       scaffoldMessenger.showSnackBar(
                         SnackBar(

@@ -1,66 +1,181 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'package:gfs/models/categorie/model.categorie.plat.dart';
+import 'package:gfs/persistData/data.dart';
 import 'package:line_icons/line_icons.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeCard extends StatefulWidget {
   final String title;
-  final String groupe;
-  final String heureCuisto;
-  final String thumbnailUrl;
+  final String commentaire;
+  final String prix;
+  final String categorie;
+  final List<String> ingredient;
 
-  const RecipeCard(
-      {Key? key,
-      required this.title,
-      required this.groupe,
-      required this.heureCuisto,
-      required this.thumbnailUrl})
-      : super(key: key);
+  const RecipeCard({
+    Key? key,
+    required this.title,
+    required this.commentaire,
+    required this.prix,
+    required this.categorie,
+    required this.ingredient,
+  }) : super(key: key);
+
+  @override
+  State<RecipeCard> createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
+  final DataApp _data = DataApp();
+
+  List<PlatModel> categorie(String nom) {
+    return _data.categoriePlat
+        .where(
+          (element) => element.name.toLowerCase() == nom.toLowerCase(),
+        )
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 10,
+      ),
       width: MediaQuery.of(context).size.width,
-      height: 180,
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.6),
+            color: Colors.black.withOpacity(0.5),
             offset: Offset(
               0.0,
               10.0,
             ),
-            blurRadius: 10.0,
-            spreadRadius: -6.0,
+            blurRadius: 15.0,
+            spreadRadius: -10.0,
           ),
         ],
-        image: DecorationImage(
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.35),
-            BlendMode.multiply,
-          ),
-          image: ExactAssetImage(thumbnailUrl),
-          fit: BoxFit.cover,
-        ),
       ),
-      child: Stack(
+      // height: 120,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Align(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                textAlign: TextAlign.center,
+          Container(
+            height: 70,
+            width: Get.width,
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            decoration: BoxDecoration(
+              color: categorie(widget.categorie)[0].couleur,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
               ),
             ),
-            alignment: Alignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  widget.title,
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.black,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                ),
+                CircleAvatar(
+                  backgroundColor: Colors.white.withOpacity(.5),
+                  radius: 25,
+                  child: Icon(
+                    categorie(widget.categorie)[0].icon,
+                    size: 32,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 5,
+            ),
+            child: Text(
+              'Commentaire :',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              textAlign: TextAlign.start,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 15),
+            child: Text(
+              widget.commentaire,
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black54,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
+              textAlign: TextAlign.start,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 5,
+            ),
+            child: Text(
+              'Compositions :',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              textAlign: TextAlign.start,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 10),
+            height: (40 * widget.ingredient.length).toDouble(),
+            child: ListView.builder(
+              itemCount: widget.ingredient.length,
+              itemBuilder: ((context, index) {
+                return Container(
+                  // margin: EdgeInsets.symmetric(horizontal: 10),
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: ListTile(
+                    leading: Text(
+                      widget.ingredient[index],
+                      style: TextStyle(
+                        color: Colors.black45,
+                        fontSize: 20,
+                      ),
+                    ),
+                    trailing: Text(
+                      "+",
+                      style: TextStyle(
+                        color: Colors.black45,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
           ),
           Align(
             child: Row(
@@ -70,21 +185,21 @@ class RecipeCard extends StatelessWidget {
                   padding: EdgeInsets.all(5),
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
+                    color: categorie(widget.categorie)[0].couleur,
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
                     children: [
                       Icon(
-                        LineIcons.users,
-                        color: Colors.orange,
+                        LineIcons.utensils,
+                        color: Colors.white,
                         size: 18,
                       ),
                       SizedBox(width: 7),
                       Text(
-                        groupe,
+                        widget.categorie + ' ',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                     ],
@@ -94,21 +209,21 @@ class RecipeCard extends StatelessWidget {
                   padding: EdgeInsets.all(5),
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
+                    color: categorie(widget.categorie)[0].couleur,
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
                     children: [
                       Icon(
-                        Icons.schedule,
-                        color: Colors.orange,
+                        LineIcons.coins,
+                        color: Colors.white,
                         size: 18,
                       ),
                       SizedBox(width: 7),
                       Text(
-                        heureCuisto,
+                        widget.prix + ' Ar',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                     ],
@@ -116,7 +231,7 @@ class RecipeCard extends StatelessWidget {
                 )
               ],
             ),
-            alignment: Alignment.bottomLeft,
+            alignment: Alignment.bottomCenter,
           ),
         ],
       ),

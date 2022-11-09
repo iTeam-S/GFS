@@ -3,8 +3,13 @@ import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
 import 'package:gfs/views/widgets/card_cuisto.dart';
 import 'package:gfs/views/widgets/drawer.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 // ignore: unused_import
 import 'package:line_icons/line_icons.dart';
+
+import '../database/db.service.dart';
+import '../models/cuisine/plat.model.dart';
+import 'widgets/empty.dart';
 
 class TacheCuisine extends StatefulWidget {
   const TacheCuisine({Key? key}) : super(key: key);
@@ -42,126 +47,56 @@ class _TacheCuisineState extends State<TacheCuisine> {
           color: Colors.black,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: Get.width,
-          height: Get.height,
+      body: Container(
+        width: Get.width,
+        height: Get.height,
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
                 width: Get.width,
-                height: Get.height * .25,
-                child: OrientationBuilder(builder: (context, orientation) {
-                  return GridView.count(
-                    crossAxisCount: 2,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed('/ajoutPlat');
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          width: Get.width,
-                          height: Get.height,
-                          decoration: BoxDecoration(
-                              color: const Color(0xff25272a),
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                LineIcons.drumstickWithBiteTakenOut,
-                                color: Colors.white,
-                                size: Get.width * .2,
-                              ),
-                              const Text(
-                                "SEMAIE A",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const Text(
-                                "10 plats",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          width: Get.width,
-                          height: Get.height,
-                          decoration: BoxDecoration(
-                              color: dark,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                LineIcons.cheese,
-                                color: Colors.white,
-                                size: Get.width * .2,
-                              ),
-                              const Text(
-                                "SEMAINE B",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const Text(
-                                "5 plats",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                }),
-              ),
-              Container(
-                width: Get.width,
-                height: Get.height * .7,
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    RecipeCard(
-                      title: 'Ravitoto',
-                      groupe: 'Groupe2',
-                      heureCuisto: '07h30',
-                      thumbnailUrl: 'assets/images/food2.png',
-                    ),
-                    RecipeCard(
-                      title: 'Tsaramaso',
-                      groupe: 'Groupe1',
-                      heureCuisto: '06h30',
-                      thumbnailUrl: 'assets/images/food2.png',
-                    ),
-                    RecipeCard(
-                      title: 'Petsay',
-                      groupe: 'Groupe3',
-                      heureCuisto: '07h30',
-                      thumbnailUrl: 'assets/images/food2.png',
-                    ),
-                  ],
+                height: Get.height * .9,
+                child: ValueListenableBuilder<Box<Plat>>(
+                  valueListenable: Boxes.getPlat().listenable(),
+                  builder: (context, box, _) {
+                    final plats = box.values.toList().cast<Plat>();
+                    if (plats.isNotEmpty) {
+                      return ListView.builder(
+                        itemCount: plats.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: ((context, index) {
+                          final plat = plats[index];
+                          return RecipeCard(
+                            title: plat.nom,
+                            commentaire: plat.commentaire,
+                            prix: plat.prix.toString(),
+                            categorie: plat.categorie,
+                            ingredient: plat.compositions,
+                          );
+                        }),
+                      );
+                    } else {
+                      return emptyWidget();
+                    }
+                  },
                 ),
+              ),
+              SizedBox(
+                height: 200,
               ),
             ],
           ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed('/ajoutPlat');
+        },
+        backgroundColor: dark,
+        child: Icon(
+          LineIcons.plus,
+          color: Colors.white,
         ),
       ),
     );
