@@ -13,25 +13,76 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  CalendarView view = CalendarView.month;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        padding: EdgeInsets.zero,
-        width: Get.width,
-        height: Get.height,
-        child: SfCalendar(
-          // dataSource: ,
-          view: CalendarView.timelineMonth,
-          // by default the month appointment display mode set as Indicator, we can
-          // change the display mode as appointment using the appointment display
-          // mode property
-          monthViewSettings: const MonthViewSettings(
-            appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.zero,
+            width: Get.width,
+            height: Get.height * .7,
+            child: SfCalendar(
+              headerHeight: 50,
+              selectionDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                border: Border.all(
+                  color: Colors.red,
+                  width: 2,
+                ),
+              ),
+              showNavigationArrow: true,
+              showDatePickerButton: true,
+              firstDayOfWeek: 1,
+              onTap: (details) {
+                if (details.appointments!.isNotEmpty) {
+                  print(details.appointments![0].location);
+                }
+              },
+              dataSource: _getCalendarDataSource(),
+              view: view,
+              monthViewSettings: const MonthViewSettings(
+                appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
+}
+
+class DataSource extends CalendarDataSource {
+  DataSource(List<Appointment> source) {
+    appointments = source;
+  }
+}
+
+DataSource _getCalendarDataSource() {
+  List<Appointment> appointments = <Appointment>[
+    Appointment(
+      startTime: DateTime(2022, 11, 15),
+      endTime: DateTime(2022, 11, 15).add(Duration(hours: 2)),
+      isAllDay: true,
+      subject: 'Groupe 1',
+      color: Colors.blue,
+      location: 'kkkkk',
+      startTimeZone: '',
+      endTimeZone: '',
+    ),
+    Appointment(
+      startTime: DateTime(2022, 11, 15),
+      endTime: DateTime(2022, 11, 15).add(Duration(hours: 2)),
+      isAllDay: true,
+      subject: 'Groupe 2',
+      color: Colors.red,
+      location: 'aaaa',
+      startTimeZone: '',
+      endTimeZone: '',
+    )
+  ];
+
+  return DataSource(appointments);
 }

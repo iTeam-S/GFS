@@ -72,4 +72,21 @@ class DataApp {
       icon: LineIcons.birthdayCake,
     ),
   ];
+  List<Color> couleurTache = [
+    Colors.black,
+    Colors.amber,
+    Colors.blue,
+    Colors.brown,
+    Colors.redAccent,
+    Colors.teal,
+    Colors.indigo,
+    Colors.deepOrange,
+    Colors.pink,
+    Colors.purple,
+    Colors.deepPurple,
+    Colors.green,
+    Colors.grey,
+    Colors.lime,
+    Colors.cyan,
+  ];
 }

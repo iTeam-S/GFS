@@ -49,9 +49,9 @@ class _RecipeCardState extends State<RecipeCard> {
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.5),
+            color: Colors.black.withOpacity(0.7),
             offset: Offset(
-              0.0,
+              5.0,
               10.0,
             ),
             blurRadius: 15.0,

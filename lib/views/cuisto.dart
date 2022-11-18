@@ -55,7 +55,8 @@ class _TacheCuisineState extends State<TacheCuisine> {
             children: [
               Container(
                 width: Get.width,
-                height: Get.height * .9,
+                height: Get.height * .95,
+                padding: EdgeInsets.only(bottom: 50),
                 child: ValueListenableBuilder<Box<Plat>>(
                   valueListenable: Boxes.getPlat().listenable(),
                   builder: (context, box, _) {
@@ -80,9 +81,6 @@ class _TacheCuisineState extends State<TacheCuisine> {
                     }
                   },
                 ),
-              ),
-              SizedBox(
-                height: 200,
               ),
             ],
           ),
