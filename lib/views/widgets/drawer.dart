@@ -55,7 +55,12 @@ class _AppDrawerState extends State<AppDrawer> {
                       Container(
                         alignment: Alignment.topRight,
                         child: InkWell(
-                          onTap: () => Get.offAllNamed('/home'),
+                          onTap: () {
+                            Get.offAllNamed('/home');
+                            setState(() {
+                              selectedIndex = 0;
+                            });
+                          },
                           child: CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Icon(

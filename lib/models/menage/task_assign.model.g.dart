@@ -1,30 +1,37 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tour_menage.model.dart';
+part of 'task_assign.model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TourMenageAdapter extends TypeAdapter<TourMenage> {
+class TaskAssignAdapter extends TypeAdapter<TaskAssign> {
   @override
-  final int typeId = 5;
+  final int typeId = 8;
 
   @override
-  TourMenage read(BinaryReader reader) {
+  TaskAssign read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return TourMenage()..description = (fields[0] as List).cast<TaskAssign>();
+    return TaskAssign()
+      ..groupe = fields[0] as int
+      ..tache = fields[1] as int
+      ..jour = fields[2] as int;
   }
 
   @override
-  void write(BinaryWriter writer, TourMenage obj) {
+  void write(BinaryWriter writer, TaskAssign obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.description);
+      ..write(obj.groupe)
+      ..writeByte(1)
+      ..write(obj.tache)
+      ..writeByte(2)
+      ..write(obj.jour);
   }
 
   @override
@@ -33,7 +40,7 @@ class TourMenageAdapter extends TypeAdapter<TourMenage> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TourMenageAdapter &&
+      other is TaskAssignAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

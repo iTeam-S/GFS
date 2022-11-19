@@ -555,7 +555,7 @@ class _GroupePageState extends State<GroupePage> {
                 SizedBox(
                   width: Get.width * .5,
                   child: Text(
-                    nomGroupe,
+                    "Groupe ${groupeIndex + 1}",
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(

@@ -5,6 +5,7 @@ import '../models/jirama/jirama.model.dart';
 import '../models/membre/groupe.model.dart';
 import '../models/membre/membre.model.dart';
 import '../models/menage/place.model.dart';
+import '../models/menage/task_assign.model.dart';
 import '../models/menage/tour_menage.model.dart';
 import 'db.service.dart';
 
@@ -229,26 +230,16 @@ class TransAction {
   //modifie les elements de la colonne TOUR MENAGE en fonction de son index dans la liste
   Future<void> editTourMenage({
     required int index,
-    required Groupe groupe,
-    required String description,
-    required DateTime dateHeure,
-    required Emplacement place,
+    required List<TaskAssign> description,
   }) async {
     TourMenage tourMenage = TourMenage();
-    tourMenage.description = description;
-    tourMenage.description = description;
-    tourMenage.groupe = groupe;
-    tourMenage.dateHeure = dateHeure;
+    tourMenage.description = description.cast<TaskAssign>();
 
     final box = Boxes.getTourMenage();
 
     await box.putAt(
       index,
-      TourMenage()
-        ..description = tourMenage.description
-        ..place = tourMenage.place
-        ..dateHeure = tourMenage.dateHeure
-        ..groupe = tourMenage.groupe,
+      TourMenage()..description = tourMenage.description,
     );
     print("modifiation TOUR MENAGE ok");
   }
@@ -362,18 +353,11 @@ class TransAction {
   }
 
   Future addTourMenage({
-    required Groupe groupe,
-    required String description,
-    required DateTime dateHeure,
-    required Emplacement place,
+    required List<TaskAssign> description,
   }) async {
-    final tourMenage = TourMenage()
-      ..groupe = groupe
-      ..description = description
-      ..dateHeure = dateHeure
-      ..place = place;
+    final tourMenage = TourMenage()..description = description;
     final box = Boxes.getTourMenage();
     await box.add(tourMenage);
-    print("ajout tour de menage :  $groupe & $description");
+    print("ajout tour de menage :  & ${description[0].groupe}");
   }
 }

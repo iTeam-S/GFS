@@ -8,18 +8,20 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../models/budget/budget.model.dart';
 import '../models/cuisine/plat.model.dart';
+import '../models/menage/task_assign.model.dart';
 
 class HiveDatabase {
   //ouvre les tables dans la base de donnée pour que l'application puisse effectuer des transaction
   Future openTableBox() async {
     await Hive.openBox<Budget>('budget');
     await Hive.openBox<Plat>('plat');
-    await Hive.openBox<TourCuisine>('tour_cuisine');
+    await Hive.openBox<TourCuisine>('tcuisine');
     await Hive.openBox<Emplacement>('place');
-    await Hive.openBox<TourMenage>('tour_menage');
+    await Hive.openBox<TourMenage>('tmenage');
     await Hive.openBox<Membre>('membre');
     await Hive.openBox<Groupe>('groupe');
     await Hive.openBox<Jirama>('jirama');
+    await Hive.openBox<TaskAssign>('task');
     //await Hive.openBox<Compare>('comparaison');
   }
 
@@ -31,6 +33,7 @@ class HiveDatabase {
     Hive.registerAdapter(TourCuisineAdapter());
     Hive.registerAdapter(EmplacementAdapter());
     Hive.registerAdapter(TourMenageAdapter());
+    Hive.registerAdapter(TaskAssignAdapter());
     Hive.registerAdapter(MembreAdapter());
     Hive.registerAdapter(GroupeAdapter());
     Hive.registerAdapter(JiramaAdapter());
@@ -41,11 +44,11 @@ class Boxes {
   //associe la table NoSQL et les HiveObject ou model de donnée qu'on a crée
   static Box<Budget> getBudget() => Hive.box<Budget>('budget');
   static Box<Plat> getPlat() => Hive.box<Plat>('plat');
-  static Box<TourCuisine> getTourCuisine() =>
-      Hive.box<TourCuisine>('tour_cuisine');
+  static Box<TourCuisine> getTourCuisine() => Hive.box<TourCuisine>('tcuisine');
   static Box<Emplacement> getEmplacement() => Hive.box<Emplacement>('place');
-  static Box<TourMenage> getTourMenage() => Hive.box<TourMenage>('tour_menage');
+  static Box<TourMenage> getTourMenage() => Hive.box<TourMenage>('tmenage');
   static Box<Membre> getMembre() => Hive.box<Membre>('membre');
   static Box<Groupe> getGroupe() => Hive.box<Groupe>('groupe');
   static Box<Jirama> getJirama() => Hive.box<Jirama>('jirama');
+  static Box<TaskAssign> getTask() => Hive.box<TaskAssign>('task');
 }

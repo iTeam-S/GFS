@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gfs/database/db.service.dart';
-
-import 'package:gfs/views/agenda.dart';
-import 'package:gfs/views/ajout_budget.dart';
-import 'package:gfs/views/ajout_plat.dart';
-import 'package:gfs/views/budget.dart';
-import 'package:gfs/views/cuisto.dart';
-import 'package:gfs/views/exemple.dart';
-import 'package:gfs/views/groupe.dart';
-import 'package:gfs/views/home.dart';
-import 'package:gfs/views/jirama.dart';
-import 'package:gfs/views/login.dart';
-import 'package:gfs/views/membres.dart';
-import 'package:gfs/views/register.dart';
-import 'package:gfs/views/splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'database/db.service.dart';
+import 'views/agenda.dart';
+import 'views/ajout_budget.dart';
 import 'views/ajout_jirama.dart';
+import 'views/ajout_plat.dart';
+import 'views/budget.dart';
+import 'views/cuisto.dart';
+import 'views/exemple.dart';
+import 'views/groupe.dart';
+import 'views/home.dart';
+import 'views/jirama.dart';
+import 'views/login.dart';
+import 'views/membres.dart';
+import 'views/register.dart';
+import 'views/splash.dart';
 
 final HiveDatabase _hiveDatabase = HiveDatabase();
 
