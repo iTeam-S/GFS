@@ -101,60 +101,108 @@ class _ScreenState extends State<Screen> {
           Container(
             width: Get.width,
             height: Get.height * .25,
-            child: Swiper(
-              itemCount: taches.length,
-              itemBuilder: (BuildContext context, int id) {
-                return Container(
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(7),
-                  decoration: BoxDecoration(
-                      color: dark, borderRadius: BorderRadius.circular(15)),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.all(15),
-                            height: 35,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: orange,
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Center(
-                              child: Text(
-                                "GROUPE " + taches[id].groupe.toString(),
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+            child: taches.isNotEmpty
+                ? Swiper(
+                    itemCount: taches.length,
+                    itemBuilder: (BuildContext context, int id) {
+                      return Container(
+                        margin: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(7),
+                        decoration: BoxDecoration(
+                            color: dark,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(15),
+                                  height: 35,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                      color: orange,
+                                      borderRadius: BorderRadius.circular(50)),
+                                  child: Center(
+                                    child: Text(
+                                      "GROUPE " + taches[id].groupe.toString(),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    _data.jours[DateTime(
+                                            DateTime.now().year,
+                                            DateTime.now().month,
+                                            taches[id].jour)
+                                        .weekday],
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              "Nettoyage cours exterieur et débarassage",
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    // indicatorLayout: PageIndicatorLayout.COLOR,
+                    autoplay: true,
+                    //pagination: const SwiperPagination(),
+                    //control: const SwiperControl(),
+                  )
+                : Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(7),
+                    decoration: BoxDecoration(
+                        color: dark, borderRadius: BorderRadius.circular(15)),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(15),
+                              height: 35,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  color: orange,
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Center(
+                                child: Text(
+                                  "GROUPE",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              _data.jours[DateTime(DateTime.now().year,
-                                      DateTime.now().month, taches[id].jour)
-                                  .weekday],
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
+                            Expanded(
+                              child: Text(
+                                _data.jours[DateTime.now().weekday],
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        "Nettoyage cours exterieur et débarassage",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 25),
-                      ),
-                    ],
+                          ],
+                        ),
+                        Text(
+                          "Il n'y a pas encore de tache.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              },
-              // indicatorLayout: PageIndicatorLayout.COLOR,
-              autoplay: true,
-              //pagination: const SwiperPagination(),
-              //control: const SwiperControl(),
-            ),
           ),
         ])));
   }
