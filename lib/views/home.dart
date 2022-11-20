@@ -2,8 +2,14 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
+import 'package:gfs/persistData/data.dart';
 import 'package:gfs/views/widgets/drawer.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:line_icons/line_icons.dart';
+
+import '../database/db.service.dart';
+import '../models/menage/task_assign.model.dart';
+import '../models/menage/tour_menage.model.dart';
 
 AppDrawer drawer = AppDrawer();
 
@@ -16,6 +22,20 @@ class Screen extends StatefulWidget {
 
 class _ScreenState extends State<Screen> {
   GlobalKey<ScaffoldState> _key = GlobalKey();
+  List<TaskAssign> taches = [];
+  List<TourMenage> listOfTask =
+      Boxes.getTourMenage().values.toList().cast<TourMenage>();
+  final DataApp _data = DataApp();
+
+  @override
+  void initState() {
+    taches = listOfTask[0]
+        .description
+        .where((value) => DateTime.now().day == value.jour)
+        .toList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +71,7 @@ class _ScreenState extends State<Screen> {
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 4,
+                    itemCount: 5,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext context, int id) {
                       return Container(
@@ -82,7 +102,7 @@ class _ScreenState extends State<Screen> {
             width: Get.width,
             height: Get.height * .25,
             child: Swiper(
-              itemCount: 5,
+              itemCount: taches.length,
               itemBuilder: (BuildContext context, int id) {
                 return Container(
                   margin: EdgeInsets.all(10),
@@ -102,7 +122,7 @@ class _ScreenState extends State<Screen> {
                                 borderRadius: BorderRadius.circular(50)),
                             child: Center(
                               child: Text(
-                                "LUNDI",
+                                "GROUPE " + taches[id].groupe.toString(),
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -112,7 +132,9 @@ class _ScreenState extends State<Screen> {
                           ),
                           Expanded(
                             child: Text(
-                              "GROUPE 3",
+                              _data.jours[DateTime(DateTime.now().year,
+                                      DateTime.now().month, taches[id].jour)
+                                  .weekday],
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),

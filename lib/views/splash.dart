@@ -11,6 +11,9 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(milliseconds: 5000), () {
+      Get.offNamed('/home');
+    });
     return Scaffold(
       body: Container(
         height: Get.height,

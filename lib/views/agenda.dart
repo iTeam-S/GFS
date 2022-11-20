@@ -3,11 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
-import 'package:gfs/database/db.transaction.dart';
 import 'package:gfs/models/menage/tour_menage.model.dart';
 import 'package:gfs/persistData/data.dart';
 import 'package:gfs/utils/generate_task.dart';
-import 'package:gfs/utils/nombre_de_mois.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -25,45 +23,13 @@ class CalendarPage extends StatefulWidget {
 
 class _CalendarPageState extends State<CalendarPage> {
   GlobalKey<ScaffoldState> _key = GlobalKey();
-  TaskMaster _taskMaster = TaskMaster();
-  TransAction _action = TransAction();
-  List<TourMenage> listOfTask =
-      Boxes.getTourMenage().values.toList().cast<TourMenage>();
-
+  TaskManager _taskMaster = TaskManager();
   //---------------------------------
-  _createTaskInAgenda() {
-    if (listOfTask.length == 0) {
-      _action.addTourMenage(
-        description: _taskMaster.generateTask(
-          nombreDeGroupe: 6,
-          nombreDeTache: 5,
-        ),
-      );
-    } else {
-      print("existe déjà");
-      List<TaskAssign> taskFromDataBase = Boxes.getTourMenage()
-          .values
-          .toList()
-          .cast<TourMenage>()[0]
-          .description;
-
-      if (nombreDeJoursDuMois(DateTime.now().month) !=
-          taskFromDataBase[taskFromDataBase.length - 1].jour) {
-        _action.editTourMenage(
-          index: 0,
-          description: _taskMaster.generateTask(
-            nombreDeGroupe: 6,
-            nombreDeTache: 5,
-          ),
-        );
-      }
-    }
-  }
 
   @override
   void initState() {
-    _createTaskInAgenda();
-    print(listOfTask.length);
+    _taskMaster.createTaskInAgenda();
+
     super.initState();
   }
 
@@ -88,7 +54,7 @@ class _CalendarPageState extends State<CalendarPage> {
           IconButton(
             onPressed: () {},
             icon: Icon(
-              LineIcons.infoCircle,
+              Icons.settings_outlined,
             ),
             color: Colors.white,
           ),
@@ -132,11 +98,6 @@ class _CalendarPageState extends State<CalendarPage> {
                         showNavigationArrow: true,
                         showDatePickerButton: true,
                         firstDayOfWeek: 1,
-                        onTap: (details) {
-                          if (details.appointments!.isNotEmpty) {
-                            print(details.appointments![0].location);
-                          }
-                        },
                         dataSource: _getCalendarDataSource(),
                         view: CalendarView.month,
                         initialSelectedDate: DateTime.now(),
@@ -170,10 +131,11 @@ class DataSource extends CalendarDataSource {
 
 DataSource _getCalendarDataSource() {
   DataApp _data = DataApp();
-  _data.couleurTache.shuffle();
-  List<TaskAssign> tacheDB =
+  List<Appointment> appointments = [];
+  List<TaskAssign> tacheDB = [];
+  tacheDB =
       Boxes.getTourMenage().values.toList().cast<TourMenage>()[0].description;
-  List<Appointment> appointments = List.generate(
+  appointments = List.generate(
     tacheDB.length,
     (index) {
       TaskAssign tache = tacheDB[index];
@@ -199,98 +161,7 @@ DataSource _getCalendarDataSource() {
   return DataSource(appointments);
 }
 
-class CardTask extends StatelessWidget {
-  const CardTask({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      width: Get.width,
-      height: 100,
-      decoration: BoxDecoration(
-        color: dark,
-        //borderRadius: BorderRadius.circular(15),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: Get.width * .1,
-            decoration: BoxDecoration(
-              color: orange,
-              /* borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  bottomLeft: Radius.circular(15)),*/
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "G",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                  ),
-                ),
-                Text(
-                  "1",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: Get.width * .9,
-            padding: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Text(
-                    "Cuisine matin et nettoyage exterieur",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                    ),
-                  ),
-                ),
-                Container(
-                  width: Get.width,
-                  height: 20,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                            itemCount: 5,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Text(
-                                "Dominick, ",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17,
-                                ),
-                              );
-                            }),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
 ///DARK MODE
 /**
  * SfCalendar(

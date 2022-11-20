@@ -25,21 +25,21 @@ void main() async {
   await Hive.initFlutter();
   _hiveDatabase.openTableBox();
   _hiveDatabase.registreAdapter();
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /*Future.delayed(Duration(milliseconds: 2000), () {
-      Get.offNamed('/home');
-    });*/
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'GFS',
-      theme: ThemeData(primarySwatch: Colors.orange, fontFamily: "ProductSans"),
-      initialRoute: '/home',
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+        fontFamily: "ProductSans",
+      ),
+      initialRoute: '/',
       routes: {
         '/': (context) => Splash(),
         '/home': (context) => Screen(),
@@ -61,5 +61,5 @@ class MyApp extends StatelessWidget {
 }
 
 //si tu veux builder la base de donnée Hive :
-//commande à executer une fois seulement ou en cas de modification du Model
+//commande à executer une fois seulement ou en cas de modification d'un Model
 //flutter packages pub run build_runner build --delete-conflicting-outputs

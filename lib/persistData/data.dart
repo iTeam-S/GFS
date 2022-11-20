@@ -54,7 +54,16 @@ class DataApp {
     'Nov',
     'Déc',
   ];
-
+  List<String> jours = [
+    'zero',
+    'Lundi',
+    'Mardi',
+    'Mercredi',
+    'Jeudi',
+    'Vendredi',
+    'Samedi',
+    'Dimanche',
+  ];
   List<PlatModel> categoriePlat = [
     PlatModel(
       name: "Petit dej",

@@ -1,12 +1,19 @@
+import '../database/db.service.dart';
+import '../database/db.transaction.dart';
 import '../models/menage/task_assign.model.dart';
+import '../models/menage/tour_menage.model.dart';
 import 'nombre_de_mois.dart';
 
-class TaskMaster {
+class TaskManager {
+  TransAction _action = TransAction();
+  List<TourMenage> _listOfTask =
+      Boxes.getTourMenage().values.toList().cast<TourMenage>();
   List<TaskAssign> _listTache = []; //
-
+  List<TaskAssign> taskFromDataBase =
+      Boxes.getTourMenage().values.toList().cast<TourMenage>()[0].description;
   List<int> _tListAll = []; //
 
-  List<TaskAssign> generateTask({
+  List<TaskAssign> _generateTask({
     required int nombreDeGroupe,
     required int nombreDeTache,
   }) {
@@ -82,5 +89,28 @@ class TaskMaster {
 
     taskList = _listTache;
     return taskList;
+  }
+
+  createTaskInAgenda() {
+    if (_listOfTask.length == 0) {
+      _action.addTourMenage(
+        description: _generateTask(
+          nombreDeGroupe: 6,
+          nombreDeTache: 5,
+        ),
+      );
+    } else {
+      print("existe déjà");
+      if (nombreDeJoursDuMois(DateTime.now().month) !=
+          taskFromDataBase[taskFromDataBase.length - 1].jour) {
+        _action.editTourMenage(
+          index: 0,
+          description: _generateTask(
+            nombreDeGroupe: 6,
+            nombreDeTache: 5,
+          ),
+        );
+      }
+    }
   }
 }
