@@ -11,6 +11,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../database/db.service.dart';
+import '../models/menage/place.model.dart';
 import '../models/menage/task_assign.model.dart';
 
 AppDrawer drawer = AppDrawer();
@@ -24,6 +25,7 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   GlobalKey<ScaffoldState> _key = GlobalKey();
   TaskManager _taskMaster = TaskManager();
+
   //---------------------------------
 
   @override
@@ -246,6 +248,8 @@ DataSource _getCalendarDataSource() {
     (index) {
       TaskAssign tache = tacheDB[index];
       DateTime date = DateTime.now();
+      List<Emplacement> listOfPlace =
+          Boxes.getEmplacement().values.toList().cast<Emplacement>();
 
       return Appointment(
         startTime: DateTime(date.year, date.month, tache.jour),
@@ -254,12 +258,9 @@ DataSource _getCalendarDataSource() {
         isAllDay: true,
         subject: tache.tache == 0
             ? 'G${tache.groupe}: aucune tache'
-            : 'G${tache.groupe} + T${tache.tache}',
+            : 'G${tache.groupe} + T${tache.tache} ( ${listOfPlace[tache.tache - 1].place} )',
         color: _data.couleurTache[
             tache.groupe.isNaN ? Random().nextInt(tache.groupe) : tache.groupe],
-        location: '',
-        startTimeZone: '',
-        endTimeZone: '',
       );
     },
   );

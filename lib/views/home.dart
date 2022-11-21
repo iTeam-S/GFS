@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
+import 'package:gfs/models/menage/place.model.dart';
 import 'package:gfs/persistData/data.dart';
 import 'package:gfs/views/widgets/drawer.dart';
 import 'package:line_icons/line_icons.dart';
@@ -24,6 +25,8 @@ class _ScreenState extends State<Screen> {
   List<TaskAssign> taches = [];
   List<TourMenage> listOfTask =
       Boxes.getTourMenage().values.toList().cast<TourMenage>();
+  List<Emplacement> listOfPlace =
+      Boxes.getEmplacement().values.toList().cast<Emplacement>();
   final DataApp _data = DataApp();
 
   @override
@@ -145,10 +148,12 @@ class _ScreenState extends State<Screen> {
                               ],
                             ),
                             Text(
-                              "Nettoyage cours exterieur et débarassage",
-                              textAlign: TextAlign.center,
+                              "${listOfPlace[id].place} (${listOfPlace[id].description})",
+                              textAlign: TextAlign.start,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 25),
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             ),
                           ],
                         ),
