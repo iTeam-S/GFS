@@ -12,7 +12,7 @@ class TaskManager {
   List<TaskAssign> taskFromDataBase =
       Boxes.getTourMenage().values.toList().cast<TourMenage>()[0].description;
   List<int> _tListAll = []; //
-
+//
   List<TaskAssign> _generateTask({
     required int nombreDeGroupe,
     required int nombreDeTache,
@@ -95,8 +95,8 @@ class TaskManager {
     if (_listOfTask.length == 0) {
       _action.addTourMenage(
         description: _generateTask(
-          nombreDeGroupe: 6,
-          nombreDeTache: 5,
+          nombreDeGroupe: Boxes.getGroupe().length,
+          nombreDeTache: Boxes.getEmplacement().length,
         ),
       );
     } else {
@@ -106,11 +106,21 @@ class TaskManager {
         _action.editTourMenage(
           index: 0,
           description: _generateTask(
-            nombreDeGroupe: 6,
-            nombreDeTache: 5,
+            nombreDeGroupe: Boxes.getGroupe().length,
+            nombreDeTache: Boxes.getEmplacement().length,
           ),
         );
       }
     }
+  }
+
+  updateTask() {
+    return _action.editTourMenage(
+      index: 0,
+      description: _generateTask(
+        nombreDeGroupe: Boxes.getGroupe().length,
+        nombreDeTache: Boxes.getEmplacement().length,
+      ),
+    );
   }
 }

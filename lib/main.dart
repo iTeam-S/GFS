@@ -15,6 +15,7 @@ import 'views/home.dart';
 import 'views/jirama.dart';
 import 'views/login.dart';
 import 'views/membres.dart';
+import 'views/menage_page.dart';
 import 'views/register.dart';
 import 'views/splash.dart';
 
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
         '/ajoutJirama': (context) => AjoutJirmaPage(),
         '/groupe': (context) => GroupePage(),
         '/ajoutPlat': (context) => AjoutPlatPage(),
+        '/menage': (context) => TourDeMenage(),
       },
     );
   }

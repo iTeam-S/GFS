@@ -52,9 +52,11 @@ class _CalendarPageState extends State<CalendarPage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              popEdit();
+            },
             icon: Icon(
-              Icons.settings_outlined,
+              Icons.refresh,
             ),
             color: Colors.white,
           ),
@@ -120,6 +122,110 @@ class _CalendarPageState extends State<CalendarPage> {
         ),
       ),
     );
+  }
+
+  Future popEdit() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            backgroundColor: Colors.transparent,
+            children: [
+              Container(
+                height: 220,
+                margin: EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 15,
+                      ),
+                      child: Text(
+                        "Etes vous sûr de vouloir actualiser l'agenda ? ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 8,
+                      ),
+                      child: Text(
+                        "cela implique la mis à jour definitive de tous les programmes sur l'agenda !",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black45,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            height: 40,
+                            child: MaterialButton(
+                              color: Colors.blue,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                "OUI",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              onPressed: () async {
+                                await _taskMaster.updateTask();
+                                setState(() {});
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: 100,
+                            height: 40,
+                            child: MaterialButton(
+                                elevation: 0,
+                                color: Colors.redAccent,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: Text(
+                                  "NON",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          );
+        });
   }
 }
 

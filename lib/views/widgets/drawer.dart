@@ -137,7 +137,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     itemIcon: LineIcons.couch,
                     isSelected: selectedIndex == 3,
                     voidCallback: () {
-                      // Get.offAllNamed( '/membre');
+                      Get.offAllNamed('/menage');
                       setState(
                         () {
                           selectedIndex = 3;

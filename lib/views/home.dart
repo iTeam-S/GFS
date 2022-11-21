@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
 import 'package:gfs/persistData/data.dart';
 import 'package:gfs/views/widgets/drawer.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../database/db.service.dart';
