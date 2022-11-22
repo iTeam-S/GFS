@@ -28,7 +28,7 @@ class _TacheCuisineState extends State<TacheCuisine> {
     return Scaffold(
       key: _key,
       drawer: drawer,
-      //backgroundColor: Color(0xff25272a),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -68,6 +68,7 @@ class _TacheCuisineState extends State<TacheCuisine> {
                         itemBuilder: ((context, index) {
                           final plat = plats[index];
                           return RecipeCard(
+                            isHome: false,
                             title: plat.nom,
                             commentaire: plat.commentaire,
                             prix: plat.prix.toString(),
@@ -77,7 +78,13 @@ class _TacheCuisineState extends State<TacheCuisine> {
                         }),
                       );
                     } else {
-                      return emptyWidget();
+                      return Padding(
+                        padding: EdgeInsets.only(top: Get.height * .2),
+                        child: emptyWidget(
+                          bgColor: Colors.white,
+                          textColor: dark,
+                        ),
+                      );
                     }
                   },
                 ),

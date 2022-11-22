@@ -1,15 +1,21 @@
+import 'dart:math';
+
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
 import 'package:gfs/models/menage/place.model.dart';
 import 'package:gfs/persistData/data.dart';
+import 'package:gfs/views/widgets/card_cuisto.dart';
 import 'package:gfs/views/widgets/drawer.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../database/db.service.dart';
+import '../models/cuisine/plat.model.dart';
 import '../models/menage/task_assign.model.dart';
 import '../models/menage/tour_menage.model.dart';
+import 'widgets/empty.dart';
 
 AppDrawer drawer = AppDrawer();
 
@@ -31,10 +37,12 @@ class _ScreenState extends State<Screen> {
 
   @override
   void initState() {
-    taches = listOfTask[0]
-        .description
-        .where((value) => DateTime.now().day == value.jour)
-        .toList();
+    if (listOfTask.isNotEmpty) {
+      taches = listOfTask[0]
+          .description
+          .where((value) => DateTime.now().day == value.jour)
+          .toList();
+    }
     super.initState();
   }
 
@@ -70,28 +78,35 @@ class _ScreenState extends State<Screen> {
             child: Row(
               children: [
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: 5,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int id) {
-                      return Container(
-                        width: 315,
-                        height: Get.height,
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.only(top: 7),
-                        decoration: BoxDecoration(
-                          color: orange,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black38,
-                              blurRadius: 12,
-                              spreadRadius: 0,
-                              offset: Offset(10, 5),
-                            )
-                          ],
-                        ),
-                      );
+                  child: ValueListenableBuilder<Box<Plat>>(
+                    valueListenable: Boxes.getPlat().listenable(),
+                    builder: (context, box, _) {
+                      final plats = box.values.toList().cast<Plat>();
+                      if (plats.isNotEmpty) {
+                        return ListView.builder(
+                          itemCount: plats.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: ((context, index) {
+                            final plat = plats[index];
+                            return SizedBox(
+                              width: Get.width * .95,
+                              child: RecipeCard(
+                                isHome: true,
+                                title: plat.nom,
+                                commentaire: plat.commentaire,
+                                prix: plat.prix.toString(),
+                                categorie: plat.categorie,
+                                ingredient: plat.compositions,
+                              ),
+                            );
+                          }),
+                        );
+                      } else {
+                        return emptyWidget(
+                          bgColor: Colors.white,
+                          textColor: dark,
+                        );
+                      }
                     },
                   ),
                 ),
@@ -104,6 +119,7 @@ class _ScreenState extends State<Screen> {
             child: taches.isNotEmpty
                 ? Swiper(
                     itemCount: taches.length,
+
                     itemBuilder: (BuildContext context, int id) {
                       return Container(
                         margin: EdgeInsets.all(10),
@@ -113,45 +129,63 @@ class _ScreenState extends State<Screen> {
                             borderRadius: BorderRadius.circular(15)),
                         child: Column(
                           children: [
-                            Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.all(15),
-                                  height: 35,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                      color: orange,
-                                      borderRadius: BorderRadius.circular(50)),
-                                  child: Center(
-                                    child: Text(
-                                      "GROUPE " + taches[id].groupe.toString(),
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                            SizedBox(
+                              width: Get.width,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 15, horizontal: 5),
+                                    height: 35,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                        color: _data.couleurTache[
+                                            taches[id].groupe.isNaN
+                                                ? Random()
+                                                    .nextInt(taches[id].groupe)
+                                                : taches[id].groupe],
+                                        borderRadius:
+                                            BorderRadius.circular(50)),
+                                    child: Center(
+                                      child: Text(
+                                        "GROUPE " +
+                                            taches[id].groupe.toString(),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    _data.jours[DateTime(
-                                            DateTime.now().year,
-                                            DateTime.now().month,
-                                            taches[id].jour)
-                                        .weekday],
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
+                                  SizedBox(
+                                    width: 25,
                                   ),
-                                ),
-                              ],
+                                  Expanded(
+                                    child: Text(
+                                      _data.jours[DateTime(
+                                              DateTime.now().year,
+                                              DateTime.now().month,
+                                              taches[id].jour)
+                                          .weekday],
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              "${listOfPlace[id].place} (${listOfPlace[id].description})",
-                              textAlign: TextAlign.start,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
+                            SizedBox(
+                              width: Get.width,
+                              child: Text(
+                                "${listOfPlace[id].place} (${listOfPlace[id].description})",
+                                textAlign: TextAlign.start,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
                             ),
                           ],
                         ),

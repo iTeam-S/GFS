@@ -3,8 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gfs/constants.dart';
+import 'package:gfs/views/widgets/snack_bar.dart';
 
 import 'package:line_icons/line_icons.dart';
+
+import '../../database/db.service.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -120,12 +123,21 @@ class _AppDrawerState extends State<AppDrawer> {
                     itemIcon: LineIcons.calendar,
                     isSelected: selectedIndex == 5,
                     voidCallback: () {
-                      Get.offAllNamed('/agenda');
-                      setState(
-                        () {
-                          selectedIndex = 5;
-                        },
-                      );
+                      if (Boxes.getEmplacement().isNotEmpty ||
+                          Boxes.getGroupe().isNotEmpty) {
+                        Get.offAllNamed('/agenda');
+                        setState(
+                          () {
+                            selectedIndex = 5;
+                          },
+                        );
+                      } else {
+                        showMe(
+                          "ALERT",
+                          "IL VOUS FAUT D'ABORD CRÉER AU MOINS UN GROUPE ET AJOUTER UNE TACHE avant d'ouvrir l'agenda !",
+                          Colors.black,
+                        );
+                      }
                     },
                   ),
                   menuItems(
