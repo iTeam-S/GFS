@@ -18,83 +18,27 @@ class _AppDrawerState extends State<AppDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: orange,
+        color: Colors.white,
         child: ListView(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(25),
-              color: orange,
-              height: 230,
+              padding: EdgeInsets.all(20),
+              color: Colors.white,
+              height: 250,
               width: Get.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        alignment: Alignment.topRight,
-                        child: InkWell(
-                          onTap: () {
-                            Get.offAllNamed('/login');
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Colors.red.shade900,
-                            child: Icon(
-                              LineIcons.alternateSignOut,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
+                  Container(
+                    height: 200,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: ExactAssetImage('assets/images/gfs.png'),
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        alignment: Alignment.topRight,
-                        child: InkWell(
-                          onTap: () {
-                            Get.offAllNamed('/home');
-                            setState(() {
-                              selectedIndex = 0;
-                            });
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              LineIcons.home,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(),
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 45,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "snap",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              overflow: TextOverflow.ellipsis),
-                        ),
-                        Text(
-                          "Chef de foyer",
-                          style: TextStyle(fontSize: 15, color: Colors.white),
-                        )
-                      ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
@@ -106,6 +50,19 @@ class _AppDrawerState extends State<AppDrawer> {
             Container(
               child: Column(
                 children: [
+                  menuItems(
+                    itemName: 'Acceuil',
+                    itemIcon: LineIcons.home,
+                    isSelected: selectedIndex == 0,
+                    voidCallback: () {
+                      Get.offAllNamed('/home');
+                      setState(
+                        () {
+                          selectedIndex = 0;
+                        },
+                      );
+                    },
+                  ),
                   menuItems(
                     itemName: 'Jirama',
                     itemIcon: LineIcons.plug,
@@ -200,7 +157,7 @@ class _AppDrawerState extends State<AppDrawer> {
     required VoidCallback voidCallback,
   }) {
     return Container(
-      color: isSelected ? Colors.black.withOpacity(.2) : Colors.transparent,
+      color: isSelected ? orange.withOpacity(.5) : Colors.transparent,
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(
           vertical: 7,
@@ -211,7 +168,7 @@ class _AppDrawerState extends State<AppDrawer> {
         title: Text(
           itemName,
           style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black,
+            color: Colors.black,
             fontSize: 17,
             fontWeight: FontWeight.bold,
           ),

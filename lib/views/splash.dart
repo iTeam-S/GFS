@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gfs/constants.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -19,20 +20,20 @@ class _SplashState extends State<Splash> {
         height: Get.height,
         width: Get.width,
         decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: ExactAssetImage('assets/images/splash.jpeg'))),
+          color: Colors.white,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Center(
-              child: Text(
-                "GFS",
-                style: TextStyle(
-                  shadows: [Shadow(offset: Offset(3, 7), color: Colors.black)],
+              child: Container(
+                height: 250,
+                decoration: BoxDecoration(
                   color: Colors.white,
-                  fontSize: Get.width * .45,
-                  fontFamily: 'Sifonn',
+                  image: DecorationImage(
+                    image: ExactAssetImage('assets/images/gf.png'),
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
               ),
             ),
@@ -40,7 +41,7 @@ class _SplashState extends State<Splash> {
               height: 15,
             ),
             CircularProgressIndicator(
-              color: Colors.white,
+              color: orange,
             )
           ],
         ),

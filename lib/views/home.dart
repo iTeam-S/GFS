@@ -56,13 +56,11 @@ class _ScreenState extends State<Screen> {
             ),
             color: Colors.black,
           ),
-          actions: [
-            Container(
-                margin: EdgeInsets.symmetric(horizontal: 15),
-                child: CircleAvatar(
-                  backgroundColor: dark,
-                ))
-          ],
+          centerTitle: true,
+          title: Text(
+            "GFS",
+            style: TextStyle(color: Colors.black, fontSize: 35),
+          ),
         ),
         body: SingleChildScrollView(
             child: Column(children: <Widget>[
