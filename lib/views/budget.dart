@@ -366,8 +366,8 @@ class _BudgetPageState extends State<BudgetPage> {
       return PieChartSectionData(
         color: _data.listCategorie[budget.type].couleur,
         value: budget.montant,
-        title: percent(budget.montant),
-        titlePositionPercentageOffset: 1.7,
+        title: isTouched ? "${budget.montant} Ar" : percent(budget.montant),
+        titlePositionPercentageOffset: isTouched ? 1.3 : 1.7,
         radius: radius,
         titleStyle: TextStyle(
           fontSize: 15,

@@ -137,8 +137,9 @@ class _CalendarPageState extends State<CalendarPage> {
                 height: 220,
                 margin: EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: Column(
                   children: [
                     Container(
@@ -158,12 +159,12 @@ class _CalendarPageState extends State<CalendarPage> {
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(
-                        horizontal: 10,
+                        horizontal: 15,
                         vertical: 8,
                       ),
                       child: Text(
-                        "cela implique la mis à jour definitive de tous les programmes sur l'agenda !",
-                        textAlign: TextAlign.start,
+                        "Cela implique la mis à jour definitive de tous les programmes sur l'agenda !",
+                        textAlign: TextAlign.justify,
                         style: TextStyle(
                           fontWeight: FontWeight.normal,
                           color: Colors.black45,
@@ -248,8 +249,9 @@ DataSource _getCalendarDataSource() {
     (index) {
       TaskAssign tache = tacheDB[index];
       DateTime date = DateTime.now();
-      List<Emplacement> listOfPlace =
-          Boxes.getEmplacement().values.toList().cast<Emplacement>();
+      List<Emplacement> listOfPlace = [];
+
+      listOfPlace = Boxes.getEmplacement().values.toList().cast<Emplacement>();
 
       return Appointment(
         startTime: DateTime(date.year, date.month, tache.jour),
