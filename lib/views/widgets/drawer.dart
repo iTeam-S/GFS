@@ -153,6 +153,19 @@ class _AppDrawerState extends State<AppDrawer> {
                       );
                     },
                   ),
+                  menuItems(
+                    itemName: 'Informations',
+                    itemIcon: LineIcons.info,
+                    isSelected: selectedIndex == 7,
+                    voidCallback: () {
+                      Get.offAllNamed('/info');
+                      setState(
+                        () {
+                          selectedIndex = 7;
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

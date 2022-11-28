@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'database/db.service.dart';
@@ -13,7 +14,7 @@ import 'views/exemple.dart';
 import 'views/groupe.dart';
 import 'views/home.dart';
 import 'views/jirama.dart';
-
+import 'views/information_page.dart';
 import 'views/membres.dart';
 import 'views/menage_page.dart';
 
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
         '/groupe': (context) => GroupePage(),
         '/ajoutPlat': (context) => AjoutPlatPage(),
         '/menage': (context) => TourDeMenage(),
+        '/info': (context) => InfoPage(),
       },
     );
   }
