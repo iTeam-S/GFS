@@ -6,19 +6,18 @@ import 'nombre_de_mois.dart';
 
 class TaskManager {
   TransAction _action = TransAction();
-
   List<TourMenage> _listOfTask =
       Boxes.getTourMenage().values.toList().cast<TourMenage>();
+
+  //------------------------------------------------------
   List<TaskAssign> _listTache = []; //
-  List<TaskAssign> taskFromDataBase =
-      Boxes.getTourMenage().values.toList().cast<TourMenage>()[0].description;
+
   List<int> _tListAll = []; //
 //
   List<TaskAssign> _generateTask({
     required int nombreDeGroupe,
     required int nombreDeTache,
   }) {
-    print("aaaaaaaa");
     print(_tListAll.length);
     List<TaskAssign> taskList = [];
     _listTache.clear();
@@ -94,7 +93,6 @@ class TaskManager {
   }
 
   createTaskInAgenda() {
-    print("aaaaaaaa");
     print([Boxes.getEmplacement().isNotEmpty, Boxes.getGroupe().isNotEmpty]);
     if (_listOfTask.length == 0) {
       _action.addTourMenage(
@@ -108,6 +106,11 @@ class TaskManager {
       );
     } else {
       print("existe déjà");
+      List<TaskAssign> taskFromDataBase = Boxes.getTourMenage()
+          .values
+          .toList()
+          .cast<TourMenage>()[0]
+          .description;
       if (nombreDeJoursDuMois(DateTime.now().month) !=
           taskFromDataBase[taskFromDataBase.length - 1].jour) {
         _action.editTourMenage(
@@ -122,12 +125,14 @@ class TaskManager {
   }
 
   updateTask() {
-    return _action.editTourMenage(
-      index: 0,
-      description: _generateTask(
-        nombreDeGroupe: Boxes.getGroupe().length,
-        nombreDeTache: Boxes.getEmplacement().length,
-      ),
-    );
+    if (Boxes.getGroupe().isNotEmpty && Boxes.getEmplacement().isNotEmpty) {
+      _action.editTourMenage(
+        index: 0,
+        description: _generateTask(
+          nombreDeGroupe: Boxes.getGroupe().length,
+          nombreDeTache: Boxes.getEmplacement().length,
+        ),
+      );
+    }
   }
 }

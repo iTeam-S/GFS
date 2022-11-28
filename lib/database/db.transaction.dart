@@ -358,6 +358,6 @@ class TransAction {
     final tourMenage = TourMenage()..description = description;
     final box = Boxes.getTourMenage();
     await box.add(tourMenage);
-    print("ajout tour de menage :  & ${description[0].groupe}");
+    print("ajout tour de menage : ${description[0].groupe}");
   }
 }
