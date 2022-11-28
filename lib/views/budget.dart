@@ -364,7 +364,8 @@ class _BudgetPageState extends State<BudgetPage> {
       final radius = isTouched ? 60.0 : 50.0;
 
       return PieChartSectionData(
-        color: _data.listCategorie[budget.type].couleur,
+        color: _data.listCategorie[budget.type].couleur
+            .withOpacity(isTouched ? 0.2 : 1),
         value: budget.montant,
         title: isTouched ? "${budget.montant} Ar" : percent(budget.montant),
         titlePositionPercentageOffset: isTouched ? 1.3 : 1.7,
