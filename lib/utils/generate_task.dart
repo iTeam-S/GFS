@@ -6,6 +6,7 @@ import 'nombre_de_mois.dart';
 
 class TaskManager {
   TransAction _action = TransAction();
+
   List<TourMenage> _listOfTask =
       Boxes.getTourMenage().values.toList().cast<TourMenage>();
   List<TaskAssign> _listTache = []; //
@@ -17,6 +18,7 @@ class TaskManager {
     required int nombreDeGroupe,
     required int nombreDeTache,
   }) {
+    print("aaaaaaaa");
     print(_tListAll.length);
     List<TaskAssign> taskList = [];
     _listTache.clear();
@@ -92,11 +94,16 @@ class TaskManager {
   }
 
   createTaskInAgenda() {
+    print("aaaaaaaa");
+    print([Boxes.getEmplacement().isNotEmpty, Boxes.getGroupe().isNotEmpty]);
     if (_listOfTask.length == 0) {
       _action.addTourMenage(
         description: _generateTask(
-          nombreDeGroupe: Boxes.getGroupe().length,
-          nombreDeTache: Boxes.getEmplacement().length,
+          nombreDeGroupe:
+              Boxes.getGroupe().isEmpty ? 0 : Boxes.getGroupe().length,
+          nombreDeTache: Boxes.getEmplacement().isEmpty
+              ? 0
+              : Boxes.getEmplacement().length,
         ),
       );
     } else {

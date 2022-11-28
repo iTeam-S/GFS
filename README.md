@@ -8,12 +8,18 @@ La gestion d'un foyer est une tâche importante, mais peu passionnante. Indispen
 
 ## Fonctionnalités
 - Page d'acceuil qui regroupe les divers catégorie de l'application
-- Page pour les tours de cuisine
 - Page pour les tours de ménage
 - Agenda contenant les tours et les tâches à faire pour chaque membres et/ou groupe dans le foyer.
-- Page pour la géstion de budget individuel et commun pour le foyer
+- Page pour la géstion de pour le foyer
+- Page contenant des plat pas cher pour minimiser les depenses
 - Page qui contient dépense en JIRAMA des mois précedent et prévision des mois à venir.
-- Page regroupant tous les membres du foyer
+- Page regroupant tous les membres et groupe du foyer
 
-## Contributeurs
-![Image des contributeurs GitHub](https://contrib.rocks/image?repo=Jayah001/GFS)
+## TO DO : 
+- Partage de donnée entre les applications
+- Mettre en mode online
+- Mode dark/light
+- Création de compte pour chaque membre
+- Gestion intelligente des dépenses du foyer
+- Partager l'app en deux (perso et groupe)
+- Posibilité de checker les tâches fini

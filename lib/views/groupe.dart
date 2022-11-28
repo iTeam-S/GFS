@@ -233,18 +233,30 @@ class _GroupePageState extends State<GroupePage> {
                                     .values
                                     .toList()
                                     .cast<Membre>()[index];
-                                return membreDansGroupe(
-                                  listDeVerification: membreDuGroupe,
-                                  nom: membre.nom,
-                                  onTap: () {
-                                    ajoutMembre(
-                                      membre: membre,
-                                      aloutMbere: membreDuGroupe,
-                                    );
-                                    setState(() {});
-                                  },
-                                  membre: membre,
-                                );
+                                if (Boxes.getMembre()
+                                    .values
+                                    .toList()
+                                    .cast<Membre>()
+                                    .isNotEmpty) {
+                                  return membreDansGroupe(
+                                    listDeVerification: membreDuGroupe,
+                                    nom: membre.nom,
+                                    onTap: () {
+                                      ajoutMembre(
+                                        membre: membre,
+                                        aloutMbere: membreDuGroupe,
+                                      );
+                                      setState(() {});
+                                    },
+                                    membre: membre,
+                                  );
+                                } else {
+                                  return Container(
+                                    margin: EdgeInsets.all(8.0),
+                                    child: Center(
+                                        child: Text("TSY MISY MPIKAMBANA")),
+                                  );
+                                }
                               }),
                             ),
                           ),

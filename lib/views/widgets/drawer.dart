@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gfs/constants.dart';
-import 'package:gfs/views/widgets/snack_bar.dart';
 
 import 'package:line_icons/line_icons.dart';
 
+import '../../constants.dart';
 import '../../database/db.service.dart';
+import 'snack_bar.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class _AppDrawerState extends State<AppDrawer> {
             Container(
               padding: EdgeInsets.all(20),
               color: Colors.white,
-              height: 250,
+              height: 200,
               width: Get.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,7 +35,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Container(
-                    height: 200,
+                    height: 150,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: ExactAssetImage('assets/images/gfs.png'),
@@ -46,7 +46,7 @@ class _AppDrawerState extends State<AppDrawer> {
               ),
             ),
             Divider(
-              color: Colors.white.withOpacity(.5),
+              color: dark.withOpacity(.2),
               height: 1,
               thickness: 1,
             ),
@@ -123,7 +123,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     itemIcon: LineIcons.calendar,
                     isSelected: selectedIndex == 5,
                     voidCallback: () {
-                      if (Boxes.getEmplacement().isNotEmpty ||
+                      if (Boxes.getEmplacement().isNotEmpty &&
                           Boxes.getGroupe().isNotEmpty) {
                         Get.offAllNamed('/agenda');
                         setState(
@@ -155,7 +155,39 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                 ],
               ),
-            )
+            ),
+            Divider(
+              color: dark.withOpacity(.2),
+              height: 1,
+              thickness: 1,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(
+                vertical: 15,
+              ),
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: "application developed by DOMINICK R.G \nfrom ",
+                  style: TextStyle(
+                    color: Colors.black26,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'iTeam-\$ community',
+                      style: TextStyle(
+                        color: Colors.teal,
+                      ),
+                    ),
+                    TextSpan(
+                      text: ' .',
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

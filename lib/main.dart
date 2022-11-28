@@ -13,10 +13,10 @@ import 'views/exemple.dart';
 import 'views/groupe.dart';
 import 'views/home.dart';
 import 'views/jirama.dart';
-import 'views/login.dart';
+
 import 'views/membres.dart';
 import 'views/menage_page.dart';
-import 'views/register.dart';
+
 import 'views/splash.dart';
 
 final HiveDatabase _hiveDatabase = HiveDatabase();
@@ -47,8 +47,6 @@ class MyApp extends StatelessWidget {
         '/jirama': (context) => JiramaPage(),
         '/agenda': (context) => CalendarPage(),
         '/membre': (context) => MembreList(),
-        '/login': (context) => LoginPage(),
-        '/register': (context) => RegisterPage(),
         '/test': (context) => MyHomePage(),
         '/cuisine': (context) => TacheCuisine(),
         '/budget': (context) => BudgetPage(),

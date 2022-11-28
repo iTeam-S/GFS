@@ -197,7 +197,7 @@ class _MembreListState extends State<MembreList> {
                                       color: Colors.black38,
                                       fontWeight: FontWeight.normal,
                                     ),
-                                    hintText: "Nom",
+                                    hintText: "*Nom",
                                     border: InputBorder.none),
                               ),
                             ),
@@ -236,7 +236,7 @@ class _MembreListState extends State<MembreList> {
                                       fontWeight: FontWeight.normal,
                                     ),
                                     hintText:
-                                        "Promotion (ex: ecrire 20 si P20)",
+                                        "*Promotion (ex: ecrire 20 si P20)",
                                     border: InputBorder.none),
                               ),
                             ),
@@ -256,9 +256,6 @@ class _MembreListState extends State<MembreList> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.normal,
                                 ),
-                                keyboardType: TextInputType.numberWithOptions(
-                                  decimal: false,
-                                ),
                                 maxLines: 1,
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(
@@ -266,7 +263,7 @@ class _MembreListState extends State<MembreList> {
                                     color: Colors.black38,
                                     fontWeight: FontWeight.normal,
                                   ),
-                                  hintText: "groupe",
+                                  hintText: "*role",
                                   border: InputBorder.none,
                                 ),
                               ),
@@ -295,7 +292,7 @@ class _MembreListState extends State<MembreList> {
                                       color: Colors.black38,
                                       fontWeight: FontWeight.normal,
                                     ),
-                                    hintText: "ES",
+                                    hintText: "*ES",
                                     border: InputBorder.none),
                               ),
                             ),
@@ -340,12 +337,6 @@ class _MembreListState extends State<MembreList> {
                                   _roleController.clear();
                                   _esController.clear();
                                   Navigator.pop(context);
-                                } else {
-                                  setState(
-                                    () {
-                                      isEmpt = true;
-                                    },
-                                  );
                                 }
                               },
                             ),
@@ -365,6 +356,10 @@ class _MembreListState extends State<MembreList> {
                                   ),
                                 ),
                                 onPressed: () {
+                                  _nameController.clear();
+                                  _promController.clear();
+                                  _roleController.clear();
+                                  _esController.clear();
                                   Navigator.pop(context);
                                 }),
                           ),

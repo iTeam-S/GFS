@@ -16,11 +16,12 @@ class _SplashState extends State<Splash> {
       Get.offNamed('/home');
     });
     return Scaffold(
+      backgroundColor: dark,
       body: Container(
         height: Get.height,
         width: Get.width,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: dark,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -29,9 +30,9 @@ class _SplashState extends State<Splash> {
               child: Container(
                 height: 250,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: dark,
                   image: DecorationImage(
-                    image: ExactAssetImage('assets/images/gf.png'),
+                    image: ExactAssetImage("assets/logo/dark/gf_dark_logo.png"),
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -42,7 +43,7 @@ class _SplashState extends State<Splash> {
             ),
             CircularProgressIndicator(
               color: orange,
-            )
+            ),
           ],
         ),
       ),

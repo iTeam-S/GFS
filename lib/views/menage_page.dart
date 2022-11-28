@@ -31,7 +31,7 @@ class _TourDeMenageState extends State<TourDeMenage> {
     return Scaffold(
       key: _key,
       drawer: drawer,
-      //backgroundColor: Color(0xff25272a),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
