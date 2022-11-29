@@ -153,7 +153,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       );
                     },
                   ),
-                  menuItems(
+                  /*menuItems(
                     itemName: 'Informations',
                     itemIcon: LineIcons.info,
                     isSelected: selectedIndex == 7,
@@ -165,7 +165,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         },
                       );
                     },
-                  ),
+                  ),*/
                 ],
               ),
             ),

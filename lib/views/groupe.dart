@@ -37,12 +37,12 @@ class _GroupePageState extends State<GroupePage> {
       setState(() {
         aloutMbere.add(membre);
       });
-      print(aloutMbere);
+      //print(aloutMbere);
     } else {
       setState(() {
         aloutMbere.remove(membre);
       });
-      print(aloutMbere);
+      //  print(aloutMbere);
     }
   }
 
@@ -290,7 +290,7 @@ class _GroupePageState extends State<GroupePage> {
                                           gp: membreDuGroupe,
                                           nom: _groupeNameController.text,
                                         );
-                                        print(membreDuGroupe);
+                                        //print(membreDuGroupe);
                                         _groupeNameController.clear();
                                         Navigator.pop(context);
                                       } else {
@@ -602,7 +602,7 @@ class _GroupePageState extends State<GroupePage> {
                                     gp: ttay,
                                     nom: _groupeNameController.text,
                                   );
-                                  print(membreDuGroupe);
+                                  //print(membreDuGroupe);
                                   _groupeNameController.clear();
                                   Navigator.pop(context);
                                 } else {

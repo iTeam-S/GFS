@@ -74,7 +74,6 @@ class TransAction {
         ..dateFin = jirama.dateFin
         ..moisDePayment = jirama.moisDePayment,
     );
-    print("modifiation JIRAMA ok");
   }
 
   //modifie les elements de la colonne BUDGET en fonction de son index dans la liste
@@ -104,7 +103,6 @@ class TransAction {
         ..titre = budget.titre
         ..type = budget.type,
     );
-    print("modifiation BUDGET ok");
   }
 
   //modifie les elements de la colonne BUDGET en fonction de son index dans la liste
@@ -131,7 +129,7 @@ class TransAction {
         ..categorie = budget.categorie
         ..commentaire = budget.commentaire,
     );
-    print("modifiation PLAT ok");
+    // print("modifiation PLAT ok");
   }
 
   //modifie les elements de la colonne TOUR CUISINE en fonction de son index dans la liste
@@ -155,7 +153,7 @@ class TransAction {
         ..groupe = tourCuisine.groupe
         ..dateHeure = tourCuisine.dateHeure,
     );
-    print("modifiation PLAT ok");
+    // print("modifiation PLAT ok");
   }
 
   //modifie les elements de la colonne TOUR GROUPE en fonction de son index dans la liste
@@ -176,7 +174,7 @@ class TransAction {
         ..gp = groupe.gp
         ..nom = groupe.nom,
     );
-    print("modifiation GROUPE ok");
+    // print("modifiation GROUPE ok");
   }
 
   //modifie les elements de la colonne MEMBRES en fonction de son index dans la liste
@@ -203,7 +201,7 @@ class TransAction {
         ..role = membre.role
         ..es = membre.es,
     );
-    print("modifiation MEMBRE ok");
+    //print("modifiation MEMBRE ok");
   }
 
   //modifie les elements de la colonne PLACES en fonction de son index dans la liste
@@ -224,7 +222,7 @@ class TransAction {
         ..place = emplacement.place
         ..description = emplacement.description,
     );
-    print("modifiation PLACE ok");
+    // print("modifiation PLACE ok");
   }
 
   //modifie les elements de la colonne TOUR MENAGE en fonction de son index dans la liste
@@ -241,7 +239,7 @@ class TransAction {
       index,
       TourMenage()..description = tourMenage.description,
     );
-    print("modifiation TOUR MENAGE ok");
+    // print("modifiation TOUR MENAGE ok");
   }
 
 //=====================================================================================================
@@ -258,7 +256,7 @@ class TransAction {
       ..moisDePayment = moisDePayment;
     final box = Boxes.getJirama();
     await box.add(jirama);
-    print("ajout jirama :  $montant");
+    // print("ajout jirama :  $montant");
   }
 
   Future addBudget({
@@ -276,7 +274,7 @@ class TransAction {
       ..type = type;
     final box = Boxes.getBudget();
     await box.add(budget);
-    print("ajout budget :  $titre");
+    // print("ajout budget :  $titre");
   }
 
   Future addPlat({
@@ -294,7 +292,7 @@ class TransAction {
       ..categorie = categorie;
     final box = Boxes.getPlat();
     await box.add(plat);
-    print("ajout plat :  $nom");
+    // print("ajout plat :  $nom");
   }
 
   Future addTourCuisine({
@@ -308,7 +306,7 @@ class TransAction {
       ..dateHeure = dateHeure;
     final box = Boxes.getTourCuisine();
     await box.add(tourCuisine);
-    print("ajout tour de cuisine :  $plat");
+    //print("ajout tour de cuisine :  $plat");
   }
 
   Future addGroupe({
@@ -320,7 +318,7 @@ class TransAction {
       ..nom = nom;
     final box = Boxes.getGroupe();
     await box.add(groupe);
-    print("ajout groupe :  $nom");
+    // print("ajout groupe :  $nom");
   }
 
   Future addMembre({
@@ -336,7 +334,7 @@ class TransAction {
       ..role = role;
     final box = Boxes.getMembre();
     await box.add(membre);
-    print("ajout membre :  $nom");
+    // print("ajout membre :  $nom");
   }
 
   Future addEmplacement({
@@ -349,7 +347,7 @@ class TransAction {
 
     final box = Boxes.getEmplacement();
     await box.add(emplacement);
-    print("ajout emplacement :  $place");
+    //  print("ajout emplacement :  $place");
   }
 
   Future addTourMenage({
@@ -358,6 +356,6 @@ class TransAction {
     final tourMenage = TourMenage()..description = description;
     final box = Boxes.getTourMenage();
     await box.add(tourMenage);
-    print("ajout tour de menage : ${description[0].groupe}");
+    //  print("ajout tour de menage : ${description[0].groupe}");
   }
 }

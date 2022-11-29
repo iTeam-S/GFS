@@ -177,8 +177,8 @@ class _AjoutBudgetPageState extends State<AjoutBudgetPage> {
                                         type = index;
                                       },
                                     );
-                                    print("type : $type et index : $index");
-                                    print(categList[index].name);
+                                    //print("type : $type et index : $index");
+                                    //print(categList[index].name);
                                   },
                                 );
                               },

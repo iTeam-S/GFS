@@ -123,7 +123,7 @@ class _AjoutBudgPlatState extends State<AjoutPlatPage> {
                             },
                           );
 
-                          print(categList[0].name);
+                          //print(categList[0].name);
                         },
                       ),
                       categWidget(
@@ -138,7 +138,7 @@ class _AjoutBudgPlatState extends State<AjoutPlatPage> {
                               type = 1;
                             },
                           );
-                          print(categList[1].name);
+                          // print(categList[1].name);
                         },
                       ),
                       categWidget(
@@ -154,7 +154,7 @@ class _AjoutBudgPlatState extends State<AjoutPlatPage> {
                             },
                           );
 
-                          print(categList[2].name);
+                          //print(categList[2].name);
                         },
                       ),
                     ],
@@ -323,7 +323,7 @@ class _AjoutBudgPlatState extends State<AjoutPlatPage> {
                             listComposant.add(_uneCompositionController.text);
                           });
                           _uneCompositionController.clear();
-                          print(listComposant);
+                          // print(listComposant);
                         },
                         color: selectedIndex == 100
                             ? dark

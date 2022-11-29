@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
               firstDayOfWeek: 1,
               onTap: (details) {
                 if (details.appointments!.isNotEmpty) {
-                  print(details.appointments![0].location);
+                  //  print(details.appointments![0].location);
                 }
               },
               dataSource: _getCalendarDataSource(),

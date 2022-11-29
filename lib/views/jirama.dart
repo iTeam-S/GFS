@@ -148,13 +148,13 @@ class _JiramaPageState extends State<JiramaPage> {
                                 if (isMultiselected) {
                                   if (!selectedList.contains(index)) {
                                     selectedList.add(index);
-                                    print("add $index");
-                                    print(selectedList);
+                                    //print("add $index");
+                                    //print(selectedList);
                                     setState(() {});
                                   } else {
                                     selectedList.remove(index);
-                                    print("remove $index");
-                                    print(selectedList);
+                                    //print("remove $index");
+                                    //print(selectedList);
                                     setState(() {});
                                   }
                                 }

@@ -18,7 +18,7 @@ class TaskManager {
     required int nombreDeGroupe,
     required int nombreDeTache,
   }) {
-    print(_tListAll.length);
+    // print(_tListAll.length);
     List<TaskAssign> taskList = [];
     _listTache.clear();
     int nombreDeJours = nombreDeJoursDuMois(
@@ -51,13 +51,13 @@ class TaskManager {
         // int tache = Random().nextInt(_tListAll.length) + 1;
         int tache = _tListAll[_tListAll.length - 1];
         if (_tListAll.contains(tache)) {
-          print(
+          /* print(
             [
               jour,
               groupe,
               tache > tch ? 0 : tache,
             ],
-          );
+          );*/
           _listTache.add(
             TaskAssign()
               ..groupe = groupe
@@ -66,13 +66,13 @@ class TaskManager {
           );
           _tListAll.remove(tache);
         } else {
-          print(
+          /* print(
             [
               jour,
               groupe,
               _tListAll[0] > tch ? 0 : _tListAll[0],
             ],
-          );
+          );*/
           _listTache.add(
             TaskAssign()
               ..groupe = groupe
@@ -83,7 +83,7 @@ class TaskManager {
         }
 
         if (groupe == gp) {
-          print('----------');
+          //  print('----------');
         }
       }
     }
@@ -93,7 +93,7 @@ class TaskManager {
   }
 
   createTaskInAgenda() {
-    print([Boxes.getEmplacement().isNotEmpty, Boxes.getGroupe().isNotEmpty]);
+    // print([Boxes.getEmplacement().isNotEmpty, Boxes.getGroupe().isNotEmpty]);
     if (_listOfTask.length == 0) {
       _action.addTourMenage(
         description: _generateTask(
@@ -105,7 +105,7 @@ class TaskManager {
         ),
       );
     } else {
-      print("existe déjà");
+      // print("existe déjà");
       List<TaskAssign> taskFromDataBase = Boxes.getTourMenage()
           .values
           .toList()

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gfs/constants.dart';
 import 'package:line_icons/line_icons.dart';
 
 import 'widgets/drawer.dart';
@@ -17,12 +18,12 @@ class _InfoPageState extends State<InfoPage> {
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _key = GlobalKey();
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: dark,
       key: _key,
       drawer: drawer,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: dark,
         leading: IconButton(
           onPressed: () {
             _key.currentState!.openDrawer();
@@ -30,12 +31,12 @@ class _InfoPageState extends State<InfoPage> {
           icon: Icon(
             LineIcons.verticalEllipsis,
           ),
-          color: Colors.black,
+          color: Colors.white,
         ),
         centerTitle: true,
         title: Text(
           "INFORMATION",
-          style: TextStyle(color: Colors.black, fontSize: 35),
+          style: TextStyle(color: Colors.white, fontSize: 35),
         ),
       ),
     );
